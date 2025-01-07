@@ -1,0 +1,9 @@
+---
+#
+- name: Test win_ping on windows
+  hosts: M2L-WSRV01
+  become: false
+  gather_facts: false
+  #
+  roles:
+    - win_ping

@@ -1,0 +1,10 @@
+---
+
+ansible_shell_type: powershell
+ansible_user: administrateur
+ansible_password: Btssio75000
+ansible_port: 5985
+ansible_connection: winrm
+ansible_winrm_scheme: http
+ansible_winrm_server_cert_validation: ignore
+ansible_python_interpreter: 'C:\program files\Python311\python.exe'

@@ -1,0 +1,46 @@
+2025-01-07 23:01:25,541 p=1221 u=root n=ansible | PLAY [Test win_ping on windows] ***************************************************************************************************************************************************************************
+2025-01-07 23:01:25,613 p=1221 u=root n=ansible | TASK [Test connection with ping] **************************************************************************************************************************************************************************
+2025-01-07 23:01:35,680 p=1221 u=root n=ansible | fatal: [M2L-WSRV01]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.62.130 port 22: Connection timed out", "unreachable": true}
+2025-01-07 23:01:35,681 p=1221 u=root n=ansible | PLAY RECAP ************************************************************************************************************************************************************************************************
+2025-01-07 23:01:35,682 p=1221 u=root n=ansible | M2L-WSRV01                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-07 23:03:52,228 p=1227 u=root n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: windows
+
+2025-01-07 23:03:52,228 p=1227 u=root n=ansible | [WARNING]: No hosts matched, nothing to do
+
+2025-01-07 23:10:33,366 p=1242 u=root n=ansible | M2L-WSRV01 | SUCCESS => {
+    "ansible_connection": "winrm"
+}
+2025-01-07 23:10:33,385 p=1242 u=root n=ansible | M2L-WSRV02 | SUCCESS => {
+    "ansible_connection": "winrm"
+}
+2025-01-07 23:10:43,009 p=1247 u=root n=ansible | PLAY [Test win_ping on windows] ***************************************************************************************************************************************************************************
+2025-01-07 23:10:43,040 p=1247 u=root n=ansible | TASK [Test connection with ping] **************************************************************************************************************************************************************************
+2025-01-07 23:10:50,571 p=1247 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-07 23:10:50,572 p=1247 u=root n=ansible | PLAY RECAP ************************************************************************************************************************************************************************************************
+2025-01-07 23:10:50,573 p=1247 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-07 23:15:41,557 p=1251 u=root n=ansible | PLAY [Test win_ping on windows] ***************************************************************************************************************************************************************************
+2025-01-07 23:15:41,593 p=1251 u=root n=ansible | TASK [Test connection with ping] **************************************************************************************************************************************************************************
+2025-01-07 23:15:45,329 p=1251 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-07 23:15:45,331 p=1251 u=root n=ansible | PLAY RECAP ************************************************************************************************************************************************************************************************
+2025-01-07 23:15:45,332 p=1251 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-07 23:18:32,616 p=1281 u=root n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  mapping values are not allowed in this context. mapping values are not allowed in this context
+  in "<unicode string>", line 4, column 31
+
+The error appears to be in '/var/ansible-projects/deploy-m2l/roles/win_ping/tasks/main.yml': line 4, column 31, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+ - name: Test connection with ping
+      ansible.windows.win_ping:
+                              ^ here
+
+2025-01-07 23:19:15,367 p=1284 u=root n=ansible | PLAY [Test win_ping on windows] ***************************************************************************************************************************************************************************
+2025-01-07 23:19:15,396 p=1284 u=root n=ansible | TASK [win_ping : Test connection with ping] ***************************************************************************************************************************************************************
+2025-01-07 23:19:19,260 p=1284 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-07 23:19:19,268 p=1284 u=root n=ansible | PLAY RECAP ************************************************************************************************************************************************************************************************
+2025-01-07 23:19:19,268 p=1284 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
