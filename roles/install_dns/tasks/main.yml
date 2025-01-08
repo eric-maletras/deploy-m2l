@@ -1,0 +1,59 @@
+---
+# tasks file for install_dns
+
+- name: Installer le rôle DNS
+  ansible.windows.win_feature:
+    name: DNS
+    state: present
+    include_management_tools: yes
+
+- name: Créer une zone de recherche directe (ZRD)
+  ansible.windows.win_dns_zone:
+    name: "{{ dns_zrd_name }}"
+    type: Primary
+    Replication: none
+    state: present
+  register: create_zone_result
+
+#- name: Importer le module DnsServer
+#  ansible.windows.win_shell: |
+#    Import-Module DnsServer
+
+- name: Configurer les mises à jour dynamiques sur la zone ZRD
+  ansible.windows.win_shell: |
+    Set-DnsServerPrimaryZone -Name "{{ dns_zrd_name }}" -DynamicUpdate "NonsecureAndSecure"
+  when: create_zone_result.changed  # N'exécuter que si la zone a été créée
+  register: dynamic_update_result
+
+- name: Créer une zone de recherche indirecte (ZRI)
+  ansible.windows.win_dns_zone:
+    name: "{{ dns_zri_name }}"
+    type: Primary
+    Replication: none
+    state: present
+  register: create_zone_result
+
+- name: Configurer les mises à jour dynamiques sur la zone ZRD
+  ansible.windows.win_shell: |
+    Set-DnsServerPrimaryZone -Name "{{ dns_zri_name }}" -DynamicUpdate "NonsecureAndSecure"
+  when: create_zone_result.changed  # N'exécuter que si la zone a été créée
+  register: dynamic_update_result
+
+- name: Ajouter des enregistrements A
+  ansible.windows.win_dns_record:
+    name: "{{ item.name }}"
+    zone: "{{ dns_zrd_name }}"
+    type: A
+    ttl: 3600
+    value: "{{ item.address }}"
+  loop: "{{ dns_a_records }}"
+
+- name: Ajouter des enregistrements CNAME
+  ansible.windows.win_dns_record:
+    name: "{{ item.alias }}"
+    zone: "{{ dns_zrd_name }}"
+    type: CNAME
+    ttl: 3600
+    value: "{{ item.target }}"
+  loop: "{{ dns_cname_records }}"
+

@@ -44,3 +44,321 @@ The offending line appears to be:
 2025-01-07 23:19:19,260 p=1284 u=root n=ansible | ok: [M2L-WSRV01]
 2025-01-07 23:19:19,268 p=1284 u=root n=ansible | PLAY RECAP ************************************************************************************************************************************************************************************************
 2025-01-07 23:19:19,268 p=1284 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:34:18,043 p=1057 u=root n=ansible | PLAY [Test win_ping on windows] ****************************************************************************************************************************************
+2025-01-08 22:34:18,139 p=1057 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] *****************************************************************************************************************************
+2025-01-08 22:35:08,481 p=1057 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 22:35:08,485 p=1057 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] *********************************************************************************************************
+2025-01-08 22:35:16,731 p=1057 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (ansible.windows.win_dns_zone) module: zone_type. Supported parameters include: forwarder_timeout, name, dns_servers, dynamic_update, type, state, replication"}
+2025-01-08 22:35:16,732 p=1057 u=root n=ansible | PLAY RECAP *************************************************************************************************************************************************************
+2025-01-08 22:35:16,732 p=1057 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:44:55,768 p=1074 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:44:55,800 p=1074 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:44:58,412 p=1074 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 22:44:58,415 p=1074 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:45:08,750 p=1074 u=root n=ansible | [WARNING]: Secure DNS updates are available only for Active Directory-integrated zones
+
+2025-01-08 22:45:08,753 p=1074 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 22:45:08,756 p=1074 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 22:45:11,353 p=1074 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (ansible.windows.win_dns_zone) module: is_reverse. Supported parameters include: forwarder_timeout, name, dns_servers, dynamic_update, type, state, replication"}
+2025-01-08 22:45:11,354 p=1074 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:45:11,355 p=1074 u=root n=ansible | M2L-WSRV01                 : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:48:01,483 p=1095 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:48:01,516 p=1095 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:48:04,167 p=1095 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 22:48:04,169 p=1095 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:48:08,676 p=1095 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Failed to set properties on the zone m2l.lan: Impossible de valider l'argument sur le paramètre « ReplicationScope ». L'argument « None » n'appartient pas au jeu « Forest;Domain;Legacy;Custom » spécifié par l'attribut ValidateSet. Indiquez un argument qui se trouve dans le jeu et réessayez."}
+2025-01-08 22:48:08,677 p=1095 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:48:08,678 p=1095 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:49:57,130 p=1102 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:49:57,163 p=1102 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:49:59,558 p=1102 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 22:49:59,561 p=1102 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:50:02,297 p=1102 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (ansible.windows.win_dns_zone) module: ReplicationScope. Supported parameters include: forwarder_timeout, name, dns_servers, dynamic_update, type, state, replication"}
+2025-01-08 22:50:02,298 p=1102 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:50:02,298 p=1102 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:50:28,859 p=1109 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:50:28,891 p=1109 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:50:31,095 p=1109 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 22:50:31,098 p=1109 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:50:35,276 p=1109 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Converting a file backed DNS zone to Active Directory integrated zone is unsupported"}
+2025-01-08 22:50:35,278 p=1109 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:50:35,278 p=1109 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:51:09,699 p=1115 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:51:09,734 p=1115 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:51:12,181 p=1115 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 22:51:12,184 p=1115 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:51:16,245 p=1115 u=root n=ansible | [WARNING]: Secure DNS updates are available only for Active Directory-integrated zones
+
+2025-01-08 22:51:16,246 p=1115 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Failed to set properties on the zone m2l.lan: Impossible de valider l'argument sur le paramètre « DynamicUpdate ». L'argument «  » n'appartient pas au jeu « None;Secure;NonsecureAndSecure » spécifié par l'attribut ValidateSet. Indiquez un argument qui se trouve dans le jeu et réessayez."}
+2025-01-08 22:51:16,248 p=1115 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:51:16,248 p=1115 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:51:59,189 p=1121 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:51:59,222 p=1121 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:52:01,420 p=1121 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 22:52:01,423 p=1121 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:52:05,415 p=1121 u=root n=ansible | [WARNING]: Secure DNS updates are available only for Active Directory-integrated zones
+
+2025-01-08 22:52:05,416 p=1121 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Failed to set properties on the zone m2l.lan: Impossible de valider l'argument sur le paramètre « DynamicUpdate ». L'argument «  » n'appartient pas au jeu « None;Secure;NonsecureAndSecure » spécifié par l'attribut ValidateSet. Indiquez un argument qui se trouve dans le jeu et réessayez."}
+2025-01-08 22:52:05,418 p=1121 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:52:05,419 p=1121 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 22:56:37,794 p=1127 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 22:56:37,825 p=1127 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 22:58:06,145 p=1127 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 22:58:06,148 p=1127 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 22:58:23,508 p=1127 u=root n=ansible | [WARNING]: Secure DNS updates are available only for Active Directory-integrated zones
+
+2025-01-08 22:58:23,508 p=1127 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 22:58:23,510 p=1127 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 22:58:29,443 p=1127 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 22:58:29,446 p=1127 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 22:58:29,485 p=1127 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'item' is undefined\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_dns/tasks/main.yml': line 26, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Ajouter des enregistrements A\n  ^ here\n"}
+2025-01-08 22:58:29,493 p=1127 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 22:58:29,495 p=1127 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=3    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:04:23,626 p=1136 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:04:23,638 p=1136 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:04:29,624 p=1136 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:04:29,627 p=1136 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:04:41,784 p=1136 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Failed to set properties on the zone m2l.lan: Impossible de valider l'argument sur le paramètre « ReplicationScope ». L'argument « None » n'appartient pas au jeu « Forest;Domain;Legacy;Custom » spécifié par l'attribut ValidateSet. Indiquez un argument qui se trouve dans le jeu et réessayez."}
+2025-01-08 23:04:41,785 p=1136 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:04:41,786 p=1136 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:06:04,193 p=1143 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:06:04,204 p=1143 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:06:06,810 p=1143 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:06:06,813 p=1143 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:06:09,560 p=1143 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "value of replication must be one of: forest, domain, legacy, none. Got no match for: noneo"}
+2025-01-08 23:06:09,561 p=1143 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:06:09,562 p=1143 u=root n=ansible | M2L-WSRV01                 : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:06:29,797 p=1150 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:06:29,809 p=1150 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:06:32,184 p=1150 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:06:32,187 p=1150 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:06:37,217 p=1150 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:06:37,219 p=1150 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:06:42,097 p=1150 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": true, "cmd": "Set-DnsServerZone -Name \"m2l.lan\" -DynamicUpdate NonsecureAndSecure", "delta": "0:00:02.187464", "end": "2025-01-08 22:06:41.915628", "msg": "non-zero return code", "rc": 1, "start": "2025-01-08 22:06:39.728164", "stderr": "Set-DnsServerZone : Le terme «Set-DnsServerZone» n'est pas reconnu comme nom d'applet de commande, fonction, fichier \r\nde script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le \r\nchemin d'accès est correct et réessayez.\r\nAu caractère Ligne:1 : 65\r\n+ ... ding = New-Object Text.UTF8Encoding $false; Set-DnsServerZone -Name \" ...\r\n+                                                 ~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (Set-DnsServerZone:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException", "stderr_lines": ["Set-DnsServerZone : Le terme «Set-DnsServerZone» n'est pas reconnu comme nom d'applet de commande, fonction, fichier ", "de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le ", "chemin d'accès est correct et réessayez.", "Au caractère Ligne:1 : 65", "+ ... ding = New-Object Text.UTF8Encoding $false; Set-DnsServerZone -Name \" ...", "+                                                 ~~~~~~~~~~~~~~~~~", "    + CategoryInfo          : ObjectNotFound: (Set-DnsServerZone:String) [], CommandNotFoundException", "    + FullyQualifiedErrorId : CommandNotFoundException"], "stdout": "", "stdout_lines": []}
+2025-01-08 23:06:42,099 p=1150 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:06:42,099 p=1150 u=root n=ansible | M2L-WSRV01                 : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:09:49,881 p=1159 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:09:49,895 p=1159 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:09:53,270 p=1159 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:09:53,273 p=1159 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:09:59,367 p=1159 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:09:59,370 p=1159 u=root n=ansible | TASK [install_dns : Importer le module DnsServer] ***********************************************************************************************************************************************
+2025-01-08 23:10:05,062 p=1159 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 23:10:05,065 p=1159 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:10:08,869 p=1159 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": true, "cmd": "Set-DnsServerZone -Name \"m2l.lan\" -DynamicUpdate NonsecureAndSecure", "delta": "0:00:01.359279", "end": "2025-01-08 22:10:08.695849", "msg": "non-zero return code", "rc": 1, "start": "2025-01-08 22:10:07.336570", "stderr": "Set-DnsServerZone : Le terme «Set-DnsServerZone» n'est pas reconnu comme nom d'applet de commande, fonction, fichier \r\nde script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le \r\nchemin d'accès est correct et réessayez.\r\nAu caractère Ligne:1 : 65\r\n+ ... ding = New-Object Text.UTF8Encoding $false; Set-DnsServerZone -Name \" ...\r\n+                                                 ~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (Set-DnsServerZone:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException", "stderr_lines": ["Set-DnsServerZone : Le terme «Set-DnsServerZone» n'est pas reconnu comme nom d'applet de commande, fonction, fichier ", "de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le ", "chemin d'accès est correct et réessayez.", "Au caractère Ligne:1 : 65", "+ ... ding = New-Object Text.UTF8Encoding $false; Set-DnsServerZone -Name \" ...", "+                                                 ~~~~~~~~~~~~~~~~~", "    + CategoryInfo          : ObjectNotFound: (Set-DnsServerZone:String) [], CommandNotFoundException", "    + FullyQualifiedErrorId : CommandNotFoundException"], "stdout": "", "stdout_lines": []}
+2025-01-08 23:10:08,871 p=1159 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:10:08,871 p=1159 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:18:06,642 p=1172 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:18:06,653 p=1172 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:18:10,996 p=1172 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:18:10,998 p=1172 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:18:16,013 p=1172 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:18:16,017 p=1172 u=root n=ansible | TASK [install_dns : Importer le module DnsServer] ***********************************************************************************************************************************************
+2025-01-08 23:18:21,202 p=1172 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 23:18:21,206 p=1172 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:18:24,173 p=1172 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": true, "cmd": "Set-DnsServerSettings -DynamicUpdate NonsecureAndSecure", "delta": "0:00:00.765444", "end": "2025-01-08 22:18:24.027411", "msg": "non-zero return code", "rc": 1, "start": "2025-01-08 22:18:23.261966", "stderr": "Set-DnsServerSettings : Le terme «Set-DnsServerSettings» n'est pas reconnu comme nom d'applet de commande, fonction, \r\nfichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que \r\nle chemin d'accès est correct et réessayez.\r\nAu caractère Ligne:1 : 65\r\n+ ...  = New-Object Text.UTF8Encoding $false; Set-DnsServerSettings -Dynami ...\r\n+                                             ~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (Set-DnsServerSettings:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException", "stderr_lines": ["Set-DnsServerSettings : Le terme «Set-DnsServerSettings» n'est pas reconnu comme nom d'applet de commande, fonction, ", "fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que ", "le chemin d'accès est correct et réessayez.", "Au caractère Ligne:1 : 65", "+ ...  = New-Object Text.UTF8Encoding $false; Set-DnsServerSettings -Dynami ...", "+                                             ~~~~~~~~~~~~~~~~~~~~~", "    + CategoryInfo          : ObjectNotFound: (Set-DnsServerSettings:String) [], CommandNotFoundException", "    + FullyQualifiedErrorId : CommandNotFoundException"], "stdout": "", "stdout_lines": []}
+2025-01-08 23:18:24,175 p=1172 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:18:24,175 p=1172 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:18:51,461 p=1180 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:18:51,471 p=1180 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:18:53,740 p=1180 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:18:53,743 p=1180 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:18:57,626 p=1180 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:18:57,628 p=1180 u=root n=ansible | TASK [install_dns : Importer le module DnsServer] ***********************************************************************************************************************************************
+2025-01-08 23:19:01,466 p=1180 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-08 23:19:01,470 p=1180 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:19:05,442 p=1180 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": true, "cmd": "Set-DnsServerSetting -DynamicUpdate NonsecureAndSecure", "delta": "0:00:01.859015", "end": "2025-01-08 22:19:05.308549", "msg": "non-zero return code", "rc": 1, "start": "2025-01-08 22:19:03.449534", "stderr": "Set-DnsServerSetting : Impossible de trouver un paramètre correspondant au nom « DynamicUpdate ».\r\nAu caractère Ligne:1 : 86\r\n+ ... Text.UTF8Encoding $false; Set-DnsServerSetting -DynamicUpdate Nonsecu ...\r\n+                                                    ~~~~~~~~~~~~~~\r\n    + CategoryInfo          : InvalidArgument : (:) [Set-DnsServerSetting], ParameterBindingException\r\n    + FullyQualifiedErrorId : NamedParameterNotFound,Set-DnsServerSetting", "stderr_lines": ["Set-DnsServerSetting : Impossible de trouver un paramètre correspondant au nom « DynamicUpdate ».", "Au caractère Ligne:1 : 86", "+ ... Text.UTF8Encoding $false; Set-DnsServerSetting -DynamicUpdate Nonsecu ...", "+                                                    ~~~~~~~~~~~~~~", "    + CategoryInfo          : InvalidArgument : (:) [Set-DnsServerSetting], ParameterBindingException", "    + FullyQualifiedErrorId : NamedParameterNotFound,Set-DnsServerSetting"], "stdout": "", "stdout_lines": []}
+2025-01-08 23:19:05,444 p=1180 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:19:05,444 p=1180 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-08 23:33:25,280 p=1191 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:33:25,318 p=1191 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:33:28,199 p=1191 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:33:28,202 p=1191 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:33:32,539 p=1191 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:33:32,542 p=1191 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:33:32,562 p=1191 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:33:32,564 p=1191 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:33:36,520 p=1191 u=root n=ansible | [WARNING]: Secure DNS updates are available only for Active Directory-integrated zones
+
+2025-01-08 23:33:36,521 p=1191 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": false, "msg": "Failed to set properties on the zone 172.16.in-addr.arpa: Impossible de valider l'argument sur le paramètre « DynamicUpdate ». L'argument «  » n'appartient pas au jeu « None;Secure;NonsecureAndSecure » spécifié par l'attribut ValidateSet. Indiquez un argument qui se trouve dans le jeu et réessayez."}
+2025-01-08 23:33:36,523 p=1191 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:33:36,524 p=1191 u=root n=ansible | M2L-WSRV01                 : ok=2    changed=0    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2025-01-08 23:34:44,311 p=1199 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:34:44,345 p=1199 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:34:46,814 p=1199 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:34:46,818 p=1199 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:34:50,969 p=1199 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:34:50,972 p=1199 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:34:50,991 p=1199 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:34:50,993 p=1199 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:34:55,038 p=1199 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:34:55,043 p=1199 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:34:55,064 p=1199 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:34:55,067 p=1199 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 23:34:55,088 p=1199 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'item' is undefined\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_dns/tasks/main.yml': line 47, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Ajouter des enregistrements A\n  ^ here\n"}
+2025-01-08 23:34:55,089 p=1199 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:34:55,089 p=1199 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-08 23:37:05,876 p=1221 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:37:05,910 p=1221 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:37:08,382 p=1221 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:37:08,385 p=1221 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:37:12,593 p=1221 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:37:12,596 p=1221 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:37:12,619 p=1221 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:37:12,621 p=1221 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:37:16,528 p=1221 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:37:16,531 p=1221 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:37:16,552 p=1221 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:37:16,554 p=1221 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 23:37:16,577 p=1221 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'item' is undefined\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_dns/tasks/main.yml': line 47, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Ajouter des enregistrements A\n  ^ here\n"}
+2025-01-08 23:37:16,578 p=1221 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:37:16,578 p=1221 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-08 23:44:23,458 p=1235 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:44:23,490 p=1235 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:44:26,360 p=1235 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:44:26,364 p=1235 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:44:30,778 p=1235 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:44:30,780 p=1235 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:44:30,799 p=1235 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:44:30,801 p=1235 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:44:34,723 p=1235 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:44:34,727 p=1235 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:44:34,749 p=1235 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:44:34,751 p=1235 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 23:44:34,769 p=1235 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "'ns_a_records' is undefined"}
+2025-01-08 23:44:34,770 p=1235 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:44:34,771 p=1235 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-08 23:46:39,881 p=1246 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:46:39,892 p=1246 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:46:42,385 p=1246 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:46:42,388 p=1246 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:46:46,548 p=1246 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:46:46,550 p=1246 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:46:46,569 p=1246 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:46:46,572 p=1246 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:46:50,500 p=1246 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:46:50,503 p=1246 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:46:50,524 p=1246 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:46:50,529 p=1246 u=root n=ansible | TASK [install_dns : Debugging ns_a_records] *****************************************************************************************************************************************************
+2025-01-08 23:46:50,554 p=1246 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "ns_a_records": "VARIABLE IS NOT DEFINED!"
+}
+2025-01-08 23:46:50,556 p=1246 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 23:46:50,574 p=1246 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "'ns_a_records' is undefined"}
+2025-01-08 23:46:50,575 p=1246 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:46:50,575 p=1246 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-08 23:51:57,577 p=1266 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:51:57,589 p=1266 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:52:00,379 p=1266 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:52:00,383 p=1266 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:52:04,742 p=1266 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:52:04,746 p=1266 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:52:04,767 p=1266 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:52:04,769 p=1266 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:52:08,717 p=1266 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:52:08,721 p=1266 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:52:08,740 p=1266 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:52:08,743 p=1266 u=root n=ansible | TASK [install_dns : Debugging ns_a_records] *****************************************************************************************************************************************************
+2025-01-08 23:52:08,769 p=1266 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "ns_a_records": [
+        {
+            "address": "192.168.1.10",
+            "name": "www"
+        },
+        {
+            "address": "192.168.1.20",
+            "name": "mail"
+        }
+    ]
+}
+2025-01-08 23:52:08,771 p=1266 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 23:52:11,306 p=1266 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'www', 'address': '192.168.1.10'}) => {"ansible_loop_var": "item", "changed": false, "item": {"address": "192.168.1.10", "name": "www"}, "msg": "Unsupported parameters for (ansible.windows.win_dns_record) module: record_type. Supported parameters include: zone, ttl, type, value, weight, state, name, zone_scope, port, aging, priority, computer_name, values"}
+2025-01-08 23:52:13,730 p=1266 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'mail', 'address': '192.168.1.20'}) => {"ansible_loop_var": "item", "changed": false, "item": {"address": "192.168.1.20", "name": "mail"}, "msg": "Unsupported parameters for (ansible.windows.win_dns_record) module: record_type. Supported parameters include: zone, ttl, type, value, weight, state, name, zone_scope, port, aging, priority, computer_name, values"}
+2025-01-08 23:52:13,740 p=1266 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:52:13,741 p=1266 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-08 23:59:25,894 p=1292 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-08 23:59:25,904 p=1292 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-08 23:59:28,523 p=1292 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:59:28,526 p=1292 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-08 23:59:33,015 p=1292 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:59:33,018 p=1292 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:59:33,041 p=1292 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:59:33,043 p=1292 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-08 23:59:36,904 p=1292 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-08 23:59:36,908 p=1292 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-08 23:59:36,931 p=1292 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-08 23:59:36,933 p=1292 u=root n=ansible | TASK [install_dns : Debugging ns_a_records] *****************************************************************************************************************************************************
+2025-01-08 23:59:36,958 p=1292 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "ns_a_records": "VARIABLE IS NOT DEFINED!"
+}
+2025-01-08 23:59:36,960 p=1292 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-08 23:59:36,979 p=1292 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "'ns_a_records' is undefined"}
+2025-01-08 23:59:36,980 p=1292 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-08 23:59:36,981 p=1292 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-09 00:00:43,153 p=1315 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-09 00:00:43,162 p=1315 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-09 00:00:45,497 p=1315 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:00:45,501 p=1315 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-09 00:00:49,610 p=1315 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:00:49,613 p=1315 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-09 00:00:49,632 p=1315 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 00:00:49,635 p=1315 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-09 00:00:53,489 p=1315 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:00:53,494 p=1315 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-09 00:00:53,515 p=1315 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 00:00:53,518 p=1315 u=root n=ansible | TASK [install_dns : Debugging ns_a_records] *****************************************************************************************************************************************************
+2025-01-09 00:00:53,543 p=1315 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "dns_a_records": [
+        {
+            "address": "172.16.2.59",
+            "name": "m2l-lsrv03"
+        },
+        {
+            "address": "172.16.2.58",
+            "name": "m2l-lsrv05"
+        }
+    ]
+}
+2025-01-09 00:00:53,545 p=1315 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-09 00:00:56,065 p=1315 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'}) => {"ansible_loop_var": "item", "changed": false, "item": {"address": "172.16.2.59", "name": "m2l-lsrv03"}, "msg": "Unsupported parameters for (ansible.windows.win_dns_record) module: record_type. Supported parameters include: zone, ttl, type, value, weight, state, name, zone_scope, port, aging, priority, computer_name, values"}
+2025-01-09 00:00:58,473 p=1315 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'}) => {"ansible_loop_var": "item", "changed": false, "item": {"address": "172.16.2.58", "name": "m2l-lsrv05"}, "msg": "Unsupported parameters for (ansible.windows.win_dns_record) module: record_type. Supported parameters include: zone, ttl, type, value, weight, state, name, zone_scope, port, aging, priority, computer_name, values"}
+2025-01-09 00:00:58,481 p=1315 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-09 00:00:58,482 p=1315 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+2025-01-09 00:03:13,802 p=1326 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-09 00:03:13,835 p=1326 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-09 00:03:16,430 p=1326 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:03:16,434 p=1326 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-09 00:03:20,928 p=1326 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:03:20,931 p=1326 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-09 00:03:20,952 p=1326 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 00:03:20,954 p=1326 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-09 00:03:24,900 p=1326 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:03:24,904 p=1326 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-09 00:03:24,925 p=1326 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 00:03:24,927 p=1326 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-09 00:03:29,828 p=1326 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-09 00:03:33,948 p=1326 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-09 00:03:33,957 p=1326 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] ******************************************************************************************************************************************
+2025-01-09 00:03:38,358 p=1326 u=root n=ansible | changed: [M2L-WSRV01] => (item={'alias': 'glpi.m2l.lan', 'target': 'm2l-lsrv03'})
+2025-01-09 00:03:42,504 p=1326 u=root n=ansible | changed: [M2L-WSRV01] => (item={'alias': 'onwcloud.m2l.lan', 'target': 'm2l-lsrv03'})
+2025-01-09 00:03:42,519 p=1326 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-09 00:03:42,519 p=1326 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+2025-01-09 00:03:46,125 p=1336 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-09 00:03:46,159 p=1336 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ******************************************************************************************************************************************************
+2025-01-09 00:03:48,285 p=1336 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:03:48,288 p=1336 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] **********************************************************************************************************************************
+2025-01-09 00:03:52,159 p=1336 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:03:52,162 p=1336 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-09 00:03:52,182 p=1336 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 00:03:52,184 p=1336 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ********************************************************************************************************************************
+2025-01-09 00:03:56,029 p=1336 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 00:03:56,031 p=1336 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *********************************************************************************************************************
+2025-01-09 00:03:56,050 p=1336 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 00:03:56,052 p=1336 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] **********************************************************************************************************************************************
+2025-01-09 00:03:59,958 p=1336 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-09 00:04:03,731 p=1336 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-09 00:04:03,741 p=1336 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] ******************************************************************************************************************************************
+2025-01-09 00:04:07,655 p=1336 u=root n=ansible | ok: [M2L-WSRV01] => (item={'alias': 'glpi.m2l.lan', 'target': 'm2l-lsrv03'})
+2025-01-09 00:04:11,444 p=1336 u=root n=ansible | ok: [M2L-WSRV01] => (item={'alias': 'onwcloud.m2l.lan', 'target': 'm2l-lsrv03'})
+2025-01-09 00:04:11,456 p=1336 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-09 00:04:11,456 p=1336 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
