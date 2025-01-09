@@ -756,3 +756,1272 @@ The offending line appears to be:
 2025-01-09 19:06:31,270 p=1441 u=root n=ansible | changed: [M2L-WSRV01]
 2025-01-09 19:06:31,275 p=1441 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
 2025-01-09 19:06:31,276 p=1441 u=root n=ansible | M2L-WSRV01                 : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:20:05,313 p=1576 u=root n=ansible | ERROR! couldn't resolve module/action 'ansible.windows.win_ad_organizational_unit'. This often indicates a misspelling, missing collection, or incorrect module path.
+
+The error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_ad/tasks/main.yml': line 23, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+- name: Create Organizational Units
+  ^ here
+
+2025-01-09 22:24:45,323 p=1582 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:24:45,354 p=1582 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:24:49,485 p=1582 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:24:49,499 p=1582 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:24:53,754 p=1582 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:24:53,757 p=1582 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:24:56,700 p=1582 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': '0m2l.lan', 'parent': ''}) => {"ansible_loop_var": "item", "changed": false, "item": {"name": "0m2l.lan", "parent": ""}, "msg": "Unsupported parameters for (microsoft.ad.ou) module: parent_ou. Supported parameters include: street, country, description, name, domain_password, display_name, protect_from_deletion, domain_credentials, state_province, domain_username, identity, attributes, state, domain_server, city, path, managed_by, postal_code"}
+2025-01-09 22:24:59,428 p=1582 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'Ligues', 'parent': 'OU=0m2l.lan,DC=m2l,DC=lan'}) => {"ansible_loop_var": "item", "changed": false, "item": {"name": "Ligues", "parent": "OU=0m2l.lan,DC=m2l,DC=lan"}, "msg": "Unsupported parameters for (microsoft.ad.ou) module: parent_ou. Supported parameters include: street, country, description, name, domain_password, display_name, protect_from_deletion, domain_credentials, state_province, domain_username, identity, attributes, state, domain_server, city, path, managed_by, postal_code"}
+2025-01-09 22:25:02,147 p=1582 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'tennis', 'parent': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'}) => {"ansible_loop_var": "item", "changed": false, "item": {"name": "tennis", "parent": "OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan"}, "msg": "Unsupported parameters for (microsoft.ad.ou) module: parent_ou. Supported parameters include: street, country, description, name, domain_password, display_name, protect_from_deletion, domain_credentials, state_province, domain_username, identity, attributes, state, domain_server, city, path, managed_by, postal_code"}
+2025-01-09 22:25:04,918 p=1582 u=root n=ansible | failed: [M2L-WSRV01] (item={'name': 'basket', 'parent': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'}) => {"ansible_loop_var": "item", "changed": false, "item": {"name": "basket", "parent": "OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan"}, "msg": "Unsupported parameters for (microsoft.ad.ou) module: parent_ou. Supported parameters include: street, country, description, name, domain_password, display_name, protect_from_deletion, domain_credentials, state_province, domain_username, identity, attributes, state, domain_server, city, path, managed_by, postal_code"}
+2025-01-09 22:25:04,941 p=1582 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:25:04,941 p=1582 u=root n=ansible | M2L-WSRV01                 : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:26:49,484 p=1590 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:26:49,515 p=1590 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:26:52,560 p=1590 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:26:52,570 p=1590 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:26:56,296 p=1590 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:26:56,300 p=1590 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:27:01,102 p=1590 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:27:04,678 p=1590 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:27:08,114 p=1590 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:27:11,470 p=1590 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:27:11,495 p=1590 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:27:11,495 p=1590 u=root n=ansible | M2L-WSRV01                 : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:43:33,936 p=1602 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:43:33,969 p=1602 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:43:37,222 p=1602 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:43:37,233 p=1602 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:43:40,941 p=1602 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:43:40,945 p=1602 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:43:44,658 p=1602 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:43:48,050 p=1602 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:43:51,415 p=1602 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:43:54,777 p=1602 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:43:54,798 p=1602 u=root n=ansible | TASK [install_ad : Créer un utilisateur AD] *************************************************************************************************************************************************************
+2025-01-09 22:43:59,000 p=1602 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 22:44:02,732 p=1602 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 22:44:06,736 p=1602 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 22:44:10,461 p=1602 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 22:44:14,150 p=1602 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 22:44:17,926 p=1602 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 22:44:17,950 p=1602 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:44:17,951 p=1602 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:44:22,254 p=1609 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:44:22,288 p=1609 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:44:24,817 p=1609 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:44:24,830 p=1609 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:44:28,428 p=1609 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:44:28,432 p=1609 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:44:31,955 p=1609 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:44:35,449 p=1609 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:44:38,931 p=1609 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:44:42,270 p=1609 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:44:42,292 p=1609 u=root n=ansible | TASK [install_ad : Créer un utilisateur AD] *************************************************************************************************************************************************************
+2025-01-09 22:44:46,348 p=1609 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 22:44:50,067 p=1609 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 22:44:53,839 p=1609 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 22:44:57,770 p=1609 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 22:45:01,600 p=1609 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 22:45:05,435 p=1609 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 22:45:05,459 p=1609 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:45:05,459 p=1609 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:48:54,816 p=1617 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:48:54,850 p=1617 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:48:58,105 p=1617 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:48:58,116 p=1617 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:49:01,915 p=1617 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:49:01,917 p=1617 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:49:05,551 p=1617 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:49:08,859 p=1617 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:49:12,382 p=1617 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:49:15,681 p=1617 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:49:15,702 p=1617 u=root n=ansible | TASK [install_ad : Créer un utilisateur AD] *************************************************************************************************************************************************************
+2025-01-09 22:49:19,838 p=1617 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 22:49:23,634 p=1617 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 22:49:27,456 p=1617 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 22:49:31,283 p=1617 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 22:49:35,073 p=1617 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 22:49:38,917 p=1617 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 22:49:38,942 p=1617 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:49:38,942 p=1617 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:50:10,289 p=1625 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:50:10,321 p=1625 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:50:12,874 p=1625 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:50:12,890 p=1625 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:50:16,542 p=1625 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:50:16,545 p=1625 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] **************************************************************************************************************
+2025-01-09 22:50:20,979 p=1625 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"changed": true, "cmd": "Import-Module GroupPolicy\nSet-ADDefaultDomainPasswordPolicy -Identity \"labo.lan\" -MaxPasswordAge (New-TimeSpan -Days 0)", "delta": "0:00:01.887628", "end": "2025-01-09 21:50:18.803616", "msg": "non-zero return code", "rc": 1, "start": "2025-01-09 21:50:16.915988", "stderr": "Set-ADDefaultDomainPasswordPolicy : Impossible de trouver un objet avec l’identité «labo.lan» sous: «DC=m2l,DC=lan».\r\nAu caractère Ligne:2 : 1\r\n+ Set-ADDefaultDomainPasswordPolicy -Identity \"labo.lan\" -MaxPasswordAg ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (labo.lan:ADDefaultDomainPasswordPolicy) [Set-ADDefaultDomainPasswordPol \r\n   icy], ADIdentityNotFoundException\r\n    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException,M \r\n   icrosoft.ActiveDirectory.Management.Commands.SetADDefaultDomainPasswordPolicy", "stderr_lines": ["Set-ADDefaultDomainPasswordPolicy : Impossible de trouver un objet avec l’identité «labo.lan» sous: «DC=m2l,DC=lan».", "Au caractère Ligne:2 : 1", "+ Set-ADDefaultDomainPasswordPolicy -Identity \"labo.lan\" -MaxPasswordAg ...", "+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", "    + CategoryInfo          : ObjectNotFound: (labo.lan:ADDefaultDomainPasswordPolicy) [Set-ADDefaultDomainPasswordPol ", "   icy], ADIdentityNotFoundException", "    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException,M ", "   icrosoft.ActiveDirectory.Management.Commands.SetADDefaultDomainPasswordPolicy"], "stdout": "", "stdout_lines": []}
+2025-01-09 22:50:20,981 p=1625 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:50:20,982 p=1625 u=root n=ansible | M2L-WSRV01                 : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:50:51,920 p=1632 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:50:51,954 p=1632 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:50:54,740 p=1632 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:50:54,753 p=1632 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:50:58,450 p=1632 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:50:58,452 p=1632 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] **************************************************************************************************************
+2025-01-09 22:51:02,002 p=1632 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-09 22:51:02,005 p=1632 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:51:05,585 p=1632 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:51:08,835 p=1632 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:51:12,326 p=1632 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:51:15,834 p=1632 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:51:15,856 p=1632 u=root n=ansible | TASK [install_ad : Créer un utilisateur AD] *************************************************************************************************************************************************************
+2025-01-09 22:51:20,043 p=1632 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 22:51:23,979 p=1632 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 22:51:28,028 p=1632 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 22:51:31,900 p=1632 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 22:51:35,763 p=1632 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 22:51:39,675 p=1632 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 22:51:39,698 p=1632 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:51:39,698 p=1632 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:56:25,706 p=1644 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:56:25,739 p=1644 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:56:28,773 p=1644 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:56:28,786 p=1644 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:56:32,648 p=1644 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:56:32,651 p=1644 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] **************************************************************************************************************
+2025-01-09 22:56:36,363 p=1644 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-09 22:56:36,365 p=1644 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] **************************************************************************************************************
+2025-01-09 22:56:39,892 p=1644 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-09 22:56:39,895 p=1644 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:56:43,415 p=1644 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:56:46,819 p=1644 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:56:50,170 p=1644 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:56:53,498 p=1644 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:56:53,520 p=1644 u=root n=ansible | TASK [install_ad : Créer un utilisateur AD] *************************************************************************************************************************************************************
+2025-01-09 22:56:57,515 p=1644 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 22:57:01,297 p=1644 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 22:57:05,102 p=1644 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 22:57:08,924 p=1644 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 22:57:12,899 p=1644 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 22:57:16,730 p=1644 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 22:57:16,755 p=1644 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:57:16,755 p=1644 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 22:58:23,956 p=1654 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************************
+2025-01-09 22:58:23,988 p=1654 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************************
+2025-01-09 22:58:26,739 p=1654 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:58:26,749 p=1654 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************************
+2025-01-09 22:58:30,398 p=1654 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:58:30,403 p=1654 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] **************************************************************************************************************
+2025-01-09 22:58:33,778 p=1654 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-09 22:58:33,782 p=1654 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] **************************************************************************************************************
+2025-01-09 22:58:37,141 p=1654 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 22:58:37,146 p=1654 u=root n=ansible | TASK [install_ad : Create Organizational Units] *********************************************************************************************************************************************************
+2025-01-09 22:58:40,656 p=1654 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 22:58:43,947 p=1654 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:58:47,323 p=1654 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:58:50,633 p=1654 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 22:58:50,654 p=1654 u=root n=ansible | TASK [install_ad : Créer un utilisateur AD] *************************************************************************************************************************************************************
+2025-01-09 22:58:54,616 p=1654 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 22:58:58,493 p=1654 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 22:59:02,235 p=1654 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 22:59:06,167 p=1654 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 22:59:09,949 p=1654 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 22:59:13,705 p=1654 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 22:59:13,729 p=1654 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************
+2025-01-09 22:59:13,729 p=1654 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:08:20,318 p=1670 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:08:20,353 p=1670 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:08:23,531 p=1670 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:08:23,546 p=1670 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:08:27,359 p=1670 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:08:27,361 p=1670 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:08:30,866 p=1670 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-09 23:08:30,868 p=1670 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:08:34,377 p=1670 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:08:34,380 p=1670 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:08:37,922 p=1670 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:08:41,212 p=1670 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:08:44,855 p=1670 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:08:48,154 p=1670 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:08:48,176 p=1670 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:08:48,205 p=1670 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "'dict object' has no attribute 'users'"}
+2025-01-09 23:08:48,207 p=1670 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:08:48,208 p=1670 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:16:09,172 p=1688 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:16:09,211 p=1688 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:16:12,391 p=1688 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:16:12,406 p=1688 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:16:16,222 p=1688 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:16:16,225 p=1688 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:16:19,939 p=1688 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-09 23:16:19,942 p=1688 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:16:23,288 p=1688 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:16:23,290 p=1688 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:16:26,829 p=1688 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:16:30,143 p=1688 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:16:33,396 p=1688 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:16:36,654 p=1688 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:16:36,676 p=1688 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:16:39,926 p=1688 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:16:43,023 p=1688 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:16:46,220 p=1688 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:16:49,288 p=1688 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:16:52,364 p=1688 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:16:55,464 p=1688 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:16:55,485 p=1688 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:16:55,511 p=1688 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The conditional check 'user_check.results[itemloop.index0].stdout == \"missing\"' failed. The error was: error while evaluating conditional (user_check.results[itemloop.index0].stdout == \"missing\"): list object has no element AnsibleUndefined(hint=None, obj=missing, name='itemloop')\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_ad/tasks/main.yml': line 61, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Créer l'utilisateur si absent\n  ^ here\n"}
+2025-01-09 23:16:55,513 p=1688 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:16:55,513 p=1688 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:19:28,152 p=1704 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:19:28,186 p=1704 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:19:30,910 p=1704 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:19:30,921 p=1704 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:19:34,586 p=1704 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:19:34,588 p=1704 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:19:38,068 p=1704 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:19:38,071 p=1704 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:19:41,693 p=1704 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:19:41,695 p=1704 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:19:45,244 p=1704 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:19:48,571 p=1704 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:19:51,826 p=1704 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:19:55,144 p=1704 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:19:55,167 p=1704 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:19:58,379 p=1704 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:20:01,426 p=1704 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:20:04,454 p=1704 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:20:07,534 p=1704 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:20:10,516 p=1704 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:20:13,510 p=1704 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:20:13,535 p=1704 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:20:13,573 p=1704 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The conditional check 'user_check.results[itemloop.index].stdout == \"missing\"' failed. The error was: error while evaluating conditional (user_check.results[itemloop.index].stdout == \"missing\"): list object has no element AnsibleUndefined(hint=None, obj=missing, name='itemloop')\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_ad/tasks/main.yml': line 61, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Créer l'utilisateur si absent\n  ^ here\n"}
+2025-01-09 23:20:13,575 p=1704 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:20:13,575 p=1704 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:22:48,829 p=1720 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:22:48,841 p=1720 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:22:51,819 p=1720 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:22:51,830 p=1720 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:22:55,617 p=1720 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:22:55,621 p=1720 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:22:59,421 p=1720 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:22:59,423 p=1720 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:23:02,698 p=1720 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:23:02,701 p=1720 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:23:06,227 p=1720 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:23:09,563 p=1720 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:23:12,822 p=1720 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:23:16,089 p=1720 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:23:16,110 p=1720 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:23:19,372 p=1720 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:23:22,460 p=1720 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:23:25,608 p=1720 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:23:28,714 p=1720 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:23:31,755 p=1720 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:23:34,843 p=1720 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:23:34,868 p=1720 u=root n=ansible | TASK [install_ad : Debug user_check results] *********************************************************************************************************************************************************************************
+2025-01-09 23:23:34,897 p=1720 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "user_check.results": [
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdoe\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.829739",
+            "end": "2025-01-09 22:23:17.273846",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 1",
+                "display_name": "John Doe",
+                "email": "jdoe@m2l.lan",
+                "firstname": "John",
+                "lastname": "Doe",
+                "name": "jdoe",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:23:16.444106",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"asmith\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.844351",
+            "end": "2025-01-09 22:23:20.350936",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 2",
+                "display_name": "Anna Smith",
+                "email": "asmith@m2l.lan",
+                "firstname": "Anna",
+                "lastname": "Smith",
+                "name": "asmith",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:23:19.506584",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"bjones\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.873286",
+            "end": "2025-01-09 22:23:23.507081",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 3",
+                "display_name": "Bob Jones",
+                "email": "bjones@m2l.lan",
+                "firstname": "Bob",
+                "lastname": "Jones",
+                "name": "bjones",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:23:22.633794",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"cwhite\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.875025",
+            "end": "2025-01-09 22:23:26.616369",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 1",
+                "display_name": "Chris White",
+                "email": "cwhite@m2l.lan",
+                "firstname": "Chris",
+                "lastname": "White",
+                "name": "cwhite",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:23:25.741344",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdavis\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.827645",
+            "end": "2025-01-09 22:23:29.662896",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 2",
+                "display_name": "Jane Davis",
+                "email": "jdavis@m2l.lan",
+                "firstname": "Jane",
+                "lastname": "Davis",
+                "name": "jdavis",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:23:28.835250",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"kwilson\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.842224",
+            "end": "2025-01-09 22:23:32.740998",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 3",
+                "display_name": "Kevin Wilson",
+                "email": "kwilson@m2l.lan",
+                "firstname": "Kevin",
+                "lastname": "Wilson",
+                "name": "kwilson",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:23:31.898774",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        }
+    ]
+}
+2025-01-09 23:23:34,900 p=1720 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:23:34,932 p=1720 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The conditional check 'user_check.results[loop.index0].stdout == \"missing\"' failed. The error was: error while evaluating conditional (user_check.results[loop.index0].stdout == \"missing\"): list object has no element AnsibleUndefined(hint=None, obj=missing, name='loop')\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_ad/tasks/main.yml': line 66, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Créer l'utilisateur si absent\n  ^ here\n"}
+2025-01-09 23:23:34,933 p=1720 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:23:34,933 p=1720 u=root n=ansible | M2L-WSRV01                 : ok=7    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:26:37,483 p=1733 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:26:37,495 p=1733 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:26:40,816 p=1733 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:26:40,826 p=1733 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:26:44,796 p=1733 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:26:44,799 p=1733 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:26:48,260 p=1733 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:26:48,262 p=1733 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:26:51,589 p=1733 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:26:51,591 p=1733 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:26:55,182 p=1733 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:26:58,567 p=1733 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:27:01,946 p=1733 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:27:05,340 p=1733 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:27:05,362 p=1733 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:27:08,636 p=1733 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:27:11,859 p=1733 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:27:14,952 p=1733 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:27:17,986 p=1733 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:27:21,368 p=1733 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:27:24,524 p=1733 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:27:24,548 p=1733 u=root n=ansible | TASK [install_ad : Debug user_check results] *********************************************************************************************************************************************************************************
+2025-01-09 23:27:24,578 p=1733 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "user_check.results": [
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdoe\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.824977",
+            "end": "2025-01-09 22:27:06.537987",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 1",
+                "display_name": "John Doe",
+                "email": "jdoe@m2l.lan",
+                "firstname": "John",
+                "lastname": "Doe",
+                "name": "jdoe",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:27:05.713009",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"asmith\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.828437",
+            "end": "2025-01-09 22:27:09.773568",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 2",
+                "display_name": "Anna Smith",
+                "email": "asmith@m2l.lan",
+                "firstname": "Anna",
+                "lastname": "Smith",
+                "name": "asmith",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:27:08.945131",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"bjones\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.827868",
+            "end": "2025-01-09 22:27:12.819037",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 3",
+                "display_name": "Bob Jones",
+                "email": "bjones@m2l.lan",
+                "firstname": "Bob",
+                "lastname": "Jones",
+                "name": "bjones",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:27:11.991168",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"cwhite\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.828010",
+            "end": "2025-01-09 22:27:15.883276",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 1",
+                "display_name": "Chris White",
+                "email": "cwhite@m2l.lan",
+                "firstname": "Chris",
+                "lastname": "White",
+                "name": "cwhite",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:27:15.055265",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdavis\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.921664",
+            "end": "2025-01-09 22:27:19.272848",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 2",
+                "display_name": "Jane Davis",
+                "email": "jdavis@m2l.lan",
+                "firstname": "Jane",
+                "lastname": "Davis",
+                "name": "jdavis",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:27:18.351184",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"kwilson\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.906376",
+            "end": "2025-01-09 22:27:22.428717",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 3",
+                "display_name": "Kevin Wilson",
+                "email": "kwilson@m2l.lan",
+                "firstname": "Kevin",
+                "lastname": "Wilson",
+                "name": "kwilson",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:27:21.522340",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        }
+    ]
+}
+2025-01-09 23:27:24,581 p=1733 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:27:24,619 p=1733 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The conditional check 'user_check.results[loop.index0].stdout | trim == \"missing\"' failed. The error was: error while evaluating conditional (user_check.results[loop.index0].stdout | trim == \"missing\"): list object has no element AnsibleUndefined(hint=None, obj=missing, name='loop')\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_ad/tasks/main.yml': line 66, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Créer l'utilisateur si absent\n  ^ here\n"}
+2025-01-09 23:27:24,621 p=1733 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:27:24,621 p=1733 u=root n=ansible | M2L-WSRV01                 : ok=7    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:31:03,359 p=1745 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:31:03,370 p=1745 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:31:06,386 p=1745 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:31:06,398 p=1745 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:31:10,064 p=1745 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:31:10,067 p=1745 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:31:13,631 p=1745 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:31:13,634 p=1745 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:31:16,895 p=1745 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:31:16,898 p=1745 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:31:20,346 p=1745 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:31:23,593 p=1745 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:31:26,931 p=1745 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:31:30,247 p=1745 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:31:30,269 p=1745 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:31:33,455 p=1745 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:31:36,500 p=1745 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:31:39,885 p=1745 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:31:43,107 p=1745 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:31:46,292 p=1745 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:31:49,338 p=1745 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:31:49,359 p=1745 u=root n=ansible | TASK [install_ad : Debug user_check results] *********************************************************************************************************************************************************************************
+2025-01-09 23:31:49,390 p=1745 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "user_check.results": [
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdoe\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.841927",
+            "end": "2025-01-09 22:31:31.365986",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 1",
+                "display_name": "John Doe",
+                "email": "jdoe@m2l.lan",
+                "firstname": "John",
+                "lastname": "Doe",
+                "name": "jdoe",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:31:30.524059",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"asmith\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.844082",
+            "end": "2025-01-09 22:31:34.413575",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 2",
+                "display_name": "Anna Smith",
+                "email": "asmith@m2l.lan",
+                "firstname": "Anna",
+                "lastname": "Smith",
+                "name": "asmith",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:31:33.569492",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"bjones\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:01.000659",
+            "end": "2025-01-09 22:31:37.758852",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 3",
+                "display_name": "Bob Jones",
+                "email": "bjones@m2l.lan",
+                "firstname": "Bob",
+                "lastname": "Jones",
+                "name": "bjones",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:31:36.758192",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"cwhite\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.859553",
+            "end": "2025-01-09 22:31:40.992321",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 1",
+                "display_name": "Chris White",
+                "email": "cwhite@m2l.lan",
+                "firstname": "Chris",
+                "lastname": "White",
+                "name": "cwhite",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:31:40.132767",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdavis\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.843124",
+            "end": "2025-01-09 22:31:44.194071",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 2",
+                "display_name": "Jane Davis",
+                "email": "jdavis@m2l.lan",
+                "firstname": "Jane",
+                "lastname": "Davis",
+                "name": "jdavis",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:31:43.350947",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"kwilson\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.873372",
+            "end": "2025-01-09 22:31:47.241567",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 3",
+                "display_name": "Kevin Wilson",
+                "email": "kwilson@m2l.lan",
+                "firstname": "Kevin",
+                "lastname": "Wilson",
+                "name": "kwilson",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:31:46.368194",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        }
+    ]
+}
+2025-01-09 23:31:49,393 p=1745 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:31:49,425 p=1745 u=root n=ansible | fatal: [M2L-WSRV01]: FAILED! => {"msg": "The conditional check 'user_check.results | selectattr('item.name', 'equalto', item.name| map(attribute='stdout') | first | trim == \"missing\"' failed. The error was: template error while templating string: unexpected '}', expected ')'. String: {% if user_check.results | selectattr('item.name', 'equalto', item.name| map(attribute='stdout') | first | trim == \"missing\" %} True {% else %} False {% endif %}. unexpected '}', expected ')'\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/install_ad/tasks/main.yml': line 66, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Créer l'utilisateur si absent\n  ^ here\n"}
+2025-01-09 23:31:49,426 p=1745 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:31:49,426 p=1745 u=root n=ansible | M2L-WSRV01                 : ok=7    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:34:17,219 p=1760 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:34:17,231 p=1760 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:34:20,283 p=1760 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:34:20,295 p=1760 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:34:23,962 p=1760 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:34:23,965 p=1760 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:34:27,508 p=1760 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:34:27,511 p=1760 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:34:30,793 p=1760 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:34:30,796 p=1760 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:34:34,319 p=1760 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:34:37,727 p=1760 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:34:40,983 p=1760 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:34:44,312 p=1760 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:34:44,332 p=1760 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:34:47,544 p=1760 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:34:50,574 p=1760 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:34:53,544 p=1760 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:34:56,644 p=1760 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:34:59,756 p=1760 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:35:02,838 p=1760 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:35:02,860 p=1760 u=root n=ansible | TASK [install_ad : Debug user_check results] *********************************************************************************************************************************************************************************
+2025-01-09 23:35:02,889 p=1760 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "user_check.results": [
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdoe\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.828429",
+            "end": "2025-01-09 22:34:45.460008",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 1",
+                "display_name": "John Doe",
+                "email": "jdoe@m2l.lan",
+                "firstname": "John",
+                "lastname": "Doe",
+                "name": "jdoe",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:34:44.631578",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"asmith\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.812411",
+            "end": "2025-01-09 22:34:48.491386",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 2",
+                "display_name": "Anna Smith",
+                "email": "asmith@m2l.lan",
+                "firstname": "Anna",
+                "lastname": "Smith",
+                "name": "asmith",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:34:47.678975",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"bjones\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.812083",
+            "end": "2025-01-09 22:34:51.460089",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 3",
+                "display_name": "Bob Jones",
+                "email": "bjones@m2l.lan",
+                "firstname": "Bob",
+                "lastname": "Jones",
+                "name": "bjones",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:34:50.648005",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"cwhite\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.828426",
+            "end": "2025-01-09 22:34:54.523083",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 1",
+                "display_name": "Chris White",
+                "email": "cwhite@m2l.lan",
+                "firstname": "Chris",
+                "lastname": "White",
+                "name": "cwhite",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:34:53.694657",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdavis\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.827839",
+            "end": "2025-01-09 22:34:57.662802",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 2",
+                "display_name": "Jane Davis",
+                "email": "jdavis@m2l.lan",
+                "firstname": "Jane",
+                "lastname": "Davis",
+                "name": "jdavis",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:34:56.834963",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"kwilson\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.875221",
+            "end": "2025-01-09 22:35:00.741241",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 3",
+                "display_name": "Kevin Wilson",
+                "email": "kwilson@m2l.lan",
+                "firstname": "Kevin",
+                "lastname": "Wilson",
+                "name": "kwilson",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:34:59.866020",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        }
+    ]
+}
+2025-01-09 23:35:02,891 p=1760 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:35:02,934 p=1760 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdoe) 
+2025-01-09 23:35:02,946 p=1760 u=root n=ansible | skipping: [M2L-WSRV01] => (item=asmith) 
+2025-01-09 23:35:02,958 p=1760 u=root n=ansible | skipping: [M2L-WSRV01] => (item=bjones) 
+2025-01-09 23:35:02,970 p=1760 u=root n=ansible | skipping: [M2L-WSRV01] => (item=cwhite) 
+2025-01-09 23:35:02,981 p=1760 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdavis) 
+2025-01-09 23:35:02,994 p=1760 u=root n=ansible | skipping: [M2L-WSRV01] => (item=kwilson) 
+2025-01-09 23:35:02,995 p=1760 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 23:35:02,998 p=1760 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:35:02,998 p=1760 u=root n=ansible | M2L-WSRV01                 : ok=7    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2025-01-09 23:36:54,865 p=1771 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:36:54,877 p=1771 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:36:57,770 p=1771 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:36:57,781 p=1771 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:37:01,521 p=1771 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:37:01,524 p=1771 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:37:05,089 p=1771 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:37:05,094 p=1771 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:37:08,437 p=1771 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:37:08,440 p=1771 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:37:11,989 p=1771 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:37:15,370 p=1771 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:37:18,675 p=1771 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:37:21,974 p=1771 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:37:21,996 p=1771 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:37:25,297 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:37:28,301 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:37:31,334 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:37:34,356 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:37:37,362 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:37:40,424 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:37:40,447 p=1771 u=root n=ansible | TASK [install_ad : Debug user_check results] *********************************************************************************************************************************************************************************
+2025-01-09 23:37:40,478 p=1771 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "user_check.results": [
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdoe\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.828018",
+            "end": "2025-01-09 22:37:23.194621",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 1",
+                "display_name": "John Doe",
+                "email": "jdoe@m2l.lan",
+                "firstname": "John",
+                "lastname": "Doe",
+                "name": "jdoe",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:37:22.366603",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "missing\r\n",
+            "stdout_lines": [
+                "missing"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"asmith\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.782634",
+            "end": "2025-01-09 22:37:26.226667",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 2",
+                "display_name": "Anna Smith",
+                "email": "asmith@m2l.lan",
+                "firstname": "Anna",
+                "lastname": "Smith",
+                "name": "asmith",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:37:25.444032",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"bjones\"} -SearchBase \"OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.858583",
+            "end": "2025-01-09 22:37:29.256586",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Tennis 3",
+                "display_name": "Bob Jones",
+                "email": "bjones@m2l.lan",
+                "firstname": "Bob",
+                "lastname": "Jones",
+                "name": "bjones",
+                "password": "Btssio75000",
+                "path": "OU=tennis,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:37:28.398003",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"cwhite\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.829260",
+            "end": "2025-01-09 22:37:32.273945",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 1",
+                "display_name": "Chris White",
+                "email": "cwhite@m2l.lan",
+                "firstname": "Chris",
+                "lastname": "White",
+                "name": "cwhite",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:37:31.444685",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"jdavis\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.873992",
+            "end": "2025-01-09 22:37:35.287744",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 2",
+                "display_name": "Jane Davis",
+                "email": "jdavis@m2l.lan",
+                "firstname": "Jane",
+                "lastname": "Davis",
+                "name": "jdavis",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:37:34.413752",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        },
+        {
+            "ansible_loop_var": "item",
+            "changed": true,
+            "cmd": "Import-Module ActiveDirectory\n$User = Get-ADUser -Filter {SamAccountName -eq \"kwilson\"} -SearchBase \"OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan\"\nif ($User) { Write-Output \"exists\" } else { Write-Output \"missing\" }",
+            "delta": "0:00:00.812399",
+            "end": "2025-01-09 22:37:38.350435",
+            "failed": false,
+            "item": {
+                "description": "Utilisateur Basket 3",
+                "display_name": "Kevin Wilson",
+                "email": "kwilson@m2l.lan",
+                "firstname": "Kevin",
+                "lastname": "Wilson",
+                "name": "kwilson",
+                "password": "Btssio75000",
+                "path": "OU=basket,OU=ligues,OU=0m2l.lan,DC=m2l,DC=lan"
+            },
+            "rc": 0,
+            "start": "2025-01-09 22:37:37.538036",
+            "stderr": "",
+            "stderr_lines": [],
+            "stdout": "exists\r\n",
+            "stdout_lines": [
+                "exists"
+            ]
+        }
+    ]
+}
+2025-01-09 23:37:40,480 p=1771 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:37:44,373 p=1771 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:37:44,386 p=1771 u=root n=ansible | skipping: [M2L-WSRV01] => (item=asmith) 
+2025-01-09 23:37:44,399 p=1771 u=root n=ansible | skipping: [M2L-WSRV01] => (item=bjones) 
+2025-01-09 23:37:44,415 p=1771 u=root n=ansible | skipping: [M2L-WSRV01] => (item=cwhite) 
+2025-01-09 23:37:44,427 p=1771 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdavis) 
+2025-01-09 23:37:44,439 p=1771 u=root n=ansible | skipping: [M2L-WSRV01] => (item=kwilson) 
+2025-01-09 23:37:44,460 p=1771 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:37:44,460 p=1771 u=root n=ansible | M2L-WSRV01                 : ok=8    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:40:02,077 p=1784 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:40:02,110 p=1784 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:40:04,687 p=1784 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:40:04,698 p=1784 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:40:08,575 p=1784 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:40:08,577 p=1784 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:40:12,025 p=1784 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:40:12,028 p=1784 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:40:15,504 p=1784 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:40:15,507 p=1784 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:40:18,979 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0m2l.lan', 'path': ''})
+2025-01-09 23:40:22,206 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:40:25,704 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:40:29,135 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:40:29,154 p=1784 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:40:32,349 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:40:35,387 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:40:38,416 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:40:41,461 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:40:44,545 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:40:47,635 p=1784 u=root n=ansible | ok: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:40:47,658 p=1784 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:40:47,703 p=1784 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdoe) 
+2025-01-09 23:40:47,716 p=1784 u=root n=ansible | skipping: [M2L-WSRV01] => (item=asmith) 
+2025-01-09 23:40:47,728 p=1784 u=root n=ansible | skipping: [M2L-WSRV01] => (item=bjones) 
+2025-01-09 23:40:47,740 p=1784 u=root n=ansible | skipping: [M2L-WSRV01] => (item=cwhite) 
+2025-01-09 23:40:47,752 p=1784 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdavis) 
+2025-01-09 23:40:47,764 p=1784 u=root n=ansible | skipping: [M2L-WSRV01] => (item=kwilson) 
+2025-01-09 23:40:47,769 p=1784 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 23:40:47,773 p=1784 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:40:47,773 p=1784 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2025-01-09 23:43:49,424 p=1805 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:43:49,455 p=1805 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:43:52,520 p=1805 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:43:52,534 p=1805 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:43:56,285 p=1805 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:43:56,289 p=1805 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:43:59,795 p=1805 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:43:59,800 p=1805 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:44:03,147 p=1805 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:44:03,149 p=1805 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:44:06,664 p=1805 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': '0_m2l.lan', 'path': ''})
+2025-01-09 23:44:10,125 p=1805 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:44:13,639 p=1805 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:44:17,062 p=1805 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:44:17,097 p=1805 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:44:20,581 p=1805 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:44:23,786 p=1805 u=root n=ansible | ok: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:44:26,950 p=1805 u=root n=ansible | ok: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:44:30,216 p=1805 u=root n=ansible | ok: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:44:33,392 p=1805 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:44:36,667 p=1805 u=root n=ansible | ok: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:44:36,686 p=1805 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:44:40,665 p=1805 u=root n=ansible | failed: [M2L-WSRV01] (item=jdoe) => {"ansible_loop_var": "item", "changed": false, "distinguished_name": null, "item": {"description": "Utilisateur Tennis 1", "display_name": "John Doe", "email": "jdoe@m2l.lan", "firstname": "John", "lastname": "Doe", "name": "jdoe", "password": "Btssio75000", "path": "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan"}, "msg": "New-ADUser failed: Le compte spécifié existe déjà", "object_guid": null}
+2025-01-09 23:44:44,380 p=1805 u=root n=ansible | failed: [M2L-WSRV01] (item=asmith) => {"ansible_loop_var": "item", "changed": false, "distinguished_name": null, "item": {"description": "Utilisateur Tennis 2", "display_name": "Anna Smith", "email": "asmith@m2l.lan", "firstname": "Anna", "lastname": "Smith", "name": "asmith", "password": "Btssio75000", "path": "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan"}, "msg": "New-ADUser failed: Le compte spécifié existe déjà", "object_guid": null}
+2025-01-09 23:44:48,061 p=1805 u=root n=ansible | failed: [M2L-WSRV01] (item=bjones) => {"ansible_loop_var": "item", "changed": false, "distinguished_name": null, "item": {"description": "Utilisateur Tennis 3", "display_name": "Bob Jones", "email": "bjones@m2l.lan", "firstname": "Bob", "lastname": "Jones", "name": "bjones", "password": "Btssio75000", "path": "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan"}, "msg": "New-ADUser failed: Le compte spécifié existe déjà", "object_guid": null}
+2025-01-09 23:44:51,696 p=1805 u=root n=ansible | failed: [M2L-WSRV01] (item=cwhite) => {"ansible_loop_var": "item", "changed": false, "distinguished_name": null, "item": {"description": "Utilisateur Basket 1", "display_name": "Chris White", "email": "cwhite@m2l.lan", "firstname": "Chris", "lastname": "White", "name": "cwhite", "password": "Btssio75000", "path": "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan"}, "msg": "New-ADUser failed: Le compte spécifié existe déjà", "object_guid": null}
+2025-01-09 23:44:55,301 p=1805 u=root n=ansible | failed: [M2L-WSRV01] (item=jdavis) => {"ansible_loop_var": "item", "changed": false, "distinguished_name": null, "item": {"description": "Utilisateur Basket 2", "display_name": "Jane Davis", "email": "jdavis@m2l.lan", "firstname": "Jane", "lastname": "Davis", "name": "jdavis", "password": "Btssio75000", "path": "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan"}, "msg": "New-ADUser failed: Le compte spécifié existe déjà", "object_guid": null}
+2025-01-09 23:44:58,953 p=1805 u=root n=ansible | failed: [M2L-WSRV01] (item=kwilson) => {"ansible_loop_var": "item", "changed": false, "distinguished_name": null, "item": {"description": "Utilisateur Basket 3", "display_name": "Kevin Wilson", "email": "kwilson@m2l.lan", "firstname": "Kevin", "lastname": "Wilson", "name": "kwilson", "password": "Btssio75000", "path": "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan"}, "msg": "New-ADUser failed: Le compte spécifié existe déjà", "object_guid": null}
+2025-01-09 23:44:58,975 p=1805 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:44:58,975 p=1805 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-09 23:46:58,130 p=1816 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************************************************************************************************************************
+2025-01-09 23:46:58,165 p=1816 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************************************************************************************************************************
+2025-01-09 23:47:01,110 p=1816 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:47:01,123 p=1816 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************************************************************************************************************************
+2025-01-09 23:47:04,831 p=1816 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:47:04,833 p=1816 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************************************************************************************************************************
+2025-01-09 23:47:08,334 p=1816 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:47:08,336 p=1816 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************************************************************************************************************************
+2025-01-09 23:47:11,798 p=1816 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-09 23:47:11,800 p=1816 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************************************************************************************************************************
+2025-01-09 23:47:15,275 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': '0_m2l.lan', 'path': ''})
+2025-01-09 23:47:18,573 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:47:21,820 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:47:25,136 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-09 23:47:25,160 p=1816 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************************************************************************************************************************
+2025-01-09 23:47:28,445 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdoe)
+2025-01-09 23:47:31,546 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item=asmith)
+2025-01-09 23:47:34,661 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item=bjones)
+2025-01-09 23:47:37,841 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item=cwhite)
+2025-01-09 23:47:40,919 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdavis)
+2025-01-09 23:47:44,079 p=1816 u=root n=ansible | ok: [M2L-WSRV01] => (item=kwilson)
+2025-01-09 23:47:44,113 p=1816 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************************************************************************************************************************
+2025-01-09 23:47:44,156 p=1816 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdoe) 
+2025-01-09 23:47:44,170 p=1816 u=root n=ansible | skipping: [M2L-WSRV01] => (item=asmith) 
+2025-01-09 23:47:44,180 p=1816 u=root n=ansible | skipping: [M2L-WSRV01] => (item=bjones) 
+2025-01-09 23:47:44,190 p=1816 u=root n=ansible | skipping: [M2L-WSRV01] => (item=cwhite) 
+2025-01-09 23:47:44,200 p=1816 u=root n=ansible | skipping: [M2L-WSRV01] => (item=jdavis) 
+2025-01-09 23:47:44,210 p=1816 u=root n=ansible | skipping: [M2L-WSRV01] => (item=kwilson) 
+2025-01-09 23:47:44,218 p=1816 u=root n=ansible | skipping: [M2L-WSRV01]
+2025-01-09 23:47:44,222 p=1816 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
+2025-01-09 23:47:44,223 p=1816 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
