@@ -6,6 +6,16 @@
     name: DNS
     state: present
     include_management_tools: yes
+  register: dns_role_installation
+
+- name: Configurer le DNS de la carte réseau Ethernet1
+  ansible.windows.win_shell: |
+    $AdapterName = "Ethernet1"
+    $DnsServer = "127.0.0.1"
+    Get-NetAdapter -Name $AdapterName | Set-DnsClientServerAddress -ServerAddresses $DnsServer
+  args:
+    executable: powershell
+  when: dns_role_installation.changed
 
 - name: Créer une zone de recherche directe (ZRD)
   ansible.windows.win_dns_zone:
@@ -38,6 +48,23 @@
     Set-DnsServerPrimaryZone -Name "{{ dns_zri_name }}" -DynamicUpdate "NonsecureAndSecure"
   when: create_zone_result.changed  # N'exécuter que si la zone a été créée
   register: dynamic_update_result
+
+- name: Vérifier si le redirecteur existe
+  ansible.windows.win_shell: |
+    $Redirector = "8.8.8.8"
+    (Get-DnsServerForwarder | Where-Object { $_.IPAddress -eq $Redirector }) | Out-Null
+    if ($?) { Write-Output $true } else { Write-Output $false }
+  args:
+    executable: powershell
+  register: dns_forwarder_exists
+
+- name: Ajouter le redirecteur si absent
+  ansible.windows.win_shell: |
+    Add-DnsServerForwarder -IPAddress "8.8.8.8" -PassThru
+  args:
+    executable: powershell
+  when: not dns_forwarder_exists.stdout | bool
+
 
 - name: Ajouter des enregistrements A
   ansible.windows.win_dns_record:

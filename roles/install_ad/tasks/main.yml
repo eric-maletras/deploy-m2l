@@ -1,0 +1,25 @@
+---
+# task file for Install Active Directory
+
+- name: Installer le rôle Active Directory Domain Services
+  ansible.windows.win_feature:
+    name: AD-Domain-Services
+    state: present
+
+- name: Vérifier ou créer le domaine
+  microsoft.ad.domain:
+    dns_domain_name: "{{dns_zrd_name}}"
+    domain_netbios_name: "{{netbios_name}}"
+    forest_mode: "default"
+    domain_mode: "default"
+    create_dns_delegation: "no"
+#    domain_admin_user: "{{windows_admin_user}}"
+#    domain_admin_password: "{{windows_admin_password}}"
+    safe_mode_password: "{{windows_admin_password}}"
+    database_path: "C:\\Windows\\NTDS"
+    sysvol_path: "C:\\Windows\\SYSVOL"
+    log_path: "C:\\Windows\\Logs"
+    reboot: true
+    reboot_timeout: 1800
+#    state: "present"
+

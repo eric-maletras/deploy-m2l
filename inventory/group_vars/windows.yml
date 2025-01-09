@@ -8,3 +8,6 @@ ansible_connection: winrm
 ansible_winrm_scheme: http
 ansible_winrm_server_cert_validation: ignore
 ansible_python_interpreter: 'C:\program files\Python311\python.exe'
+
+windows_admin_user: administrateur
+windows_admin_password: Btssio75000

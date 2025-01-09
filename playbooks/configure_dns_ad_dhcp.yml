@@ -4,13 +4,7 @@
   hosts: M2L-WSRV01
   become: false
   gather_facts: false
-#  vars:
-#    ns_a_records:
-#      - { name: "www", address: "192.168.1.10" }
-#      - { name: "mail", address: "192.168.1.20" }
-#    dns_cname_records:
-#      - { alias: "ftp", target: "www.example.com" }
-#      - { alias: "api", target: "www.example.com" }
   #
   roles:
-    - install_dns
+#    - install_dns
+    - install_ad

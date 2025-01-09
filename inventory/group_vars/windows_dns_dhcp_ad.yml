@@ -1,11 +1,14 @@
 # group_vars/windows_dns_dhcp_ad.yml
 dns_role_name: "DNS"
 dns_zrd_name: "m2l.lan"
-dns_zri_name: "172.16.in-addr.arpa"
+netbios_name: "M2L"
+dns_zri_name: "2.16.172.in-addr.arpa"
 
 dns_a_records:
   - { name: "m2l-lsrv03", address: "172.16.2.59" }
   - { name: "m2l-lsrv05", address: "172.16.2.58" }
 dns_cname_records:
-  - { alias: "glpi.m2l.lan", target: "m2l-lsrv03" }
-  - { alias: "onwcloud.m2l.lan", target: "m2l-lsrv03" }  
+  - { alias: "glpi", target: "m2l-lsrv03.m2l.lan" }
+  - { alias: "onwcloud", target: "m2l-lsrv03.m2l.lan" }  
+
+forest_mode_name: "Win2016"
