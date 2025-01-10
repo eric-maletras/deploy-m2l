@@ -2025,3 +2025,208 @@ The offending line appears to be:
 2025-01-09 23:47:44,218 p=1816 u=root n=ansible | skipping: [M2L-WSRV01]
 2025-01-09 23:47:44,222 p=1816 u=root n=ansible | PLAY RECAP *******************************************************************************************************************************************************************************************************************
 2025-01-09 23:47:44,223 p=1816 u=root n=ansible | M2L-WSRV01                 : ok=6    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2025-01-10 11:52:47,464 p=931 u=root n=ansible | PLAY [Test win_ping on windows] ***********************************************************************************************************************************************************
+2025-01-10 11:52:47,595 p=931 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ************************************************************************************************************************************************
+2025-01-10 11:53:54,590 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:53:54,593 p=931 u=root n=ansible | TASK [install_dns : Configurer le DNS de la carte réseau Ethernet1] ***********************************************************************************************************************
+2025-01-10 11:54:02,988 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:02,992 p=931 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] ****************************************************************************************************************************
+2025-01-10 11:54:12,206 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:12,208 p=931 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ***************************************************************************************************************
+2025-01-10 11:54:20,068 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:20,071 p=931 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] **************************************************************************************************************************
+2025-01-10 11:54:36,909 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:36,913 p=931 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ***************************************************************************************************************
+2025-01-10 11:54:45,212 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:45,216 p=931 u=root n=ansible | TASK [install_dns : Vérifier si le redirecteur existe] ************************************************************************************************************************************
+2025-01-10 11:54:52,646 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:52,649 p=931 u=root n=ansible | TASK [install_dns : Ajouter le redirecteur si absent] *************************************************************************************************************************************
+2025-01-10 11:54:58,781 p=931 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:54:58,784 p=931 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] ****************************************************************************************************************************************
+2025-01-10 11:55:14,374 p=931 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-10 11:55:24,019 p=931 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-10 11:55:24,028 p=931 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] ************************************************************************************************************************************
+2025-01-10 11:55:30,528 p=931 u=root n=ansible | changed: [M2L-WSRV01] => (item={'alias': 'glpi', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-10 11:55:36,157 p=931 u=root n=ansible | changed: [M2L-WSRV01] => (item={'alias': 'onwcloud', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-10 11:55:36,171 p=931 u=root n=ansible | PLAY RECAP ********************************************************************************************************************************************************************************
+2025-01-10 11:55:36,172 p=931 u=root n=ansible | M2L-WSRV01                 : ok=10   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-10 11:57:55,144 p=994 u=root n=ansible | PLAY [Test win_ping on windows] **********************************************************************************
+2025-01-10 11:57:55,178 p=994 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *******************************************
+2025-01-10 11:58:59,222 p=994 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 11:58:59,240 p=994 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *****************************************************************
+2025-01-10 12:04:19,992 p=994 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 12:04:19,994 p=994 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***********************
+2025-01-10 12:04:27,395 p=994 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-10 12:04:27,398 p=994 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***********************
+2025-01-10 12:04:31,678 p=994 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-10 12:04:31,681 p=994 u=root n=ansible | TASK [install_ad : Create Organizational Units] ******************************************************************
+2025-01-10 12:04:36,541 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': '0_m2l.lan', 'path': ''})
+2025-01-10 12:04:40,871 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'Ligues', 'path': 'OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-10 12:04:45,216 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-10 12:04:49,708 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-10 12:04:49,728 p=994 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *************************************************************
+2025-01-10 12:04:53,771 p=994 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdoe)
+2025-01-10 12:04:57,525 p=994 u=root n=ansible | ok: [M2L-WSRV01] => (item=asmith)
+2025-01-10 12:05:01,386 p=994 u=root n=ansible | ok: [M2L-WSRV01] => (item=bjones)
+2025-01-10 12:05:05,069 p=994 u=root n=ansible | ok: [M2L-WSRV01] => (item=cwhite)
+2025-01-10 12:05:08,699 p=994 u=root n=ansible | ok: [M2L-WSRV01] => (item=jdavis)
+2025-01-10 12:05:12,435 p=994 u=root n=ansible | ok: [M2L-WSRV01] => (item=kwilson)
+2025-01-10 12:05:12,459 p=994 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ****************************************************************
+2025-01-10 12:05:17,342 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdoe)
+2025-01-10 12:05:21,796 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item=asmith)
+2025-01-10 12:05:26,249 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item=bjones)
+2025-01-10 12:05:30,732 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item=cwhite)
+2025-01-10 12:05:35,267 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item=jdavis)
+2025-01-10 12:05:39,818 p=994 u=root n=ansible | changed: [M2L-WSRV01] => (item=kwilson)
+2025-01-10 12:05:39,843 p=994 u=root n=ansible | PLAY RECAP *******************************************************************************************************
+2025-01-10 12:05:39,844 p=994 u=root n=ansible | M2L-WSRV01                 : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-10 15:38:00,043 p=1210 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-10 15:38:00,055 p=1210 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] ****************************************************************************************************************************************************
+2025-01-10 15:39:13,618 p=1210 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:39:13,620 p=1210 u=root n=ansible | TASK [install_dhcp : Autoriser le serveur DHCP dans Active Directory] ***************************************************************************************************************************
+2025-01-10 15:39:25,218 p=1210 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:39:25,221 p=1210 u=root n=ansible | TASK [install_dhcp : Vérifier l'autorisation du serveur DHCP dans Active Directory] *************************************************************************************************************
+2025-01-10 15:39:30,743 p=1210 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:39:30,747 p=1210 u=root n=ansible | TASK [install_dhcp : Créer l'étendue DHCP et configurer les options] ****************************************************************************************************************************
+2025-01-10 15:39:37,385 p=1210 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.2.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.2.1', 'ip_end': '172.16.2.10', 'gateway': '172.16.2.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:39:42,296 p=1210 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.10.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.10.1', 'ip_end': '172.16.10.10', 'gateway': '172.16.10.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:39:48,551 p=1210 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.11.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.11.1', 'ip_end': '172.16.11.10', 'gateway': '172.16.11.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:39:48,575 p=1210 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-10 15:39:48,575 p=1210 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-10 15:44:08,373 p=1219 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-10 15:44:08,384 p=1219 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] ****************************************************************************************************************************************************
+2025-01-10 15:44:11,548 p=1219 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-10 15:44:11,550 p=1219 u=root n=ansible | TASK [install_dhcp : Autoriser le serveur DHCP dans Active Directory] ***************************************************************************************************************************
+2025-01-10 15:44:21,625 p=1219 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:44:21,628 p=1219 u=root n=ansible | TASK [install_dhcp : Vérifier l'autorisation du serveur DHCP dans Active Directory] *************************************************************************************************************
+2025-01-10 15:44:26,370 p=1219 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:44:26,374 p=1219 u=root n=ansible | TASK [install_dhcp : Créer l'étendue DHCP et configurer les options] ****************************************************************************************************************************
+2025-01-10 15:44:31,244 p=1219 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.2.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.2.1', 'ip_end': '172.16.2.10', 'gateway': '172.16.2.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:44:35,998 p=1219 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.10.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.10.1', 'ip_end': '172.16.10.10', 'gateway': '172.16.10.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:44:40,726 p=1219 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.11.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.11.1', 'ip_end': '172.16.11.10', 'gateway': '172.16.11.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:44:40,748 p=1219 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-10 15:44:40,749 p=1219 u=root n=ansible | M2L-WSRV01                 : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-10 15:58:29,925 p=1230 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-10 15:58:29,937 p=1230 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] ****************************************************************************************************************************************************
+2025-01-10 15:58:33,188 p=1230 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-10 15:58:33,191 p=1230 u=root n=ansible | TASK [install_dhcp : Autoriser le serveur DHCP dans Active Directory] ***************************************************************************************************************************
+2025-01-10 15:58:38,941 p=1230 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:58:38,944 p=1230 u=root n=ansible | TASK [install_dhcp : Vérifier l'autorisation du serveur DHCP dans Active Directory] *************************************************************************************************************
+2025-01-10 15:58:43,804 p=1230 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 15:58:43,807 p=1230 u=root n=ansible | TASK [install_dhcp : Créer l'étendue DHCP et configurer les options] ****************************************************************************************************************************
+2025-01-10 15:58:48,791 p=1230 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.2.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.2.1', 'ip_end': '172.16.2.10', 'gateway': '172.16.2.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:58:53,349 p=1230 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.10.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.10.1', 'ip_end': '172.16.10.10', 'gateway': '172.16.10.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:58:57,931 p=1230 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.11.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.11.1', 'ip_end': '172.16.11.10', 'gateway': '172.16.11.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 15:58:57,957 p=1230 u=root n=ansible | TASK [install_dhcp : Afficher les résultats de la configuration des étendues] *******************************************************************************************************************
+2025-01-10 15:58:57,987 p=1230 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "dhcp_scope_results": {
+        "changed": true,
+        "msg": "All items completed",
+        "results": [
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "$scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq \"172.16.2.0\" }\n\n# Si l'étendue n'existe pas, créez-la\nif (-not $scope) {\n    Write-Host \"Création de l'étendue 172.16.2.0\"\n    Add-DhcpServerv4Scope -Name \"Etendue_172.16.2.0\" `\n                          -StartRange \"172.16.2.1\" `\n                          -EndRange \"172.16.2.10\" `\n                          -SubnetMask \"255.255.255.192\" `\n                          -LeaseDuration (New-TimeSpan -Days 1) `\n                          -Description \"Etendue pour 172.16.2.0\"\n    $scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq \"172.16.2.0\" }\n} else {\n    Write-Host \"L'étendue 172.16.2.0 existe déjà.\"\n}\n\n# Ajouter les options DHCP (Passerelle, DNS, Domaine)\n\n# Passerelle\n$gateway_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -ErrorAction SilentlyContinue\nif (-not $gateway_option) {\n    Write-Host \"Ajout de l'option Passerelle pour l'étendue 172.16.2.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -Value \"172.16.2.62\"\n} else {\n    Write-Host \"L'option Passerelle pour l'étendue 172.16.2.0 est déjà configurée.\"\n}\n\n# Serveur DNS\n$dns_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -ErrorAction SilentlyContinue\nif (-not $dns_option) {\n    Write-Host \"Ajout de l'option DNS pour l'étendue 172.16.2.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -Value \"172.16.2.61\"\n} else {\n    Write-Host \"L'option DNS pour l'étendue 172.16.2.0 est déjà configurée.\"\n}\n\n# Domaine\n$domain_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -ErrorAction SilentlyContinue\nif (-not $domain_option) {\n    Write-Host \"Ajout de l'option Domaine pour l'étendue 172.16.2.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -Value \"m2l.lan\"\n} else {\n    Write-Host \"L'option Domaine pour l'étendue 172.16.2.0 est déjà configurée.\"\n}",
+                "delta": "0:00:02.265623",
+                "end": "2025-01-10 14:58:49.457677",
+                "failed": false,
+                "item": {
+                    "dns": "172.16.2.61",
+                    "domain": "m2l.lan",
+                    "gateway": "172.16.2.62",
+                    "ip_end": "172.16.2.10",
+                    "ip_start": "172.16.2.1",
+                    "network_id": "172.16.2.0",
+                    "subnet_mask": "255.255.255.192"
+                },
+                "rc": 0,
+                "start": "2025-01-10 14:58:47.192054",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "L'étendue 172.16.2.0 existe déjà.\nL'option Passerelle pour l'étendue 172.16.2.0 est déjà configurée.\nL'option DNS pour l'étendue 172.16.2.0 est déjà configurée.\nL'option Domaine pour l'étendue 172.16.2.0 est déjà configurée.\n",
+                "stdout_lines": [
+                    "L'étendue 172.16.2.0 existe déjà.",
+                    "L'option Passerelle pour l'étendue 172.16.2.0 est déjà configurée.",
+                    "L'option DNS pour l'étendue 172.16.2.0 est déjà configurée.",
+                    "L'option Domaine pour l'étendue 172.16.2.0 est déjà configurée."
+                ]
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "$scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq \"172.16.10.0\" }\n\n# Si l'étendue n'existe pas, créez-la\nif (-not $scope) {\n    Write-Host \"Création de l'étendue 172.16.10.0\"\n    Add-DhcpServerv4Scope -Name \"Etendue_172.16.10.0\" `\n                          -StartRange \"172.16.10.1\" `\n                          -EndRange \"172.16.10.10\" `\n                          -SubnetMask \"255.255.255.192\" `\n                          -LeaseDuration (New-TimeSpan -Days 1) `\n                          -Description \"Etendue pour 172.16.10.0\"\n    $scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq \"172.16.10.0\" }\n} else {\n    Write-Host \"L'étendue 172.16.10.0 existe déjà.\"\n}\n\n# Ajouter les options DHCP (Passerelle, DNS, Domaine)\n\n# Passerelle\n$gateway_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -ErrorAction SilentlyContinue\nif (-not $gateway_option) {\n    Write-Host \"Ajout de l'option Passerelle pour l'étendue 172.16.10.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -Value \"172.16.10.62\"\n} else {\n    Write-Host \"L'option Passerelle pour l'étendue 172.16.10.0 est déjà configurée.\"\n}\n\n# Serveur DNS\n$dns_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -ErrorAction SilentlyContinue\nif (-not $dns_option) {\n    Write-Host \"Ajout de l'option DNS pour l'étendue 172.16.10.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -Value \"172.16.2.61\"\n} else {\n    Write-Host \"L'option DNS pour l'étendue 172.16.10.0 est déjà configurée.\"\n}\n\n# Domaine\n$domain_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -ErrorAction SilentlyContinue\nif (-not $domain_option) {\n    Write-Host \"Ajout de l'option Domaine pour l'étendue 172.16.10.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -Value \"m2l.lan\"\n} else {\n    Write-Host \"L'option Domaine pour l'étendue 172.16.10.0 est déjà configurée.\"\n}",
+                "delta": "0:00:02.234319",
+                "end": "2025-01-10 14:58:54.035473",
+                "failed": false,
+                "item": {
+                    "dns": "172.16.2.61",
+                    "domain": "m2l.lan",
+                    "gateway": "172.16.10.62",
+                    "ip_end": "172.16.10.10",
+                    "ip_start": "172.16.10.1",
+                    "network_id": "172.16.10.0",
+                    "subnet_mask": "255.255.255.192"
+                },
+                "rc": 0,
+                "start": "2025-01-10 14:58:51.801153",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "L'étendue 172.16.10.0 existe déjà.\nL'option Passerelle pour l'étendue 172.16.10.0 est déjà configurée.\nL'option DNS pour l'étendue 172.16.10.0 est déjà configurée.\nL'option Domaine pour l'étendue 172.16.10.0 est déjà configurée.\n",
+                "stdout_lines": [
+                    "L'étendue 172.16.10.0 existe déjà.",
+                    "L'option Passerelle pour l'étendue 172.16.10.0 est déjà configurée.",
+                    "L'option DNS pour l'étendue 172.16.10.0 est déjà configurée.",
+                    "L'option Domaine pour l'étendue 172.16.10.0 est déjà configurée."
+                ]
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "$scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq \"172.16.11.0\" }\n\n# Si l'étendue n'existe pas, créez-la\nif (-not $scope) {\n    Write-Host \"Création de l'étendue 172.16.11.0\"\n    Add-DhcpServerv4Scope -Name \"Etendue_172.16.11.0\" `\n                          -StartRange \"172.16.11.1\" `\n                          -EndRange \"172.16.11.10\" `\n                          -SubnetMask \"255.255.255.192\" `\n                          -LeaseDuration (New-TimeSpan -Days 1) `\n                          -Description \"Etendue pour 172.16.11.0\"\n    $scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq \"172.16.11.0\" }\n} else {\n    Write-Host \"L'étendue 172.16.11.0 existe déjà.\"\n}\n\n# Ajouter les options DHCP (Passerelle, DNS, Domaine)\n\n# Passerelle\n$gateway_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -ErrorAction SilentlyContinue\nif (-not $gateway_option) {\n    Write-Host \"Ajout de l'option Passerelle pour l'étendue 172.16.11.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -Value \"172.16.11.62\"\n} else {\n    Write-Host \"L'option Passerelle pour l'étendue 172.16.11.0 est déjà configurée.\"\n}\n\n# Serveur DNS\n$dns_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -ErrorAction SilentlyContinue\nif (-not $dns_option) {\n    Write-Host \"Ajout de l'option DNS pour l'étendue 172.16.11.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -Value \"172.16.2.61\"\n} else {\n    Write-Host \"L'option DNS pour l'étendue 172.16.11.0 est déjà configurée.\"\n}\n\n# Domaine\n$domain_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -ErrorAction SilentlyContinue\nif (-not $domain_option) {\n    Write-Host \"Ajout de l'option Domaine pour l'étendue 172.16.11.0\"\n    Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -Value \"m2l.lan\"\n} else {\n    Write-Host \"L'option Domaine pour l'étendue 172.16.11.0 est déjà configurée.\"\n}",
+                "delta": "0:00:02.249939",
+                "end": "2025-01-10 14:58:58.613514",
+                "failed": false,
+                "item": {
+                    "dns": "172.16.2.61",
+                    "domain": "m2l.lan",
+                    "gateway": "172.16.11.62",
+                    "ip_end": "172.16.11.10",
+                    "ip_start": "172.16.11.1",
+                    "network_id": "172.16.11.0",
+                    "subnet_mask": "255.255.255.192"
+                },
+                "rc": 0,
+                "start": "2025-01-10 14:58:56.363574",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "L'étendue 172.16.11.0 existe déjà.\nL'option Passerelle pour l'étendue 172.16.11.0 est déjà configurée.\nL'option DNS pour l'étendue 172.16.11.0 est déjà configurée.\nL'option Domaine pour l'étendue 172.16.11.0 est déjà configurée.\n",
+                "stdout_lines": [
+                    "L'étendue 172.16.11.0 existe déjà.",
+                    "L'option Passerelle pour l'étendue 172.16.11.0 est déjà configurée.",
+                    "L'option DNS pour l'étendue 172.16.11.0 est déjà configurée.",
+                    "L'option Domaine pour l'étendue 172.16.11.0 est déjà configurée."
+                ]
+            }
+        ],
+        "skipped": false
+    }
+}
+2025-01-10 15:58:57,991 p=1230 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-10 15:58:57,991 p=1230 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-10 16:01:38,739 p=1239 u=root n=ansible | PLAY [Test win_ping on windows] *****************************************************************************************************************************************************************
+2025-01-10 16:01:38,751 p=1239 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] ****************************************************************************************************************************************************
+2025-01-10 16:01:41,909 p=1239 u=root n=ansible | ok: [M2L-WSRV01]
+2025-01-10 16:01:41,911 p=1239 u=root n=ansible | TASK [install_dhcp : Autoriser le serveur DHCP dans Active Directory] ***************************************************************************************************************************
+2025-01-10 16:01:46,773 p=1239 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 16:01:46,777 p=1239 u=root n=ansible | TASK [install_dhcp : Vérifier l'autorisation du serveur DHCP dans Active Directory] *************************************************************************************************************
+2025-01-10 16:01:51,457 p=1239 u=root n=ansible | changed: [M2L-WSRV01]
+2025-01-10 16:01:51,461 p=1239 u=root n=ansible | TASK [install_dhcp : Créer l'étendue DHCP et configurer les options] ****************************************************************************************************************************
+2025-01-10 16:01:56,336 p=1239 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.2.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.2.1', 'ip_end': '172.16.2.10', 'gateway': '172.16.2.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 16:02:01,016 p=1239 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.10.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.10.1', 'ip_end': '172.16.10.10', 'gateway': '172.16.10.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 16:02:05,660 p=1239 u=root n=ansible | changed: [M2L-WSRV01] => (item={'network_id': '172.16.11.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.11.1', 'ip_end': '172.16.11.10', 'gateway': '172.16.11.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-10 16:02:05,685 p=1239 u=root n=ansible | TASK [install_dhcp : Afficher les résultats de la configuration des étendues] *******************************************************************************************************************
+2025-01-10 16:02:05,707 p=1239 u=root n=ansible | ok: [M2L-WSRV01] => {
+    "msg": "Les étendues ont été configurées avec succès"
+}
+2025-01-10 16:02:05,712 p=1239 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2025-01-10 16:02:05,712 p=1239 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

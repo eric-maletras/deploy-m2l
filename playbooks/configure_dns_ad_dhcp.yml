@@ -7,4 +7,5 @@
   #
   roles:
 #    - install_dns
-    - install_ad
+#    - install_ad
+     - install_dhcp

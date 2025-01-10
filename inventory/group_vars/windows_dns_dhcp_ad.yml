@@ -30,3 +30,27 @@ ad_users:
   - { name: "cwhite", firstname: "Chris", lastname: "White", display_name: "Chris White", email: "cwhite@m2l.lan", password: "Btssio75000", description: "Utilisateur Basket 1", path: "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
   - { name: "jdavis", firstname: "Jane", lastname: "Davis", display_name: "Jane Davis", email: "jdavis@m2l.lan", password: "Btssio75000", description: "Utilisateur Basket 2", path: "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
   - { name: "kwilson", firstname: "Kevin", lastname: "Wilson", display_name: "Kevin Wilson", email: "kwilson@m2l.lan", password: "Btssio75000", description: "Utilisateur Basket 3", path: "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+
+
+dhcp_scopes:
+  - network_id: "172.16.2.0"
+    subnet_mask: "255.255.255.192"  # /26
+    ip_start: "172.16.2.1"
+    ip_end: "172.16.2.10"
+    gateway: "172.16.2.62"
+    dns: "172.16.2.61"
+    domain: "m2l.lan"
+  - network_id: "172.16.10.0"
+    subnet_mask: "255.255.255.192"  # /26
+    ip_start: "172.16.10.1"
+    ip_end: "172.16.10.10"
+    gateway: "172.16.10.62"
+    dns: "172.16.2.61"
+    domain: "m2l.lan"
+  - network_id: "172.16.11.0"
+    subnet_mask: "255.255.255.192"  # /26
+    ip_start: "172.16.11.1"
+    ip_end: "172.16.11.10"
+    gateway: "172.16.11.62"
+    dns: "172.16.2.61"
+    domain: "m2l.lan"

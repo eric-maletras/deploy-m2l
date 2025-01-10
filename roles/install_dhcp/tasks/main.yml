@@ -1,0 +1,73 @@
+---
+- name: Installer le rôle DHCP
+  win_feature:
+    name: DHCP
+    state: present
+    include_management_tools: yes
+
+- name: Autoriser le serveur DHCP dans Active Directory
+  win_shell: |
+    Add-DhcpServerInDC -DnsName "M2L-WSRV01.m2l.lan" -IPAddress "172.16.2.61"
+  args:
+    executable: powershell
+
+- name: Vérifier l'autorisation du serveur DHCP dans Active Directory
+  win_shell: |
+    Get-DhcpServerInDC
+  args:
+    executable: powershell
+
+- name: Créer l'étendue DHCP et configurer les options
+  win_shell: |
+    $scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq "{{ item.network_id }}" }
+
+    # Si l'étendue n'existe pas, créez-la
+    if (-not $scope) {
+        Write-Host "Création de l'étendue {{ item.network_id }}"
+        Add-DhcpServerv4Scope -Name "Etendue_{{ item.network_id }}" `
+                              -StartRange "{{ item.ip_start }}" `
+                              -EndRange "{{ item.ip_end }}" `
+                              -SubnetMask "{{ item.subnet_mask }}" `
+                              -LeaseDuration (New-TimeSpan -Days 1) `
+                              -Description "Etendue pour {{ item.network_id }}"
+        $scope = Get-DhcpServerv4Scope | Where-Object { $_.ScopeId -eq "{{ item.network_id }}" }
+    } else {
+        Write-Host "L'étendue {{ item.network_id }} existe déjà."
+    }
+
+    # Ajouter les options DHCP (Passerelle, DNS, Domaine)
+    
+    # Passerelle
+    $gateway_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -ErrorAction SilentlyContinue
+    if (-not $gateway_option) {
+        Write-Host "Ajout de l'option Passerelle pour l'étendue {{ item.network_id }}"
+        Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 3 -Value "{{ item.gateway }}"
+    } else {
+        Write-Host "L'option Passerelle pour l'étendue {{ item.network_id }} est déjà configurée."
+    }
+    
+    # Serveur DNS
+    $dns_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -ErrorAction SilentlyContinue
+    if (-not $dns_option) {
+        Write-Host "Ajout de l'option DNS pour l'étendue {{ item.network_id }}"
+        Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 6 -Value "{{ item.dns }}"
+    } else {
+        Write-Host "L'option DNS pour l'étendue {{ item.network_id }} est déjà configurée."
+    }
+
+    # Domaine
+    $domain_option = Get-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -ErrorAction SilentlyContinue
+    if (-not $domain_option) {
+        Write-Host "Ajout de l'option Domaine pour l'étendue {{ item.network_id }}"
+        Set-DhcpServerv4OptionValue -ScopeId $scope.ScopeId -OptionId 15 -Value "{{ item.domain }}"
+    } else {
+        Write-Host "L'option Domaine pour l'étendue {{ item.network_id }} est déjà configurée."
+    }
+  args:
+    executable: powershell
+  loop: "{{ dhcp_scopes }}"
+  register: dhcp_scope_results
+
+- name: Afficher les résultats de la configuration des étendues
+  debug:
+    msg: "Les étendues ont été configurées avec succès"
