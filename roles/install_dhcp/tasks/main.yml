@@ -1,4 +1,11 @@
 ---
+
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{ad_admin.username}}"
+    ansible_password: "{{ad_admin.password}}"
+
+
 - name: Installer le rôle DHCP
   win_feature:
     name: DHCP

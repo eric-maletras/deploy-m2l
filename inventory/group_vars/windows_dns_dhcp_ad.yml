@@ -22,6 +22,8 @@ ad_ou_hierarchy:
     path: "OU=Ligues,OU=0_m2l.lan,{{ ad_base_dn }}"
   - name: "basket"
     path: "OU=Ligues,OU=0_m2l.lan,{{ ad_base_dn }}"
+  - name: "Serveurs"
+    path: "OU=0_m2l.lan,{{ad_base_dn}}"
 
 ad_users:
   - { name: "jdoe", firstname: "John", lastname: "Doe", display_name: "John Doe", email: "jdoe@m2l.lan", password: "Btssio75000", description: "Utilisateur Tennis 1", path: "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }

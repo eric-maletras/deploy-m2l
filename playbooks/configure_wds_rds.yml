@@ -1,11 +1,9 @@
 ---
 #
 - name: Test win_ping on windows
-  hosts: M2L-WSRV01-A
+  hosts: M2L-WSRV02-A
   become: false
   gather_facts: false
   #
   roles:
-    - install_dns
-    - install_ad
-    - install_dhcp
+    - integrerAD

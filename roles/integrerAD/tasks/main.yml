@@ -1,0 +1,36 @@
+--- 
+
+#vars:
+#  ad_domain: "mon_domaine.local"
+#  ad_admin_user: "admin_ad"
+#  ad_admin_password: "Password123"
+#  ad_ou: "OU=Serveurs,OU=Sites,DC=mon_domaine,DC=local"
+
+- name: Définir l'utilisateur Ansible à local
+  set_fact:
+    ansible_user: "{{local_admin.username}}"
+    ansible_password: "{{local_admin.password}}"
+
+- name: Configurer le DNS de la carte réseau Ethernet1
+  ansible.windows.win_shell: |
+    $AdapterName = "Ethernet1"
+    $DnsServer = "172.16.2.61"
+    Get-NetAdapter -Name $AdapterName | Set-DnsClientServerAddress -ServerAddresses $DnsServer
+  args:
+    executable: powershell
+
+
+- name: Joindre la machine au domaine Active Directory
+  microsoft.ad.membership:
+    state: domain
+    dns_domain_name: "m2l.lan"
+    domain_admin_user: "{{ ad_admin.username }}"
+    domain_admin_password: "{{ ad_admin.password }}"
+    domain_ou_path: "OU=Serveurs,OU=0_m2l.lan,DC=m2l,DC=lan"
+    hostname: "M2L-WSRV02"
+    reboot: yes 
+
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{ad_admin.username}}"
+    ansible_password: "{{ad_admin.password}}"

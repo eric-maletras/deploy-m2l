@@ -7,7 +7,13 @@ ansible_port: 5985
 ansible_connection: winrm
 ansible_winrm_scheme: http
 ansible_winrm_server_cert_validation: ignore
+ansible_winrm_transport: basic
 ansible_python_interpreter: 'C:\program files\Python311\python.exe'
 
-windows_admin_user: administrateur
-windows_admin_password: Btssio75000
+local_admin:
+  username: "Administrateur"
+  password: "Btssio75000"
+
+ad_admin:
+  username: "Administrateur@m2l.lan"
+  password: "Btssio75000"

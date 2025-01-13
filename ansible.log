@@ -2230,3 +2230,337 @@ The offending line appears to be:
 }
 2025-01-10 16:02:05,712 p=1239 u=root n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
 2025-01-10 16:02:05,712 p=1239 u=root n=ansible | M2L-WSRV01                 : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-12 23:34:29,085 p=1314 u=root n=ansible | PLAY [Test win_ping on windows] ********************************************************************************************************************************************************************
+2025-01-12 23:34:29,112 p=1314 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] *******************************************************************************************************************************************************
+2025-01-12 23:34:53,627 p=1314 u=root n=ansible |  [ERROR]: User interrupted execution
+
+2025-01-12 23:44:22,611 p=1322 u=root n=ansible | PLAY [Test win_ping on windows] ****************************************************************************************************************************
+2025-01-12 23:44:22,626 p=1322 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] *****************************************************************************************************************
+2025-01-12 23:47:06,480 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:47:06,482 p=1322 u=root n=ansible | TASK [install_dns : Configurer le DNS de la carte réseau Ethernet1] ****************************************************************************************
+2025-01-12 23:47:51,311 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:47:51,314 p=1322 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] *********************************************************************************************
+2025-01-12 23:48:31,157 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:48:31,165 p=1322 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ********************************************************************************
+2025-01-12 23:48:45,190 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:48:45,194 p=1322 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] *******************************************************************************************
+2025-01-12 23:49:03,060 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:49:03,064 p=1322 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ********************************************************************************
+2025-01-12 23:49:16,027 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:49:16,030 p=1322 u=root n=ansible | TASK [install_dns : Vérifier si le redirecteur existe] *****************************************************************************************************
+2025-01-12 23:49:27,564 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:49:27,567 p=1322 u=root n=ansible | TASK [install_dns : Ajouter le redirecteur si absent] ******************************************************************************************************
+2025-01-12 23:49:43,819 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:49:43,821 p=1322 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] *********************************************************************************************************
+2025-01-12 23:50:01,613 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-12 23:50:14,377 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-12 23:50:14,402 p=1322 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] *****************************************************************************************************
+2025-01-12 23:50:22,044 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'alias': 'glpi', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-12 23:50:27,601 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'alias': 'onwcloud', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-12 23:50:27,619 p=1322 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] *************************************************************************************
+2025-01-12 23:51:29,290 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-12 23:51:29,303 p=1322 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ***********************************************************************************************************
+2025-01-13 00:00:05,395 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 00:00:05,398 p=1322 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] *****************************************************************
+2025-01-13 00:00:12,481 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 00:00:12,486 p=1322 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] *****************************************************************
+2025-01-13 00:00:16,543 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 00:00:16,547 p=1322 u=root n=ansible | TASK [install_ad : Create Organizational Units] ************************************************************************************************************
+2025-01-13 00:00:21,574 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': '0_m2l.lan', 'path': ''})
+2025-01-13 00:00:26,900 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'Ligues', 'path': 'OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-13 00:00:31,300 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-13 00:00:35,420 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-13 00:00:35,445 p=1322 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *******************************************************************************************************
+2025-01-13 00:00:39,464 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=jdoe)
+2025-01-13 00:00:43,370 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=asmith)
+2025-01-13 00:00:47,104 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=bjones)
+2025-01-13 00:00:50,885 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=cwhite)
+2025-01-13 00:00:54,533 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=jdavis)
+2025-01-13 00:00:58,193 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=kwilson)
+2025-01-13 00:00:58,220 p=1322 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] **********************************************************************************************************
+2025-01-13 00:01:03,708 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=jdoe)
+2025-01-13 00:01:08,452 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=asmith)
+2025-01-13 00:01:13,601 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=bjones)
+2025-01-13 00:01:18,484 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=cwhite)
+2025-01-13 00:01:23,447 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=jdavis)
+2025-01-13 00:01:28,245 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=kwilson)
+2025-01-13 00:01:28,270 p=1322 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] ***************************************************************************************************************
+2025-01-13 00:01:57,792 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 00:01:57,795 p=1322 u=root n=ansible | TASK [install_dhcp : Autoriser le serveur DHCP dans Active Directory] **************************************************************************************
+2025-01-13 00:02:08,612 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 00:02:08,616 p=1322 u=root n=ansible | TASK [install_dhcp : Vérifier l'autorisation du serveur DHCP dans Active Directory] ************************************************************************
+2025-01-13 00:02:13,849 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 00:02:13,855 p=1322 u=root n=ansible | TASK [install_dhcp : Créer l'étendue DHCP et configurer les options] ***************************************************************************************
+2025-01-13 00:02:31,289 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'network_id': '172.16.2.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.2.1', 'ip_end': '172.16.2.10', 'gateway': '172.16.2.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-13 00:02:48,276 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'network_id': '172.16.10.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.10.1', 'ip_end': '172.16.10.10', 'gateway': '172.16.10.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-13 00:03:05,728 p=1322 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'network_id': '172.16.11.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.11.1', 'ip_end': '172.16.11.10', 'gateway': '172.16.11.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-13 00:03:05,753 p=1322 u=root n=ansible | TASK [install_dhcp : Afficher les résultats de la configuration des étendues] ******************************************************************************
+2025-01-13 00:03:05,776 p=1322 u=root n=ansible | ok: [M2L-WSRV01-A] => {
+    "msg": "Les étendues ont été configurées avec succès"
+}
+2025-01-13 00:03:05,780 p=1322 u=root n=ansible | PLAY RECAP *************************************************************************************************************************************************
+2025-01-13 00:03:05,780 p=1322 u=root n=ansible | M2L-WSRV01-A               : ok=22   changed=17   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-13 00:16:29,410 p=1405 u=root n=ansible | ERROR! the role 'IntegrerAD' was not found in /var/ansible-projects/deploy-m2l/playbooks/roles:/var/ansible-projects/deploy-m2l/roles:/var/ansible-projects/deploy-m2l/playbooks
+
+The error appears to be in '/var/ansible-projects/deploy-m2l/playbooks/configure_wds_rds.yml': line 9, column 7, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  roles:
+    - IntegrerAD
+      ^ here
+
+2025-01-13 00:17:24,231 p=1425 u=root n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected key. while parsing a block mapping
+  in "<unicode string>", line 5, column 5
+did not find expected key
+  in "<unicode string>", line 11, column 5
+
+The error appears to be in '/var/ansible-projects/deploy-m2l/roles/integrerAD/tasks/main.yml': line 11, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+    - name: Joindre le serveur Windows au domaine
+    ^ here
+
+2025-01-13 00:18:16,435 p=1428 u=root n=ansible | [DEPRECATION WARNING]: ansible.windows.win_domain_membership has been deprecated. Use microsoft.ad.membership instead. This feature will be removed from 
+ansible.windows in version 3.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2025-01-13 00:18:16,453 p=1428 u=root n=ansible | PLAY [Test win_ping on windows] ****************************************************************************************************************************
+2025-01-13 00:18:16,483 p=1428 u=root n=ansible | TASK [integrerAD : Configurer les paramètres DNS pour pointer vers le contrôleur de domaine] ***************************************************************
+2025-01-13 00:18:32,040 p=1428 u=root n=ansible | changed: [M2L-WSRV02-A]
+2025-01-13 00:18:32,043 p=1428 u=root n=ansible | TASK [integrerAD : Joindre le serveur Windows au domaine] **************************************************************************************************
+2025-01-13 00:18:34,677 p=1428 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"changed": false, "msg": "dns_domain_name is required when state is 'domain'"}
+2025-01-13 00:18:34,678 p=1428 u=root n=ansible | PLAY RECAP *************************************************************************************************************************************************
+2025-01-13 00:18:34,679 p=1428 u=root n=ansible | M2L-WSRV02-A               : ok=1    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 00:25:09,831 p=1440 u=root n=ansible | PLAY [Test win_ping on windows] ****************************************************************************************************************************
+2025-01-13 00:25:09,868 p=1440 u=root n=ansible | TASK [integrerAD : Joindre la machine au domaine Active Directory] *****************************************************************************************
+2025-01-13 00:25:09,890 p=1440 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'Btssio75000' is undefined\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/integrerAD/tasks/main.yml': line 9, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Joindre la machine au domaine Active Directory\n  ^ here\n"}
+2025-01-13 00:25:09,891 p=1440 u=root n=ansible | PLAY RECAP *************************************************************************************************************************************************
+2025-01-13 00:25:09,891 p=1440 u=root n=ansible | M2L-WSRV02-A               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 00:25:32,833 p=1446 u=root n=ansible | PLAY [Test win_ping on windows] ****************************************************************************************************************************
+2025-01-13 00:25:32,872 p=1446 u=root n=ansible | TASK [integrerAD : Joindre la machine au domaine Active Directory] *****************************************************************************************
+2025-01-13 00:25:37,331 p=1446 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (microsoft.ad.domain) module: ou_path, user_name, name, password, domain_name, state. Supported parameters include: log_path, forest_mode, install_dns, dns_domain_name, safe_mode_password, reboot, sysvol_path, create_dns_delegation, reboot_timeout, domain_netbios_name, database_path, domain_mode"}
+2025-01-13 00:25:37,332 p=1446 u=root n=ansible | PLAY RECAP *************************************************************************************************************************************************
+2025-01-13 00:25:37,332 p=1446 u=root n=ansible | M2L-WSRV02-A               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 21:40:21,953 p=1120 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************
+2025-01-13 21:40:22,073 p=1120 u=root n=ansible | TASK [install_dns : Définir l'utilisateur Ansible] ******************************************************************************************************************************************
+2025-01-13 21:40:22,106 p=1120 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 21:40:22,108 p=1120 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] **************************************************************************************************************************************************
+2025-01-13 21:40:22,299 p=1120 u=root n=ansible | fatal: [M2L-WSRV01-A]: UNREACHABLE! => {"changed": false, "msg": "plaintext: the specified credentials were rejected by the server", "unreachable": true}
+2025-01-13 21:40:22,300 p=1120 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************
+2025-01-13 21:40:22,300 p=1120 u=root n=ansible | M2L-WSRV01-A               : ok=1    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-13 21:42:13,120 p=1140 u=root n=ansible | PLAY [Test win_ping on windows] *************************************************************************************************************************************************************
+2025-01-13 21:42:13,138 p=1140 u=root n=ansible | TASK [install_dns : Définir l'utilisateur Ansible] ******************************************************************************************************************************************
+2025-01-13 21:42:13,174 p=1140 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 21:42:13,177 p=1140 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] **************************************************************************************************************************************************
+2025-01-13 21:44:31,126 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:44:31,130 p=1140 u=root n=ansible | TASK [install_dns : Configurer le DNS de la carte réseau Ethernet1] *************************************************************************************************************************
+2025-01-13 21:44:53,373 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:44:53,377 p=1140 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] ******************************************************************************************************************************
+2025-01-13 21:45:20,316 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:45:20,321 p=1140 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *****************************************************************************************************************
+2025-01-13 21:45:43,119 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:45:43,123 p=1140 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] ****************************************************************************************************************************
+2025-01-13 21:46:06,763 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:46:06,765 p=1140 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] *****************************************************************************************************************
+2025-01-13 21:46:21,227 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:46:21,229 p=1140 u=root n=ansible | TASK [install_dns : Vérifier si le redirecteur existe] **************************************************************************************************************************************
+2025-01-13 21:46:40,157 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:46:40,160 p=1140 u=root n=ansible | TASK [install_dns : Ajouter le redirecteur si absent] ***************************************************************************************************************************************
+2025-01-13 21:46:50,254 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:46:50,257 p=1140 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] ******************************************************************************************************************************************
+2025-01-13 21:47:18,754 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-13 21:47:46,771 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-13 21:47:46,820 p=1140 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] **************************************************************************************************************************************
+2025-01-13 21:48:10,369 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'alias': 'glpi', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-13 21:48:34,688 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'alias': 'onwcloud', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-13 21:48:34,705 p=1140 u=root n=ansible | TASK [install_ad : Définir l'utilisateur Ansible à local] ***********************************************************************************************************************************
+2025-01-13 21:48:34,747 p=1140 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 21:48:34,751 p=1140 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] **********************************************************************************************************************
+2025-01-13 21:50:53,249 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:50:53,288 p=1140 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] ********************************************************************************************************************************************
+2025-01-13 21:58:08,934 p=1140 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 21:58:08,937 p=1140 u=root n=ansible | TASK [install_ad : Définir l'utilisateur Ansible à ad] **************************************************************************************************************************************
+2025-01-13 21:58:08,967 p=1140 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 21:58:08,970 p=1140 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] **************************************************************************************************
+2025-01-13 21:58:09,033 p=1140 u=root n=ansible | fatal: [M2L-WSRV01-A]: UNREACHABLE! => {"changed": false, "msg": "plaintext: the specified credentials were rejected by the server", "unreachable": true}
+2025-01-13 21:58:09,034 p=1140 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************
+2025-01-13 21:58:09,034 p=1140 u=root n=ansible | M2L-WSRV01-A               : ok=15   changed=12   unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-13 22:02:39,424 p=1173 u=root n=ansible | PLAY [Test win_ping on windows] **************************************************************************************************************************************
+2025-01-13 22:02:39,449 p=1173 u=root n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  found unknown escape character. while parsing a quoted scalar
+  in "<unicode string>", line 17, column 13
+found unknown escape character
+  in "<unicode string>", line 17, column 17
+
+The error appears to be in '/var/ansible-projects/deploy-m2l/inventory/group_vars/windows.yml': line 17, column 17, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+ad_admin:
+  username: "m2l\Administrateur"
+                ^ here
+
+2025-01-13 22:06:42,264 p=1177 u=root n=ansible | PLAY [Test win_ping on windows] **************************************************************************************************************************************
+2025-01-13 22:06:42,286 p=1177 u=root n=ansible | TASK [install_dns : Définir l'utilisateur Ansible] *******************************************************************************************************************
+2025-01-13 22:06:42,322 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:06:42,325 p=1177 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ***************************************************************************************************************************
+2025-01-13 22:07:34,605 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:07:34,607 p=1177 u=root n=ansible | TASK [install_dns : Configurer le DNS de la carte réseau Ethernet1] **************************************************************************************************
+2025-01-13 22:07:34,638 p=1177 u=root n=ansible | skipping: [M2L-WSRV01-A]
+2025-01-13 22:07:34,641 p=1177 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] *******************************************************************************************************
+2025-01-13 22:07:46,757 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:07:46,760 p=1177 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ******************************************************************************************
+2025-01-13 22:07:46,784 p=1177 u=root n=ansible | skipping: [M2L-WSRV01-A]
+2025-01-13 22:07:46,786 p=1177 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] *****************************************************************************************************
+2025-01-13 22:07:52,863 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:07:52,866 p=1177 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ******************************************************************************************
+2025-01-13 22:07:52,885 p=1177 u=root n=ansible | skipping: [M2L-WSRV01-A]
+2025-01-13 22:07:52,887 p=1177 u=root n=ansible | TASK [install_dns : Vérifier si le redirecteur existe] ***************************************************************************************************************
+2025-01-13 22:07:59,498 p=1177 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:07:59,501 p=1177 u=root n=ansible | TASK [install_dns : Ajouter le redirecteur si absent] ****************************************************************************************************************
+2025-01-13 22:08:06,046 p=1177 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:08:06,050 p=1177 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] *******************************************************************************************************************
+2025-01-13 22:08:12,093 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-13 22:08:17,885 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-13 22:08:17,913 p=1177 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] ***************************************************************************************************************
+2025-01-13 22:08:23,962 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'alias': 'glpi', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-13 22:08:29,514 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'alias': 'onwcloud', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-13 22:08:29,551 p=1177 u=root n=ansible | TASK [install_ad : Définir l'utilisateur Ansible à local] ************************************************************************************************************
+2025-01-13 22:08:29,586 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:08:29,588 p=1177 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] ***********************************************************************************************
+2025-01-13 22:08:33,206 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:08:33,217 p=1177 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *********************************************************************************************************************
+2025-01-13 22:08:37,965 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:08:37,969 p=1177 u=root n=ansible | TASK [install_ad : Définir l'utilisateur Ansible à ad] ***************************************************************************************************************
+2025-01-13 22:08:37,997 p=1177 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:08:38,000 p=1177 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***************************************************************************
+2025-01-13 22:08:38,056 p=1177 u=root n=ansible | fatal: [M2L-WSRV01-A]: UNREACHABLE! => {"changed": false, "msg": "Kerberos auth failure when calling kinit cmd 'kinit': [Errno 2] Aucun fichier ou dossier de ce type: 'kinit'", "unreachable": true}
+2025-01-13 22:08:38,057 p=1177 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************************************
+2025-01-13 22:08:38,057 p=1177 u=root n=ansible | M2L-WSRV01-A               : ok=12   changed=2    unreachable=1    failed=0    skipped=3    rescued=0    ignored=0   
+2025-01-13 22:10:44,297 p=1198 u=root n=ansible | PLAY [Test win_ping on windows] **************************************************************************************************************************************
+2025-01-13 22:10:44,319 p=1198 u=root n=ansible | TASK [install_dns : Définir l'utilisateur Ansible] *******************************************************************************************************************
+2025-01-13 22:10:44,348 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:10:44,350 p=1198 u=root n=ansible | TASK [install_dns : Installer le rôle DNS] ***************************************************************************************************************************
+2025-01-13 22:10:48,470 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:10:48,473 p=1198 u=root n=ansible | TASK [install_dns : Configurer le DNS de la carte réseau Ethernet1] **************************************************************************************************
+2025-01-13 22:10:48,496 p=1198 u=root n=ansible | skipping: [M2L-WSRV01-A]
+2025-01-13 22:10:48,499 p=1198 u=root n=ansible | TASK [install_dns : Créer une zone de recherche directe (ZRD)] *******************************************************************************************************
+2025-01-13 22:11:14,270 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:11:14,273 p=1198 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ******************************************************************************************
+2025-01-13 22:11:14,294 p=1198 u=root n=ansible | skipping: [M2L-WSRV01-A]
+2025-01-13 22:11:14,296 p=1198 u=root n=ansible | TASK [install_dns : Créer une zone de recherche indirecte (ZRI)] *****************************************************************************************************
+2025-01-13 22:11:30,066 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:11:30,069 p=1198 u=root n=ansible | TASK [install_dns : Configurer les mises à jour dynamiques sur la zone ZRD] ******************************************************************************************
+2025-01-13 22:11:30,092 p=1198 u=root n=ansible | skipping: [M2L-WSRV01-A]
+2025-01-13 22:11:30,096 p=1198 u=root n=ansible | TASK [install_dns : Vérifier si le redirecteur existe] ***************************************************************************************************************
+2025-01-13 22:12:04,375 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:12:04,379 p=1198 u=root n=ansible | TASK [install_dns : Ajouter le redirecteur si absent] ****************************************************************************************************************
+2025-01-13 22:12:28,178 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:12:28,181 p=1198 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements A] *******************************************************************************************************************
+2025-01-13 22:12:52,184 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv03', 'address': '172.16.2.59'})
+2025-01-13 22:13:15,677 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'name': 'm2l-lsrv05', 'address': '172.16.2.58'})
+2025-01-13 22:13:15,715 p=1198 u=root n=ansible | TASK [install_dns : Ajouter des enregistrements CNAME] ***************************************************************************************************************
+2025-01-13 22:13:40,005 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'alias': 'glpi', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-13 22:13:45,912 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item={'alias': 'onwcloud', 'target': 'm2l-lsrv03.m2l.lan'})
+2025-01-13 22:13:45,948 p=1198 u=root n=ansible | TASK [install_ad : Définir l'utilisateur Ansible à local] ************************************************************************************************************
+2025-01-13 22:13:45,978 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:13:45,981 p=1198 u=root n=ansible | TASK [install_ad : Installer le rôle Active Directory Domain Services] ***********************************************************************************************
+2025-01-13 22:13:49,980 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:13:49,994 p=1198 u=root n=ansible | TASK [install_ad : Vérifier ou créer le domaine] *********************************************************************************************************************
+2025-01-13 22:13:53,991 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:13:53,994 p=1198 u=root n=ansible | TASK [install_ad : Définir l'utilisateur Ansible à ad] ***************************************************************************************************************
+2025-01-13 22:13:54,021 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:13:54,024 p=1198 u=root n=ansible | TASK [install_ad : Vérifier si l'antériorité maximale du mot de passe est déjà configurée] ***************************************************************************
+2025-01-13 22:14:02,459 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:14:02,461 p=1198 u=root n=ansible | TASK [install_ad : Modifier l'antériorité maximale du mot de passe dans la GPO par défaut] ***************************************************************************
+2025-01-13 22:14:06,869 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:14:06,872 p=1198 u=root n=ansible | TASK [install_ad : Create Organizational Units] **********************************************************************************************************************
+2025-01-13 22:14:11,686 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': '0_m2l.lan', 'path': ''})
+2025-01-13 22:14:15,725 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'Ligues', 'path': 'OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-13 22:14:19,536 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'tennis', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-13 22:14:23,482 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'name': 'basket', 'path': 'OU=Ligues,OU=0_m2l.lan,DC=m2l,DC=lan'})
+2025-01-13 22:14:23,524 p=1198 u=root n=ansible | TASK [install_ad : Vérifier si l'utilisateur existe] *****************************************************************************************************************
+2025-01-13 22:14:28,624 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=jdoe)
+2025-01-13 22:14:32,821 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=asmith)
+2025-01-13 22:14:36,962 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=bjones)
+2025-01-13 22:14:42,392 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=cwhite)
+2025-01-13 22:14:46,672 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=jdavis)
+2025-01-13 22:14:50,780 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => (item=kwilson)
+2025-01-13 22:14:50,815 p=1198 u=root n=ansible | TASK [install_ad : Créer l'utilisateur si absent] ********************************************************************************************************************
+2025-01-13 22:14:55,871 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=jdoe)
+2025-01-13 22:15:00,852 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=asmith)
+2025-01-13 22:15:05,786 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=bjones)
+2025-01-13 22:15:10,808 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=cwhite)
+2025-01-13 22:15:15,477 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=jdavis)
+2025-01-13 22:15:20,070 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item=kwilson)
+2025-01-13 22:15:20,104 p=1198 u=root n=ansible | TASK [install_dhcp : Définir l'utilisateur Ansible à ad] *************************************************************************************************************
+2025-01-13 22:15:20,133 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A]
+2025-01-13 22:15:20,136 p=1198 u=root n=ansible | TASK [install_dhcp : Installer le rôle DHCP] *************************************************************************************************************************
+2025-01-13 22:17:44,317 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:17:44,320 p=1198 u=root n=ansible | TASK [install_dhcp : Autoriser le serveur DHCP dans Active Directory] ************************************************************************************************
+2025-01-13 22:17:54,014 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:17:54,017 p=1198 u=root n=ansible | TASK [install_dhcp : Vérifier l'autorisation du serveur DHCP dans Active Directory] **********************************************************************************
+2025-01-13 22:18:00,931 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A]
+2025-01-13 22:18:00,934 p=1198 u=root n=ansible | TASK [install_dhcp : Créer l'étendue DHCP et configurer les options] *************************************************************************************************
+2025-01-13 22:18:10,239 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'network_id': '172.16.2.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.2.1', 'ip_end': '172.16.2.10', 'gateway': '172.16.2.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-13 22:18:18,152 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'network_id': '172.16.10.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.10.1', 'ip_end': '172.16.10.10', 'gateway': '172.16.10.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-13 22:18:26,455 p=1198 u=root n=ansible | changed: [M2L-WSRV01-A] => (item={'network_id': '172.16.11.0', 'subnet_mask': '255.255.255.192', 'ip_start': '172.16.11.1', 'ip_end': '172.16.11.10', 'gateway': '172.16.11.62', 'dns': '172.16.2.61', 'domain': 'm2l.lan'})
+2025-01-13 22:18:26,501 p=1198 u=root n=ansible | TASK [install_dhcp : Afficher les résultats de la configuration des étendues] ****************************************************************************************
+2025-01-13 22:18:26,530 p=1198 u=root n=ansible | ok: [M2L-WSRV01-A] => {
+    "msg": "Les étendues ont été configurées avec succès"
+}
+2025-01-13 22:18:26,536 p=1198 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************************************
+2025-01-13 22:18:26,536 p=1198 u=root n=ansible | M2L-WSRV01-A               : ok=23   changed=8    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+2025-01-13 22:39:24,329 p=1272 u=root n=ansible | PLAY [Test win_ping on windows] *********************************************************************************************
+2025-01-13 22:39:24,342 p=1272 u=root n=ansible | TASK [integrerAD : Définir l'utilisateur Ansible à local] *******************************************************************
+2025-01-13 22:39:24,373 p=1272 u=root n=ansible | ok: [M2L-WSRV02-A]
+2025-01-13 22:39:24,386 p=1272 u=root n=ansible | TASK [integrerAD : Joindre la machine au domaine Active Directory] **********************************************************
+2025-01-13 22:39:48,958 p=1272 u=root n=ansible | [WARNING]: WSMan OperationTimeout during send input, attempting to continue. If this continues to occur, try increasing the
+connection_timeout value for this host.
+
+2025-01-13 22:40:02,594 p=1272 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (microsoft.ad.domain) module: ou_path, user_name, name, password, domain_name, state. Supported parameters include: log_path, forest_mode, install_dns, dns_domain_name, safe_mode_password, reboot, sysvol_path, create_dns_delegation, reboot_timeout, domain_netbios_name, database_path, domain_mode"}
+2025-01-13 22:40:02,596 p=1272 u=root n=ansible | PLAY RECAP ******************************************************************************************************************
+2025-01-13 22:40:02,596 p=1272 u=root n=ansible | M2L-WSRV02-A               : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 22:49:27,244 p=1288 u=root n=ansible | PLAY [Test win_ping on windows] *********************************************************************************************
+2025-01-13 22:49:27,263 p=1288 u=root n=ansible | TASK [integrerAD : Définir l'utilisateur Ansible à local] *******************************************************************
+2025-01-13 22:49:27,295 p=1288 u=root n=ansible | ok: [M2L-WSRV02-A]
+2025-01-13 22:49:27,311 p=1288 u=root n=ansible | TASK [integrerAD : Joindre la machine au domaine Active Directory] **********************************************************
+2025-01-13 22:49:34,942 p=1288 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (microsoft.ad.membership) module: ou_path, user_name, password, domain_name. Supported parameters include: workgroup_name, domain_admin_password, dns_domain_name, domain_admin_user, hostname, reboot, reboot_timeout, state, domain_ou_path, domain_server, offline_join_blob"}
+2025-01-13 22:49:34,949 p=1288 u=root n=ansible | PLAY RECAP ******************************************************************************************************************
+2025-01-13 22:49:34,949 p=1288 u=root n=ansible | M2L-WSRV02-A               : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 22:51:58,719 p=1295 u=root n=ansible | PLAY [Test win_ping on windows] *********************************************************************************************
+2025-01-13 22:51:58,733 p=1295 u=root n=ansible | TASK [integrerAD : Définir l'utilisateur Ansible à local] *******************************************************************
+2025-01-13 22:51:58,764 p=1295 u=root n=ansible | ok: [M2L-WSRV02-A]
+2025-01-13 22:51:58,777 p=1295 u=root n=ansible | TASK [integrerAD : Joindre la machine au domaine Active Directory] **********************************************************
+2025-01-13 22:52:18,164 p=1295 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"changed": false, "msg": "L’ordinateur « M2L-WSRV02 » n’a pas pu joindre le domaine « m2l.lan » à partir de son groupe de travail actuel « WORKGROUP » avec le message d’erreur suivant : Le domaine spécifié n’existe pas ou n’a pas pu être contacté.", "reboot_required": false}
+2025-01-13 22:52:18,166 p=1295 u=root n=ansible | PLAY RECAP ******************************************************************************************************************
+2025-01-13 22:52:18,166 p=1295 u=root n=ansible | M2L-WSRV02-A               : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 22:55:13,033 p=1319 u=root n=ansible | PLAY [Test win_ping on windows] **************************************************************************************************************
+2025-01-13 22:55:13,050 p=1319 u=root n=ansible | TASK [integrerAD : Définir l'utilisateur Ansible à local] ************************************************************************************
+2025-01-13 22:55:13,090 p=1319 u=root n=ansible | ok: [M2L-WSRV02-A]
+2025-01-13 22:55:13,093 p=1319 u=root n=ansible | TASK [integrerAD : Configurer le DNS de la carte réseau Ethernet1] ***************************************************************************
+2025-01-13 22:55:13,125 p=1319 u=root n=ansible | fatal: [M2L-WSRV02-A]: FAILED! => {"msg": "The conditional check 'dns_role_installation.changed' failed. The error was: error while evaluating conditional (dns_role_installation.changed): 'dns_role_installation' is undefined\n\nThe error appears to be in '/var/ansible-projects/deploy-m2l/roles/integrerAD/tasks/main.yml': line 14, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Configurer le DNS de la carte réseau Ethernet1\n  ^ here\n"}
+2025-01-13 22:55:13,126 p=1319 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************
+2025-01-13 22:55:13,126 p=1319 u=root n=ansible | M2L-WSRV02-A               : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-13 22:56:23,837 p=1327 u=root n=ansible | PLAY [Test win_ping on windows] **************************************************************************************************************
+2025-01-13 22:56:23,855 p=1327 u=root n=ansible | TASK [integrerAD : Définir l'utilisateur Ansible à local] ************************************************************************************
+2025-01-13 22:56:23,896 p=1327 u=root n=ansible | ok: [M2L-WSRV02-A]
+2025-01-13 22:56:23,899 p=1327 u=root n=ansible | TASK [integrerAD : Configurer le DNS de la carte réseau Ethernet1] ***************************************************************************
+2025-01-13 22:56:37,629 p=1327 u=root n=ansible | changed: [M2L-WSRV02-A]
+2025-01-13 22:56:37,640 p=1327 u=root n=ansible | TASK [integrerAD : Joindre la machine au domaine Active Directory] ***************************************************************************
+2025-01-13 22:58:51,003 p=1327 u=root n=ansible | changed: [M2L-WSRV02-A]
+2025-01-13 22:58:51,005 p=1327 u=root n=ansible | TASK [integrerAD : Définir l'utilisateur Ansible à ad] ***************************************************************************************
+2025-01-13 22:58:51,036 p=1327 u=root n=ansible | ok: [M2L-WSRV02-A]
+2025-01-13 22:58:51,041 p=1327 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************
+2025-01-13 22:58:51,041 p=1327 u=root n=ansible | M2L-WSRV02-A               : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

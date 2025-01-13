@@ -1,5 +1,10 @@
 ---
 # task file for Install Active Directory
+- name: Définir l'utilisateur Ansible à local
+  set_fact:
+    ansible_user: "{{local_admin.username}}"
+    ansible_password: "{{local_admin.password}}"
+
 
 - name: Installer le rôle Active Directory Domain Services
   ansible.windows.win_feature:
@@ -19,6 +24,13 @@
     log_path: "C:\\Windows\\Logs"
     reboot: true
     reboot_timeout: 1800
+
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{ad_admin.username}}"
+    ansible_password: "{{ad_admin.password}}"
+
+
 
 - name: Vérifier si l'antériorité maximale du mot de passe est déjà configurée
   ansible.windows.win_shell: |

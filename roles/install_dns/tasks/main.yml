@@ -1,6 +1,11 @@
 ---
 # tasks file for install_dns
 
+- name: Définir l'utilisateur Ansible
+  set_fact:
+    ansible_user: "{{local_admin.username}}"
+    ansible_password: "{{local_admin.password}}"
+
 - name: Installer le rôle DNS
   ansible.windows.win_feature:
     name: DNS

@@ -1,0 +1,9 @@
+[windows:children]
+windows_dns_dhcp_ad
+windows_wds_rdp
+
+[windows_dns_dhcp_ad]
+M2L-WSRV01-A ansible_host=192.168.62.129
+
+[windows_wds_rdp]
+M2L-WSRV02-A ansible_host=192.168.62.130
