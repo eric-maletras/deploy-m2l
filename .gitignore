@@ -1,0 +1,7 @@
+# Ignorer tous les fichiers .wim dans le dossier files/
+roles/install_wds/files/*.wim
+
+# Ignorer d'autres fichiers temporaires ou de configuration
+*.log
+*.tmp
+*.bak

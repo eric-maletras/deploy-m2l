@@ -6,4 +6,6 @@
   gather_facts: false
   #
   roles:
-    - integrerAD
+#    - win_ping
+#    - integrerAD
+    - install_wds

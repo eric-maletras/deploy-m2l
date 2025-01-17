@@ -1,0 +1,65 @@
+---
+
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{ad_admin.username}}"
+    ansible_password: "{{ad_admin.password}}"
+
+- name: Afficher l'utilisateur Ansible utilisé
+  debug:
+    msg: "L'utilisateur Ansible utilisé est {{ ansible_user }}"
+
+- name: Test connection with ping
+  ansible.windows.win_ping:
+
+#- name: Tester la connexion WinRM
+#  win_shell: |
+#    try {
+#      $session = Enter-PSSession -ComputerName "M2l-WSRV02" -Credential (New-Object System.Management.Automation.PSCredential("{{ ansible_user }}", (ConvertTo-SecureString "{{ ansible_password }}" -AsPlainText -Force))) -Authentication Basic -Port 5985 -ErrorAction Stop
+#      $session.Exit()
+#      Write-Output "Connexion WinRM réussie"
+#    } catch {
+#      Write-Error "Impossible de se connecter à WinRM : $_"
+#      exit 1
+#    }
+#  register: winrm_connection_test
+#  failed_when: "'Impossible de se connecter à WinRM' in winrm_connection_test.stderr"
+#  changed_when: false
+
+
+- name: Vérifier si le rôle WDS est déjà installé
+  win_shell: |
+    Get-WindowsFeature -Name WDS
+  register: wds_status
+  changed_when: false
+
+- name: Installer le rôle WDS si nécessaire
+  win_shell: |
+    Install-WindowsFeature -Name WDS -IncludeManagementTools
+  when: wds_status.stdout.find("Installed") == -1
+
+
+- name: Vérifier si le serveur WDS est déjà initialisé
+  win_shell: |
+    wdsutil /Get-Server
+  register: wds_server_check
+  failed_when: false
+  changed_when: false
+
+- name: Configurer WDS initialement si nécessaire
+  win_shell: |
+    wdsutil /initialize-server /Server:localhost /RemInst:"{{ wds_install_path }}"
+  args:
+    chdir: C:\Windows\System32
+  when: "'WDSSERVER' not in wds_server_check.stdout"
+
+- name: Vérifier les options actuelles du serveur WDS
+  win_shell: |
+    wdsutil /Get-Server /Show:Configuration
+  register: wds_options_check
+  changed_when: false
+
+- name: Configurer les options du serveur WDS si nécessaire
+  win_shell: |
+    wdsutil /Set-Server /AnswerClients:{{ wds_server_options }}
+  when: "'AnswerClients: {{ wds_server_options }}' not in wds_options_check.stdout"

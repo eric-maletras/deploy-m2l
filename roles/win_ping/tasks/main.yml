@@ -1,4 +1,26 @@
 ---
 
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{local_admin.username}}"
+    ansible_password: "{{local_admin.password}}"
+
+- name: Afficher l'utilisateur Ansible utilisé
+  debug:
+    msg: "L'utilisateur Ansible utilisé est {{ ansible_user }}"
+
+- name: Test connection with ping
+  ansible.windows.win_ping:
+
+
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{ad_admin.username}}"
+    ansible_password: "{{ad_admin.password}}"
+
+- name: Afficher l'utilisateur Ansible utilisé
+  debug:
+    msg: "L'utilisateur Ansible utilisé est {{ ansible_user }}"
+
 - name: Test connection with ping
   ansible.windows.win_ping:

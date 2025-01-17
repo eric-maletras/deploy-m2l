@@ -1,7 +1,7 @@
 ---
 #
 - name: Test win_ping on windows
-  hosts: M2L-WSRV01
+  hosts: [windows]
   become: false
   gather_facts: false
   #

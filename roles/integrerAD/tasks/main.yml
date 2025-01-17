@@ -1,10 +1,4 @@
---- 
-
-#vars:
-#  ad_domain: "mon_domaine.local"
-#  ad_admin_user: "admin_ad"
-#  ad_admin_password: "Password123"
-#  ad_ou: "OU=Serveurs,OU=Sites,DC=mon_domaine,DC=local"
+---
 
 - name: Définir l'utilisateur Ansible à local
   set_fact:
@@ -19,7 +13,6 @@
   args:
     executable: powershell
 
-
 - name: Joindre la machine au domaine Active Directory
   microsoft.ad.membership:
     state: domain
@@ -30,7 +23,13 @@
     hostname: "M2L-WSRV02"
     reboot: yes 
 
-- name: Définir l'utilisateur Ansible à ad
-  set_fact:
-    ansible_user: "{{ad_admin.username}}"
-    ansible_password: "{{ad_admin.password}}"
+- name: Test connection with ping
+  ansible.windows.win_ping:
+
+#- name: Définir l'utilisateur Ansible à ad
+#  set_fact:
+#    ansible_user: "{{ad_admin.username}}"
+#    ansible_password: "{{ad_admin.password}}"
+
+#- name: Test connection with ping
+#  ansible.windows.win_ping:

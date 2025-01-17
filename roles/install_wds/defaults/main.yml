@@ -1,0 +1,34 @@
+# Définir l'état d'installation du service
+wds_install_state: present
+
+# Rôles de WDS à installer
+wds_roles:
+  - Deployment Server
+  - Transport Server
+
+# Chemin d'installation des images
+wds_image_path: "C:\\RemoteInstall"
+
+# Configuration PXE
+wds_pxe_config:
+  dhcp_option_60: true
+  require_admin_approval: false
+
+# Options de démarrage
+wds_startup_settings:
+  default_boot_program: "Boot\\x64\\pxeboot.com"
+  architecture_options:
+    - x86
+    - x64
+
+boot_image:
+  path: "C:\\Sources\\win10\\boot.wim"
+  index: 1
+  name: "Windows 10 Boot Image (x64)"
+
+
+install_images:
+  - name: "Windows 10 Éducation"
+    index: 4
+  - name: "Windows 10 Enterprise"
+    index: 6

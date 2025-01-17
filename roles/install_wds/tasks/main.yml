@@ -1,0 +1,149 @@
+---
+# Inclusion du rôle trippsc2.windows.deployment_services
+
+- name: Définir l'utilisateur Ansible à ad
+  set_fact:
+    ansible_user: "{{ad_admin.username}}"
+    ansible_password: "{{ad_admin.password}}"
+
+
+- name: Vérifier si le dossier d'installation de WDS existe
+  win_stat:
+    path: "C:\\RemoteInstall"
+  register: wds_initialized
+
+- name: Installer et configurer Windows Deployment Services
+  include_role:
+    name: trippsc2.windows.deployment_services
+  when: not wds_initialized.stat.exists
+  vars:
+    wds_install_state: "{{ wds_install_state }}"
+    wds_roles: "{{ wds_roles }}"
+    wds_image_path: "{{ wds_image_path }}"
+    wds_pxe_config: "{{ wds_pxe_config }}"
+    wds_startup_settings: "{{ wds_startup_settings }}"
+    wds_admin_user: "M2L\\administrateur"
+    wds_admin_password: "Btssio75000"
+    wds_dhcp_authorized: true
+
+
+- name: Créer le dossier pour Windows 10 sur le serveur WDS
+  win_file:
+    path: "C:\\Sources\\win10"
+    state: directory
+
+#- name: Copier le fichier boot.wim pour Windows 10
+#  win_copy:
+#    src: "{{ role_path }}/files/win10/boot.wim"
+#    dest: "C:\\Sources\\win10\\boot.wim"
+
+#- name: Copier le fichier install.wim pour Windows 10
+#  win_copy:
+#    src: "{{ role_path }}/files/win10/install.wim"
+#    dest: "C:\\Sources\\win10\\install.wim"
+
+- name: Vérifier l'état actuel de DSC
+  win_shell: |
+    Get-DscConfigurationStatus
+  register: dsc_status
+  failed_when: false
+
+- name: Supprimer les configurations DSC en attente
+  win_shell: |
+    Remove-DscConfigurationDocument -Stage Current,Pending,Previous
+  when: '"Pending" in dsc_status.stdout'
+  args:
+    executable: powershell
+
+- name: Ajouter une image de démarrage via DSC
+  win_shell: |
+    Configuration AddWdsBootImage {
+        Import-DscResource -ModuleName WdsDsc
+        Node "localhost" {
+            WdsBootImage BootImage {
+                Ensure      = "Present"
+                Path        = "C:\\Sources\\win10\\boot.wim"
+                NewImageName        = "Windows 10 Boot Image (x64)"
+                NewDescription = "Boot image for Windows 10 deployments"
+                skipVerify = $true
+            }
+        }
+    }
+    AddWdsBootImage -OutputPath "C:\\DSC\\AddWdsBootImage"
+    Start-DscConfiguration -Path "C:\\DSC\\AddWdsBootImage" -Wait -Verbose
+
+- name: Créer un groupe d'images via PowerShell natif
+  win_shell: |
+    if (-not (Get-WdsInstallImageGroup | Where-Object { $_.Name -eq "Windows 10 Images" })) {
+        New-WdsInstallImageGroup -Name "Windows 10 Images"
+    }
+  args:
+    executable: powershell
+
+
+- name: Ajouter l'image d'installation "Windows 10 Pro" via DSC
+  win_shell: |
+    Configuration AddWdsInstallImage {
+        Import-DscResource -ModuleName WdsDsc
+        Node "localhost" {
+            WdsInstallImage InstallImage {
+                Ensure         = "Present"
+                Path           = "C:\\Sources\\win10\\install.wim"
+                ImageGroup     = "Windows 10 Images"
+                ImageName      = "Windows 10 Pro"  # Utiliser le nom affiché dans WDS
+                NewImageName   = "Windows 10 Professional"
+                NewDescription = "Windows 10 Professional Installation Image"
+                SkipVerify     = $true
+            }
+        }
+    }
+    AddWdsInstallImage -OutputPath "C:\\DSC\\AddWdsInstallImage"
+    Start-DscConfiguration -Path "C:\\DSC\\AddWdsInstallImage" -Wait -Verbose
+  args:
+    executable: powershell
+
+
+#- name: Vérifier si l'image "Windows 10 Professionnel" existe déjà
+#  win_shell: |
+#    $imageGroup = "Windows 10 Images"
+#    $imageName = "Windows 10 Pro"
+#    $existingImage = Get-WdsInstallImage -ImageGroup $imageGroup | Where-Object { $_.Name -eq $imageName }
+#    if ($existingImage) { exit 0 } else { exit 1 }
+#  register: wds_image_check
+#  failed_when: false
+#  changed_when: false
+
+#- name: Importer l'image "Windows 10 Professionnel" si elle n'existe pas
+#  win_shell: |
+#    Import-WdsInstallImage -Path "C:\Sources\win10\install.wim" -ImageName "Windows 10 Pro" -ImageGroup "Windows 10 Images"
+#  when: wds_image_check.rc != 0
+#  args:
+#    executable: powershell
+
+
+#- name: Ajouter une image de démarrage spécifique
+#  win_shell: |
+#    $Session = New-PSSession -ComputerName "M2L-WSRV02" -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList @("Administrateur", (ConvertTo-SecureString "Btssio75000" -AsPlainText -Force)))
+#    Invoke-Command -Session $Session -ScriptBlock {
+#      Import-WdsBootImage -Path "C:\\Sources\\win10\\boot.wim" 
+#    }
+#    Remove-PSSession -Session $Session
+#  args:
+#    executable: powershell
+
+#- name: Vérifier si le groupe d'images existe
+#  win_shell: |
+#    if (Get-WdsInstallImageGroup | Where-Object { $_.Name -eq "win10" }) { exit 0 } else { exit 1 }
+#  register: image_group_check
+#  failed_when: false
+#  changed_when: false
+
+#- name: Créer le groupe d'images si nécessaire
+#  win_shell: |
+#    $Password = ConvertTo-SecureString "Btssio75000" -AsPlainText -Force
+#    $Credential = New-Object System.Management.Automation.PSCredential("M2L\Administrateur", $Password)
+#    Enter-PSSession -ComputerName localhost -Credential $Credential
+#    New-WdsInstallImageGroup -Name "win10"
+#  when: image_group_check.rc != 0
+#  args:
+#    executable: powershell

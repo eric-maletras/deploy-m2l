@@ -1,19 +1,19 @@
 ---
 
 ansible_shell_type: powershell
-ansible_user: administrateur
-ansible_password: Btssio75000
-ansible_port: 5985
+#ansible_user: administrateur
+#ansible_password: Btssio75000
+ansible_port: 5986
 ansible_connection: winrm
-ansible_winrm_scheme: http
+#ansible_winrm_scheme: https
 ansible_winrm_server_cert_validation: ignore
-ansible_winrm_transport: basic
+ansible_winrm_transport: credssp
 ansible_python_interpreter: 'C:\program files\Python311\python.exe'
 
 local_admin:
-  username: "Administrateur"
+  username: "administrateur"
   password: "Btssio75000"
 
 ad_admin:
-  username: "Administrateur@m2l.lan"
+  username: "m2l\\administrateur"
   password: "Btssio75000"
