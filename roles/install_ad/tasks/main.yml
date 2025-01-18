@@ -1,9 +1,7 @@
 ---
 # task file for Install Active Directory
-- name: Définir l'utilisateur Ansible à local
-  set_fact:
-    ansible_user: "{{local_admin.username}}"
-    ansible_password: "{{local_admin.password}}"
+- name: Inclure la configuration basic
+  include_tasks: "../../../tasks/configure_basic.yml"
 
 
 - name: Installer le rôle Active Directory Domain Services
@@ -25,10 +23,8 @@
     reboot: true
     reboot_timeout: 1800
 
-- name: Définir l'utilisateur Ansible à ad
-  set_fact:
-    ansible_user: "{{ad_admin.username}}"
-    ansible_password: "{{ad_admin.password}}"
+#- name: Inclure la configuration ad basic
+#  include_tasks: "../../../tasks/configure_ad_basic.yml"
 
 
 

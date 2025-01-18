@@ -1,5 +1,5 @@
 # Ignorer tous les fichiers .wim dans le dossier files/
-roles/install_wds/files/*.wim
+roles/install_wds/files/win10/*.wim
 
 # Ignorer d'autres fichiers temporaires ou de configuration
 *.log

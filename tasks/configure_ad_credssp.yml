@@ -1,0 +1,9 @@
+- name: Configurer un utilisateur AD Credssp
+  set_fact:
+    ansible_connection: winrm
+    ansible_winrm_transport: credssp
+    ansible_winrm_scheme: https
+    ansible_port: 5986
+    ansible_user: "{{ ad_credssp_user.username }}"
+    ansible_password: "{{ ad_credssp_user.password }}"
+    ansible_winrm_server_cert_validation: ignore

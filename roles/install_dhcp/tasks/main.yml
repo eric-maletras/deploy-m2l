@@ -1,9 +1,7 @@
 ---
 
-- name: Définir l'utilisateur Ansible à ad
-  set_fact:
-    ansible_user: "{{ad_admin.username}}"
-    ansible_password: "{{ad_admin.password}}"
+- name: Inclure la configuration basic
+  include_tasks: "../../../tasks/configure_basic.yml"
 
 
 - name: Installer le rôle DHCP

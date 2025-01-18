@@ -1,10 +1,8 @@
 ---
 # Inclusion du rôle trippsc2.windows.deployment_services
 
-- name: Définir l'utilisateur Ansible à ad
-  set_fact:
-    ansible_user: "{{ad_admin.username}}"
-    ansible_password: "{{ad_admin.password}}"
+- name: Inclure la configuration ad credssp
+  include_tasks: "../../../tasks/configure_ad_credssp.yml"
 
 
 - name: Vérifier si le dossier d'installation de WDS existe
@@ -26,21 +24,41 @@
     wds_admin_password: "Btssio75000"
     wds_dhcp_authorized: true
 
+- name: Définir RequireAdministratorApproval à 0 si nécessaire
+  win_shell: |
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\WDSServer\Providers\WDSPXE" -Name "RequireAdministratorApproval" -Value 0
+#  when: current_approval_value.stdout != "0"
+  args:
+    executable: powershell
+
+- name: Activer "Répondre à tous les ordinateurs clients" dans le registre WDS
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\WDSServer\Providers\WDSPXE
+    name: RequireAdministratorApproval
+    data: 0
+    type: dword
+    state: present
+
+- name: Redémarrer le service WDS pour appliquer les modifications
+  win_service:
+    name: WDSServer
+    state: restarted
+
 
 - name: Créer le dossier pour Windows 10 sur le serveur WDS
   win_file:
     path: "C:\\Sources\\win10"
     state: directory
 
-#- name: Copier le fichier boot.wim pour Windows 10
-#  win_copy:
-#    src: "{{ role_path }}/files/win10/boot.wim"
-#    dest: "C:\\Sources\\win10\\boot.wim"
+- name: Copier le fichier boot.wim pour Windows 10
+  win_copy:
+    src: "{{ role_path }}/files/win10/boot.wim"
+    dest: "C:\\Sources\\win10\\boot.wim"
 
-#- name: Copier le fichier install.wim pour Windows 10
-#  win_copy:
-#    src: "{{ role_path }}/files/win10/install.wim"
-#    dest: "C:\\Sources\\win10\\install.wim"
+- name: Copier le fichier install.wim pour Windows 10
+  win_copy:
+    src: "{{ role_path }}/files/win10/install.wim"
+    dest: "C:\\Sources\\win10\\install.wim"
 
 - name: Vérifier l'état actuel de DSC
   win_shell: |
@@ -55,6 +73,7 @@
   args:
     executable: powershell
 
+
 - name: Ajouter une image de démarrage via DSC
   win_shell: |
     Configuration AddWdsBootImage {
@@ -65,7 +84,7 @@
                 Path        = "C:\\Sources\\win10\\boot.wim"
                 NewImageName        = "Windows 10 Boot Image (x64)"
                 NewDescription = "Boot image for Windows 10 deployments"
-                skipVerify = $true
+#                skipVerify = $true
             }
         }
     }
@@ -147,3 +166,5 @@
 #  when: image_group_check.rc != 0
 #  args:
 #    executable: powershell
+
+

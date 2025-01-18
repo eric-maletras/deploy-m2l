@@ -1,9 +1,7 @@
 ---
 
-- name: Définir l'utilisateur Ansible à local
-  set_fact:
-    ansible_user: "{{local_admin.username}}"
-    ansible_password: "{{local_admin.password}}"
+- name: Inclure la configuration Basic
+  include_tasks: "../../../tasks/configure_basic.yml"
 
 - name: Configurer le DNS de la carte réseau Ethernet1
   ansible.windows.win_shell: |
@@ -23,13 +21,37 @@
     hostname: "M2L-WSRV02"
     reboot: yes 
 
+- name: Copier le script ConfigureRemotingForAnsible.ps1 sur la machine cible
+  win_copy:
+    src: ../files/ConfigureRemotingForAnsible.ps1
+    dest: "C:\\ConfigureRemotingForAnsible.ps1"
+
+- name: Vérifier la présence du script sur la machine cible
+  win_stat:
+    path: "C:\\ConfigureRemotingForAnsible.ps1"
+  register: script_exists
+
+- name: Exécuter le script ConfigureRemotingForAnsible.ps1
+  win_shell: |
+    Set-ExecutionPolicy RemoteSigned -Force
+    C:\ConfigureRemotingForAnsible.ps1
+  args:
+    executable: powershell
+  when: script_exists.stat.exists
+
+- name: Supprimer le script après exécution (facultatif)
+  win_file:
+    path: "C:\\ConfigureRemotingForAnsible.ps1"
+    state: absent
+
+
+- name: activer  CredSSD sur le serveur
+  ansible.windows.win_shell: |
+    Enable-WSManCredSSP -Role Server -Force
+    Enable-WSManCredSSP -Role Client -DelegateComputer 192.168.62.52 -Force
+#    Restart-Service WinRM
+  args:
+    executable: powershell
+
 - name: Test connection with ping
   ansible.windows.win_ping:
-
-#- name: Définir l'utilisateur Ansible à ad
-#  set_fact:
-#    ansible_user: "{{ad_admin.username}}"
-#    ansible_password: "{{ad_admin.password}}"
-
-#- name: Test connection with ping
-#  ansible.windows.win_ping:

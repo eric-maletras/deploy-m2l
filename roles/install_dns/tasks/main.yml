@@ -1,10 +1,8 @@
 ---
 # tasks file for install_dns
 
-- name: Définir l'utilisateur Ansible
-  set_fact:
-    ansible_user: "{{local_admin.username}}"
-    ansible_password: "{{local_admin.password}}"
+- name: Inclure la configuration ad credssp
+  include_tasks: "../../../tasks/configure_basic.yml"
 
 - name: Installer le rôle DNS
   ansible.windows.win_feature:
@@ -88,4 +86,6 @@
     ttl: 3600
     value: "{{ item.target }}"
   loop: "{{ dns_cname_records }}"
+
+
 

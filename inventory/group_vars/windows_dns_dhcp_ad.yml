@@ -11,7 +11,9 @@ dns_cname_records:
   - { alias: "glpi", target: "m2l-lsrv03.m2l.lan" }
   - { alias: "onwcloud", target: "m2l-lsrv03.m2l.lan" }
 
+windows_admin_password: "Btssio75000"
 ad_base_dn: "DC=m2l,DC=lan"
+
 
 ad_ou_hierarchy:
   - name: "0_m2l.lan"

@@ -1,0 +1,9 @@
+- name: Configurer un utilisateur Basic
+  set_fact:
+    ansible_connection: winrm
+    ansible_winrm_transport: basic
+    ansible_winrm_scheme: http
+    ansible_port: 5985
+    ansible_user: "{{ basic_user.username }}"
+    ansible_password: "{{ basic_user.password }}"
+    ansible_winrm_server_cert_validation: ignore

@@ -1,0 +1,9 @@
+
+- name: Inclure la configuration ad credssp
+  include_tasks: "../../../tasks/configure_ad_credssp.yml"
+
+- name: Activer l'option "Répondre à tous les ordinateurs clients" sur le serveur WDS
+  win_shell: |
+    Set-WdsServer -RespondToAllClients $true
+  args:
+    executable: powershell
