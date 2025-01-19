@@ -1,0 +1,86 @@
+---
+# roles/rds_rdp/tasks/main.yml
+- name: Inclure la configuration ad credssp
+  include_tasks: "../../../tasks/configure_ad_credssp.yml"
+
+
+#- name: Activer PowerShell Remoting
+#  ansible.windows.win_shell:
+#    _raw_params: Enable-PSRemoting -Force
+
+- name: Installer les fonctionnalités RDS
+  ansible.windows.win_shell:
+    _raw_params: Add-WindowsFeature RDS-RD-Server –IncludeAllSubFeature -IncludeManagementTools -Restart
+
+- name: Attendre que le serveur redémarre
+  pause:
+    minutes: 1
+
+- name: Attendre que le serveur termine son redémarrage (port 5986 accessible)
+  ansible.windows.win_wait_for:
+    port: 5986
+    state: started
+    protocol: https
+    timeout: 600
+    sleep: 10
+
+
+- name: Charger le module RemoteDesktop
+  ansible.windows.win_shell:
+    _raw_params: Import-Module RemoteDesktop
+
+- name: Vérifier les commandes disponibles dans RemoteDesktop
+  ansible.windows.win_shell:
+    _raw_params: Get-Command -Module RemoteDesktop
+
+- name: Créer le déploiement RD Session
+  ansible.windows.win_shell:
+    _raw_params: |
+      New-RDSessionDeployment -ConnectionBroker {{ rds_server }} -SessionHost {{ rds_server }} -WebAccessServer {{ rds_server }}
+  vars:
+    rds_server: "M2L-WSRV02.m2l.lan"
+
+- name: Ajouter le rôle Licensing au serveur
+  ansible.windows.win_shell:
+    _raw_params: Add-RDServer -Server {{ rds_server }} -Role RDS-LICENSING -ConnectionBroker {{ rds_server }}
+  vars:
+    rds_server: "M2L-WSRV02.m2l.lan"
+
+- name: Configurer le serveur de licences
+  ansible.windows.win_shell:
+    _raw_params: |
+      Set-RDLicenseConfiguration -LicenseServer {{ rds_server }} -Mode PerUser -ConnectionBroker {{ rds_server }} -Force
+  vars:
+    rds_server: "M2L-WSRV02.m2l.lan"
+
+- name: Vérifier la configuration des licences RDS
+  ansible.windows.win_shell:
+    _raw_params: Get-RDLicenseConfiguration
+
+- name: Redémarrer après la configuration des licences
+  ansible.windows.win_reboot:
+    msg: "Redémarrage initié par Ansible après l'installation des fonctionnalités RDS."
+    pre_reboot_delay: 2
+    post_reboot_delay: 60
+    reboot_timeout: 600
+
+- name: Créer une collection RD Session
+  ansible.windows.win_shell:
+    _raw_params: |
+      New-RDSessionCollection -CollectionName "RdsApps" -CollectionDescription "Collection RDS pour accéder aux apps M2L" -ConnectionBroker {{ rds_server }} -SessionHost {{ rds_server }}
+  vars:
+    rds_server: "M2L-WSRV02.m2l.lan"
+
+- name: Ajouter une application distante à la collection
+  ansible.windows.win_shell:
+    _raw_params: |
+      New-RDRemoteApp -Alias WordPad -DisplayName WordPad -FilePath "C:\Program Files\Windows NT\Accessories\wordpad.exe" -ShowInWebAccess 1 -CollectionName "RdsApps" -ConnectionBroker {{ rds_server }}
+  vars:
+    rds_server: "M2L-WSRV02.m2l.lan"
+
+#- name: Redémarrer après l'ajout d'une collection
+#  ansible.windows.win_reboot:
+#    msg: "Redémarrage initié par Ansible après l'ajout d'une collection."
+#    pre_reboot_delay: 2
+#    post_reboot_delay: 60
+#    reboot_timeout: 600

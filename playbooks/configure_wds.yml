@@ -1,6 +1,6 @@
 ---
 #
-- name: Test win_ping on windows
+- name: Installe WDS sur un serveur windows 2019
   hosts: M2L-WSRV02-A
   become: false
   gather_facts: false

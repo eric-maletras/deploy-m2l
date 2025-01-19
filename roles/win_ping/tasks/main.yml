@@ -1,7 +1,7 @@
 ---
 
 - name: Inclure la configuration Basic
-  include_tasks: "../../../tasks/configure_basic.yml"
+  include_tasks: "../../../tasks/configure_ad_credssp.yml"
 
 - name: Afficher l'utilisateur Ansible utilisé
   debug:

@@ -1,0 +1,10 @@
+---
+#
+- name: Installe RDS sur un serveur windows 2019
+  hosts: M2L-WSRV02-A
+  become: false
+  gather_facts: false
+  #
+  roles:
+#    - integrerAD
+    - install_rds
