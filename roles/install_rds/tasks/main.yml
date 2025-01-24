@@ -14,7 +14,7 @@
 
 - name: Attendre que le serveur redémarre
   pause:
-    minutes: 1
+    minutes: 3
 
 - name: Attendre que le serveur termine son redémarrage (port 5986 accessible)
   ansible.windows.win_wait_for:
