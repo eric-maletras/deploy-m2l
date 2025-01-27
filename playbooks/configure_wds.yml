@@ -1,11 +1,17 @@
 ---
 #
+
+- name: Configure CD/DVD on ESXi
+  hosts: localhost
+  roles:
+    - configure_cdrom
+
 - name: Installe WDS sur un serveur windows 2019
   hosts: M2L-WSRV02-A
   become: false
   gather_facts: false
   #
   roles:
-    - win_ping
+#    - win_ping
     - integrerAD
     - install_wds

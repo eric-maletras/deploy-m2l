@@ -1,0 +1,12 @@
+---
+
+- name: Lancer le script configure_cdrom.sh
+  ansible.builtin.shell: |
+    ./configure_cdrom.sh
+  args:
+    chdir: "{{ role_path }}/files" # Remplace par le chemin du script
+  register: result
+
+- name: Afficher le résultat du script
+  ansible.builtin.debug:
+    var: result.stdout

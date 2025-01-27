@@ -33,18 +33,19 @@
     state: present
 
 - name: Configurer WDS pour répondre à tous les clients PXE
-  win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Services\WDSServer\Providers\WDSPXE
-    name: RespondToAllClients
-    data: 1
-    type: dword
-    state: present
+  ansible.windows.win_shell: |
+    wdsutil /Set-Server /AnswerClients:All
+  register: wdsutil_result
 
 - name: Redémarrer le service WDS pour appliquer les modifications
   win_service:
     name: WDSServer
     state: restarted
 
+
+- name: Vérifier le résultat de la configuration WDS
+  debug:
+    var: wdsutil_result.stdout
 
 - name: Créer le dossier pour Windows 10 sur le serveur WDS
   win_file:
@@ -53,14 +54,15 @@
 
 - name: Copier le fichier boot.wim pour Windows 10
   win_copy:
-    src: "{{ role_path }}/files/win10/boot.wim"
+    src: "D:\\sources\\boot.wim"
     dest: "C:\\Sources\\win10\\boot.wim"
+    remote_src: yes
 
 - name: Copier le fichier install.wim pour Windows 10
   win_copy:
-    src: "{{ role_path }}/files/win10/install.wim"
+    src: "D:\\sources\\install.wim"
     dest: "C:\\Sources\\win10\\install.wim"
-
+    remote_src: yes
 - name: Vérifier l'état actuel de DSC
   win_shell: |
     Get-DscConfigurationStatus
@@ -85,7 +87,6 @@
                 Path        = "C:\\Sources\\win10\\boot.wim"
                 NewImageName        = "Windows 10 Boot Image (x64)"
                 NewDescription = "Boot image for Windows 10 deployments"
-#                skipVerify = $true
             }
         }
     }
