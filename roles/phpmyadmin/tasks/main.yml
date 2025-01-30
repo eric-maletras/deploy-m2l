@@ -1,0 +1,113 @@
+---
+- name: Installer phpMyAdmin et les dépendances
+  apt:
+    name:
+      - phpmyadmin
+      - php-mbstring
+      - php-zip
+      - php-gd
+      - php-json
+      - php-curl
+    state: present
+    update_cache: yes
+
+- name: Assurer que le répertoire de phpMyAdmin existe
+  file:
+    path: /usr/share/phpmyadmin
+    state: directory
+    mode: '0755'
+
+- name: Copier la configuration d'Apache pour phpMyAdmin
+  template:
+    src: phpmyadmin.conf.j2
+    dest: /etc/apache2/conf-available/phpmyadmin.conf
+  notify: Redémarrer Apache
+
+- name: Activer la configuration de phpMyAdmin dans Apache
+  command: a2enconf phpmyadmin
+  notify: Redémarrer Apache
+
+- name: Activer l’extension PHP mbstring
+  command: phpenmod mbstring
+  notify: Redémarrer Apache
+
+- name: Sécuriser l’accès à phpMyAdmin avec un fichier .htaccess
+  copy:
+    dest: /usr/share/phpmyadmin/.htaccess
+    content: |
+      AuthType Basic
+      AuthName "Restricted Access"
+      AuthUserFile /etc/phpmyadmin/.htpasswd
+      Require valid-user
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Redémarrer Apache
+  when: pma_secure_access
+
+- name: Créer un utilisateur d’authentification pour phpMyAdmin
+  shell: |
+    htpasswd -b -c /etc/phpmyadmin/.htpasswd {{ pma_admin_user }} {{ pma_admin_password }}
+  args:
+    creates: /etc/phpmyadmin/.htpasswd
+  when: pma_secure_access
+
+- name: Vérifier si la base de données phpMyAdmin existe
+  mysql_db:
+    name: phpmyadmin
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+  become: yes
+  become_user: root
+
+- name: Vérifier si l'utilisateur phpmyadmin existe
+  mysql_user:
+    name: phpmyadmin
+    host: localhost
+    password: "{{ pma_db_password }}"
+    priv: "phpmyadmin.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    column_case_sensitive: false
+  become: yes
+
+- name: Attribuer les permissions nécessaires à l'utilisateur phpmyadmin
+  mysql_user:
+    name: phpmyadmin
+    host: localhost
+    password: "{{ pma_db_password }}"
+    priv: "*.*:SELECT,INSERT,UPDATE,DELETE"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    column_case_sensitive: false
+  become: yes
+
+- name: Configurer phpMyAdmin avec les bons identifiants
+  lineinfile:
+    path: /etc/phpmyadmin/config.inc.php
+    regexp: "^\\$cfg\\['Servers'\\]\\[\\$i\\]\\['controluser'\\]"
+    line: "$cfg['Servers'][$i]['controluser'] = 'phpmyadmin';"
+  become: yes
+
+#- name: Configurer phpMyAdmin avec le bon mot de passe
+#  lineinfile:
+#    path: /etc/phpmyadmin/config.inc.php
+#    regexp: "^\\$cfg\\['Servers'\\]\\[\\$i\\]\\['controlpass'\\]"
+#    line: "$cfg['Servers'][$i]['controlpass'] = '{{ pma_db_password }}';"
+#  become: yes
+
+- name: Configurer phpMyAdmin pour utiliser la connexion socket
+  lineinfile:
+    path: /etc/phpmyadmin/config.inc.php
+    regexp: "^\\$cfg\\['Servers'\\]\\[\\$i\\]\\['host'\\]"
+    line: "$cfg['Servers'][$i]['host'] = 'localhost';"
+  become: yes
+  
+
+- name: Mettre à jour les privilèges MySQL
+  command: mysql -u root -p'{{ mysql_root_password }}' -e "FLUSH PRIVILEGES;"
+  become: yes
+  become_user: root

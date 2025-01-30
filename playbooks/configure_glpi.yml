@@ -1,0 +1,10 @@
+---
+#
+- name: Install GLPI on Debian 12
+  hosts: debian_glpi
+  become: yes
+  #
+  roles:
+    - install_LAMP
+    - phpmyadmin
+    - install_glpi

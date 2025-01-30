@@ -1,0 +1,93 @@
+- name: Mettre à jour la liste des paquets
+  ansible.builtin.apt:
+    update_cache: yes
+  become: yes
+
+- name: Installer Apache, MariaDB et PHP
+  ansible.builtin.apt:
+    name:
+      - apache2
+      - mariadb-server
+      - php
+      - php-mysql
+      - php-cli
+      - php-ldap
+      - php-curl
+      - php-gd
+      - php-imap
+      - php-xml
+      - php-zip
+      - unzip
+      - libapache2-mod-php
+    state: present
+  become: yes
+
+- name: Installer les dépendances Python pour MySQL/MariaDB
+  ansible.builtin.apt:
+    name:
+      - python3-pymysql
+    state: present
+  become: yes
+
+- name: Démarrer et activer Apache et MariaDB
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - apache2
+    - mariadb
+  become: yes
+
+- name: Vérifier si le mot de passe root est déjà défini
+  ansible.builtin.command:
+    cmd: "mysql -u root -p'{{ mysql_root_password }}' -e 'SELECT 1;'"
+  register: mysql_root_check
+  changed_when: false
+  failed_when: false
+
+- name: Définir le mot de passe root de MySQL si ce n'est pas encore fait
+  ansible.builtin.mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: "*.*:ALL,GRANT"
+    state: present
+  when: mysql_root_check.rc != 0
+
+
+- name: Supprimer les utilisateurs anonymes de MariaDB
+  ansible.builtin.mysql_user:
+    name: ""
+    host_all: yes
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    column_case_sensitive: true
+
+- name: Désactiver l'accès root distant à MariaDB
+  ansible.builtin.mysql_user:
+    name: root
+    host: "{{ item }}"
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    column_case_sensitive: true
+  loop:
+    - "{{ ansible_default_ipv4.address }}"
+    - "127.0.0.1"
+    - "::1"
+    - "%"
+  become: yes
+
+- name: Supprimer la base de données test
+  ansible.builtin.mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Recharger les privilèges MariaDB
+  ansible.builtin.command:
+    cmd: "mysql -u root -p'{{ mysql_root_password }}' -e 'FLUSH PRIVILEGES;'"
+  become: yes

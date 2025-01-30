@@ -1,0 +1,120 @@
+---
+- name: Installer les extensions PHP requises
+  apt:
+    name:
+      - php-intl
+      - php-bz2
+    state: present
+  notify: Redémarrer Apache
+
+- name: Vérifier si GLPI est déjà installé
+  stat:
+    path: "/var/www/glpi/config/config_db.php"
+  register: glpi_config_file
+
+- name: Télécharger et extraire GLPI
+  when: not glpi_config_file.stat.exists
+  block:
+    - name: Télécharger GLPI
+      get_url:
+        url: "https://github.com/glpi-project/glpi/releases/download/10.0.17/glpi-10.0.17.tgz"
+        dest: "/tmp/glpi.tgz"
+        mode: '0644'
+
+    - name: Extraire GLPI
+      ansible.builtin.unarchive:
+        src: "/tmp/glpi.tgz"
+        dest: "/var/www/"
+        remote_src: yes
+
+    - name: Définir les permissions correctes
+      ansible.builtin.file:
+        path: "/var/www/glpi"
+        owner: www-data
+        group: www-data
+        mode: '0755'
+        recurse: yes
+
+- name: Copier le fichier de configuration Apache pour GLPI
+  template:
+    src: "glpi.conf.j2"
+    dest: "/etc/apache2/sites-available/glpi.conf"
+    mode: '0644'
+
+- name: Activer le site GLPI dans Apache
+  command: a2ensite glpi.conf
+  notify: Redémarrer Apache
+
+- name: Vérifier que le module rewrite est activé
+  command: a2enmod rewrite
+  notify: Redémarrer Apache
+
+- name: Récupérer la version de PHP installée
+  command: php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;'
+  register: php_version_result
+  changed_when: false
+
+- name: Définir une variable de version PHP
+  set_fact:
+    php_version: "{{ php_version_result.stdout }}"
+
+- name: Activer session.cookie_httponly
+  lineinfile:
+    path: "/etc/php/{{ php_version }}/apache2/php.ini"
+    regexp: '^session.cookie_httponly'
+    line: 'session.cookie_httponly = On'
+  notify: Redémarrer Apache
+
+- name: Recharger Apache pour appliquer la configuration
+  service:
+    name: apache2
+    state: reloaded
+
+- name: Vérifier si la base de données GLPI existe déjà
+  mysql_db:
+    name: glpi
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+  register: glpi_db_check
+
+- name: Créer un utilisateur MySQL/MariaDB pour GLPI
+  mysql_user:
+    name: glpi
+    password: "Btssio75000"
+    priv: "glpi.*:ALL"
+    host: "localhost"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+  when: glpi_db_check is changed
+
+
+- name: Vérifier si la base de données GLPI contient déjà des tables
+  command: >
+    mysql -u {{ mysql_root_user }} -p{{ mysql_root_password }} -e
+    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='glpi';"
+  register: glpi_table_count
+  changed_when: false
+  failed_when: glpi_table_count.rc != 0
+
+- name: Récupérer la version de GLPI installée
+  command: awk -F '"' '/GLPI_VERSION/ {print $2}' /var/www/glpi/inc/defines.php
+  register: glpi_version
+  changed_when: false
+
+- name: Vérifier si le fichier SQL pour la version installée existe
+  stat:
+    path: "/var/www/glpi/install/mysql/glpi-{{ glpi_version.stdout }}-empty.sql"
+  register: glpi_sql_file
+
+- name: Importer la base de données initiale de GLPI
+  mysql_db:
+    name: "glpi"
+    state: import
+    target: "/var/www/glpi/install/mysql/glpi-{{ glpi_version.stdout }}-empty.sql"
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+  when: 
+    - glpi_sql_file.stat.exists
+    - glpi_table_count.stdout | int <= 2

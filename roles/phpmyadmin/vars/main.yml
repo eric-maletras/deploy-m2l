@@ -1,0 +1,6 @@
+---
+pma_admin_user: "root"
+pma_admin_password: "Btssio75000"
+pma_secure_access: true
+
+pma_db_password: "Btssio75000"

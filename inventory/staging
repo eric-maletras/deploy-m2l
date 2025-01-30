@@ -7,3 +7,12 @@ M2L-WSRV01-A ansible_host=192.168.62.129
 
 [windows_wds_rdp]
 M2L-WSRV02-A ansible_host=192.168.62.130
+
+[debian:children]
+debian_glpi
+
+[debian_lamp:children]
+debian_glpi
+
+[debian_glpi]
+Debian12-VM ansible_host=192.168.62.231

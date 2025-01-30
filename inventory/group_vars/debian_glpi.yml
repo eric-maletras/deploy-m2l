@@ -1,0 +1,4 @@
+glpi_db_user: "glpi_user"
+glpi_db_password: "Btssio75000"
+
+glpi_server_name: "glpi.labo.lan"
