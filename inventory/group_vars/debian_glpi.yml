@@ -1,4 +1,9 @@
-glpi_db_user: "glpi_user"
+glpi_db_host: "localhost"
+glpi_db_user: "glpi"
 glpi_db_password: "Btssio75000"
+glpi_db_name: "glpi"
+glpi_db_port: "3306"
+
+
 
 glpi_server_name: "glpi.labo.lan"

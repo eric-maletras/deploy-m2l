@@ -90,3 +90,76 @@
   when: glpi_db_check is changed
 
 
+- name: Vérifier si la base de données GLPI contient déjà des tables
+  command: >
+    mysql -u {{ mysql_root_user }} -p{{ mysql_root_password }} -e
+    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='glpi';"
+  register: glpi_table_count
+  changed_when: false
+  failed_when: glpi_table_count.rc != 0
+
+- name: Récupérer la version de GLPI installée
+  command: grep "GLPI_VERSION" /var/www/glpi/inc/define.php
+  register: glpi_version_raw
+  changed_when: false
+
+- name: Extraire la version de GLPI depuis la sortie de grep
+  set_fact:
+    glpi_version: "{{ glpi_version_raw.stdout | regex_search(\"'([0-9]+\\.[0-9]+\\.[0-9]+)'\", '\\1') }}"
+
+
+- name: Debug - Afficher la version de GLPI détectée
+  debug:
+    msg: "Version GLPI détectée: {{ glpi_version }}"
+
+
+- name: Vérifier si le fichier SQL pour la version installée existe
+  stat:
+    path: "/var/www/glpi/install/mysql/glpi-{{ glpi_version }}-empty.sql"
+  register: glpi_sql_file_version
+
+- name: Vérifier si le fichier SQL par défaut existe
+  stat:
+    path: "/var/www/glpi/install/mysql/glpi-empty.sql"
+  register: glpi_sql_file_default
+  when: not glpi_sql_file_version.stat.exists
+
+
+- name: Déterminer le fichier SQL à utiliser
+  set_fact:
+    glpi_mysql_file: "{{ (glpi_sql_file_version.stat.path if glpi_sql_file_version.stat.exists else glpi_sql_file_default.stat.path) | regex_replace('\"', '') }}"
+
+
+- name: Debug - Fichier SQL sélectionné pour importation
+  debug:
+    msg: "Fichier SQL utilisé: {{ glpi_mysql_file }}"
+
+
+
+- name: Ajouter "USE glpi;" au début du fichier SQL
+  lineinfile:
+    path: "{{ glpi_mysql_file }}"
+    line: 'USE glpi;'
+    insertbefore: BOF
+  become: yes
+#  when: glpi_sql_check.stat.exists
+
+
+- name: Importer la base de données initiale de GLPI
+  mysql_db:
+    name: "glpi"
+    state: import
+    target: "{{glpi_mysql_file}}"
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+  when: 
+    - glpi_mysql_file is not none
+    - glpi_table_count.stdout | int <= 2
+
+- name: Création du fichier config_db.php pour GLPI
+  template:
+    src: config_db.php.j2
+    dest: /var/www/glpi/config/config_db.php
+    owner: www-data
+    group: www-data
+    mode: '0600'

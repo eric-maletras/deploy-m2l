@@ -8,3 +8,4 @@
     - install_LAMP
     - phpmyadmin
     - install_glpi
+    - configure_glpi
