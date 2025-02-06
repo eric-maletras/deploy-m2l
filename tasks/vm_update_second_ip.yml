@@ -1,0 +1,24 @@
+---
+- name: Configurer la seconde interface sur Debian via /etc/network/interfaces
+  become: yes
+  blockinfile:
+    path: /etc/network/interfaces
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: Configuration de {{ networkCard_name }}"
+    block: |
+      auto {{ networkCard_name }}
+      iface {{ networkCard_name }} inet static
+          address {{ new_ip }}
+          netmask {{ netmask }}
+          gateway {{ gateway }}
+  when: networkCard_name == "ens33"
+
+- name: Configurer la seconde interface sur Windows (Ethernet2) via PowerShell
+  win_shell: |
+    $interface = Get-NetAdapter -Name "{{ networkCard_name }}" -ErrorAction SilentlyContinue
+    if ($interface) {
+      # Optionnel : Supprimer les anciennes adresses IP
+      Get-NetIPAddress -InterfaceAlias $interface.Name -ErrorAction SilentlyContinue | Remove-NetIPAddress -Confirm:$false
+      # Appliquer la nouvelle configuration
+      New-NetIPAddress -InterfaceAlias $interface.Name -IPAddress "{{ new_ip }}" -PrefixLength {{ prefix_length }} -DefaultGateway "{{ gateway }}"
+    }
+  when: networkCard_name == "Ethernet2"

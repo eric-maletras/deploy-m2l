@@ -8,9 +8,41 @@
     - name: Inclure la tâche de démarrage des VMs
       include_tasks: "../tasks/vm_esxi_start.yml"
 
+- name: Mettre à jour l'IP de la seconde carte réseau dans la VM
+  hosts: "debian_squid"  # ou un hôte spécifique
+  gather_facts: yes
+  become: yes
+  vars:
+    # Pour une VM Debian, par exemple :
+    networkCard_name: "ens33"
+    new_ip: "192.168.0.1"
+    netmask: "255.255.255.0"
+    gateway: "192.168.0.254"
+    # Pour Windows, vous pourriez définir par exemple :
+    # networkCard_name: "Ethernet2"
+    # new_ip: "192.168.61.200"
+    # prefix_length: 24
+    # gateway: "192.168.61.1"
+  tasks:
+    - name: Mettre à jour l'IP de la seconde interface
+      include_tasks: "../tasks/vm_update_second_ip.yml"
+
 - name: Installer Squid sur la VM démarrée
   hosts: "debian_squid"
   gather_facts: yes
   become: yes
   roles:
     - install_squid
+
+- name: Mettre fin à l'utilisation de ens32 et reconfigurer la VM via ESXi
+  hosts: "debian_squid"  # ou le groupe correspondant
+  gather_facts: yes
+  become: yes
+  vars:
+    vm_name: "M2L-LSRV05"         # Nom de la VM tel que défini dans ESXi
+    esxi_hostname: "192.168.62.100"  # Adresse de votre ESXi ou vCenter
+    esxi_username: "root"
+    esxi_password: "Btssio75000!"
+  tasks:
+    - name: Supprimer les infos de la carte ens32, supprimer la carte et rebooter la VM
+      include_tasks: "../tasks/vm_remove_first_ip.yml"

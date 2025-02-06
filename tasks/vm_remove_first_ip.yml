@@ -1,0 +1,50 @@
+---
+- name: Supprimer la configuration de ens32 dans le guest
+  become: yes
+  blockinfile:
+    path: /etc/network/interfaces
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: Configuration de ens32"
+    state: absent
+  # Cette tâche s'exécute sur le guest ; assurez-vous que cet hôte est ciblé dans le play.
+  # Vous pouvez ajouter une condition si besoin (ex: only if a variable remove_ens32_config est vraie).
+
+- name: Récupérer les informations de la VM
+  community.vmware.vmware_guest_info:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    datacenter: "ha-datacenter"
+    validate_certs: no
+    name: "{{ vm_name }}"
+  delegate_to: localhost
+  register: vm_info
+
+- name: Afficher les informations de la VM
+  debug:
+    var: vm_info
+
+
+- name: Supprimer la carte réseau ens32 via ESXi
+  community.vmware.vmware_guest_network:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    datacenter: "ha-datacenter"
+    validate_certs: no
+    name: "{{ vm_name }}"
+    label: "Network adapter 1"
+    state: absent
+  delegate_to: localhost
+  # La tâche utilise l'API ESXi pour supprimer le NIC dont le label (ou le nom) est défini ici comme "ens32".
+  # Adaptez éventuellement la valeur du paramètre "name" si, dans votre ESXi, le NIC à supprimer a un autre identifiant.
+
+- name: Rebooter la VM via ESXi
+  vmware_guest:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    validate_certs: no
+    name: "{{ vm_name }}"
+    state: restarted
+  delegate_to: localhost
+  # Cette tâche redémarre la VM via l'API ESXi.
