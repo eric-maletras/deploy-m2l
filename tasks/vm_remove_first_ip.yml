@@ -23,20 +23,22 @@
   debug:
     var: vm_info
 
+- name: Récupérer l'adresse MAC de la première carte réseau (Network adapter 1)
+  set_fact:
+    mac_address_to_remove: "{{ vm_info.instance.hw_eth0.macaddress }}"
 
-- name: Supprimer la carte réseau ens32 via ESXi
+- name: Supprimer la carte réseau avec l'adresse MAC "{{ mac_address_to_remove }}"
   community.vmware.vmware_guest_network:
     hostname: "{{ esxi_hostname }}"
     username: "{{ esxi_username }}"
     password: "{{ esxi_password }}"
-    datacenter: "ha-datacenter"
     validate_certs: no
     name: "{{ vm_name }}"
-    label: "Network adapter 1"
+    datacenter: "ha-datacenter"
+    mac_address: "{{ mac_address_to_remove }}"
     state: absent
   delegate_to: localhost
-  # La tâche utilise l'API ESXi pour supprimer le NIC dont le label (ou le nom) est défini ici comme "ens32".
-  # Adaptez éventuellement la valeur du paramètre "name" si, dans votre ESXi, le NIC à supprimer a un autre identifiant.
+
 
 - name: Rebooter la VM via ESXi
   vmware_guest:
