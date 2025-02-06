@@ -1,0 +1,5 @@
+---
+- name: Installer Squid
+  ansible.builtin.package:
+    name: squid
+    state: present

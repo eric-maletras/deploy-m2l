@@ -1,0 +1,7 @@
+# Adresse de votre serveur ESXi
+esxi_hostname: "192.168.62.100"
+
+# Identifiants de connexion à ESXi
+esxi_username: "root"
+esxi_password: "Btssio75000!"
+

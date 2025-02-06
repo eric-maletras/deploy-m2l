@@ -1,0 +1,6 @@
+[staging]
+localhost ansible_connection=local
+
+[production]
+localhost ansible_connection=local
+

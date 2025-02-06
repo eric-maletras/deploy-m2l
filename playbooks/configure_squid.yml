@@ -1,0 +1,16 @@
+---
+- name: Démarrer la VM via ESXi et attendre son accessibilité
+  hosts: localhost
+  gather_facts: no
+  vars:
+    target_group: "debian_squid"
+  tasks:
+    - name: Inclure la tâche de démarrage des VMs
+      include_tasks: "../tasks/vm_esxi_start.yml"
+
+- name: Installer Squid sur la VM démarrée
+  hosts: "debian_squid"
+  gather_facts: yes
+  become: yes
+  roles:
+    - install_squid

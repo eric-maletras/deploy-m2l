@@ -10,9 +10,13 @@ M2L-WSRV02-A ansible_host=192.168.62.130
 
 [debian:children]
 debian_glpi
+debian_squid
 
 [debian_lamp:children]
 debian_glpi
 
 [debian_glpi]
 Debian12-VM ansible_host=192.168.62.231
+
+[debian_squid]
+M2L-LSRV05 ansible_host=192.168.62.110
