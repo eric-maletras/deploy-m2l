@@ -1,0 +1,5 @@
+---
+squid_listen_port: 3128
+squid_user: proxy
+squid_group: proxy
+squid_coredump_dir: /var/spool/squid

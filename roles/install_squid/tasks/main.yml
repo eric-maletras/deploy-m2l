@@ -3,3 +3,18 @@
   ansible.builtin.package:
     name: squid
     state: present
+
+- name: Déployer le fichier de configuration de Squid
+  ansible.builtin.template:
+    src: squid.conf.j2
+    dest: /etc/squid/squid.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Redémarrer Squid
+
+- name: Démarrer et activer Squid
+  ansible.builtin.service:
+    name: squid
+    state: started
+    enabled: true

@@ -3,14 +3,19 @@
   become: yes
   blockinfile:
     path: /etc/network/interfaces
-    marker: "# {mark} ANSIBLE MANAGED BLOCK: Configuration de {{ networkCard_name }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: Configuration de {{ network_interface_ens33.name }}"
     block: |
-      auto {{ networkCard_name }}
-      iface {{ networkCard_name }} inet static
-          address {{ new_ip }}
-          netmask {{ netmask }}
-          gateway {{ gateway }}
-  when: networkCard_name == "ens33"
+          auto {{ network_interface_ens33.name }}
+          iface {{ network_interface_ens33.name }} inet {{ network_interface_ens33.method }}
+              address {{ network_interface_ens33.address }}
+              netmask {{ network_interface_ens33.netmask }}
+          {% if network_interface_ens33.gateway is defined %}
+              gateway {{ network_interface_ens33.gateway }}
+          {% endif %}
+          {% if network_interface_ens33.dns is defined %}
+              dns-nameservers {{ network_interface_ens33.dns | join(' ') }}
+          {% endif %}
+  when: network_interface_ens33.name == "ens33"
 
 - name: Configurer la seconde interface sur Windows (Ethernet2) via PowerShell
   win_shell: |
@@ -21,4 +26,4 @@
       # Appliquer la nouvelle configuration
       New-NetIPAddress -InterfaceAlias $interface.Name -IPAddress "{{ new_ip }}" -PrefixLength {{ prefix_length }} -DefaultGateway "{{ gateway }}"
     }
-  when: networkCard_name == "Ethernet2"
+  when: network_interface_ens33.name == "Ethernet2"
