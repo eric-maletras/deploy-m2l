@@ -6,6 +6,7 @@
     state: present
     login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   register: glpi_db_check
 
 - name: Créer un utilisateur MySQL/MariaDB pour GLPI
@@ -17,6 +18,7 @@
     state: present
     login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   when: glpi_db_check is changed
 
 - name: Installation automatique de GLPI avec les paramètres définis

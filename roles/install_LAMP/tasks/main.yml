@@ -26,8 +26,8 @@
   ansible.builtin.apt:
     name:
       - python3-pymysql
+      - python3-mysqldb
     state: present
-  become: yes
 
 - name: Démarrer et activer Apache et MariaDB
   ansible.builtin.service:
@@ -39,7 +39,7 @@
     - mariadb
   become: yes
 
-- name: Vérifier si le mot de passe root est déjà défini
+- name: Vérifier si le mot de passe root '{{ mysql_root_password }}' est déjà défini
   ansible.builtin.command:
     cmd: "mysql -u root -p'{{ mysql_root_password }}' -e 'SELECT 1;'"
   register: mysql_root_check
@@ -63,6 +63,7 @@
     state: absent
     login_user: root
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: true
 
 - name: Désactiver l'accès root distant à MariaDB
@@ -72,6 +73,7 @@
     state: absent
     login_user: root
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: true
   loop:
     - "{{ ansible_default_ipv4.address }}"
@@ -86,6 +88,7 @@
     state: absent
     login_user: root
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Recharger les privilèges MariaDB
   ansible.builtin.command:

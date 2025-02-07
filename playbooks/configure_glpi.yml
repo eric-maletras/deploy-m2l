@@ -1,11 +1,30 @@
 ---
 #
+- name: Démarrer la VM via ESXi et attendre son accessibilité
+  hosts: localhost
+  gather_facts: no
+  vars:
+    target_group: "debian_glpi"
+  tasks:
+    - name: Inclure la tâche de démarrage des VMs
+      include_tasks: "../tasks/vm_esxi_start.yml"
+
+
+
 - name: Install GLPI on Debian 12
   hosts: debian_glpi
   become: yes
   #
   roles:
+    - vm_update_2nd_interface
     - install_LAMP
     - phpmyadmin
     - install_glpi
     - configure_glpi
+
+- name: Supprimer les accès externes
+  hosts: debian_glpi
+  gather_facts: yes
+  become: yes
+  roles:
+    - vm_remove_first_ip

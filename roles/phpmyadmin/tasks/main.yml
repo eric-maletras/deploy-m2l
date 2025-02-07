@@ -58,8 +58,9 @@
     state: present
     login_user: root
     login_password: "{{ mysql_root_password }}"
-  become: yes
-  become_user: root
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+#  become: yes
+#  become_user: root
 
 - name: Vérifier si l'utilisateur phpmyadmin existe
   mysql_user:
@@ -70,6 +71,7 @@
     state: present
     login_user: root
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: false
   become: yes
 
@@ -82,6 +84,7 @@
     state: present
     login_user: root
     login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: false
   become: yes
 

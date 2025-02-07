@@ -5,3 +5,4 @@ esxi_hostname: "192.168.62.100"
 esxi_username: "root"
 esxi_password: "Btssio75000!"
 
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

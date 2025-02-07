@@ -7,6 +7,7 @@
     state: absent
   # Cette tâche s'exécute sur le guest ; assurez-vous que cet hôte est ciblé dans le play.
   # Vous pouvez ajouter une condition si besoin (ex: only if a variable remove_ens32_config est vraie).
+  when: vm_os == "debian"
 
 - name: Récupérer les informations de la VM
   community.vmware.vmware_guest_info:
@@ -15,13 +16,9 @@
     password: "{{ esxi_password }}"
     datacenter: "ha-datacenter"
     validate_certs: no
-    name: "{{ vm_name }}"
+    name: "{{ inventory_hostname }}"
   delegate_to: localhost
   register: vm_info
-
-- name: Afficher les informations de la VM
-  debug:
-    var: vm_info
 
 - name: Récupérer l'adresse MAC de la première carte réseau (Network adapter 1)
   set_fact:
@@ -33,7 +30,7 @@
     username: "{{ esxi_username }}"
     password: "{{ esxi_password }}"
     validate_certs: no
-    name: "{{ vm_name }}"
+    name: "{{ inventory_hostname }}"
     datacenter: "ha-datacenter"
     mac_address: "{{ mac_address_to_remove }}"
     state: absent
@@ -46,7 +43,7 @@
     username: "{{ esxi_username }}"
     password: "{{ esxi_password }}"
     validate_certs: no
-    name: "{{ vm_name }}"
+    name: "{{ inventory_hostname }}"
     state: restarted
   delegate_to: localhost
   # Cette tâche redémarre la VM via l'API ESXi.

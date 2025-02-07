@@ -3,19 +3,19 @@
   become: yes
   blockinfile:
     path: /etc/network/interfaces
-    marker: "# {mark} ANSIBLE MANAGED BLOCK: Configuration de {{ network_interface_ens33.name }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: Configuration de {{ network_2nd_interface.name }}"
     block: |
-          auto {{ network_interface_ens33.name }}
-          iface {{ network_interface_ens33.name }} inet {{ network_interface_ens33.method }}
-              address {{ network_interface_ens33.address }}
-              netmask {{ network_interface_ens33.netmask }}
-          {% if network_interface_ens33.gateway is defined %}
-              gateway {{ network_interface_ens33.gateway }}
+          auto {{ network_2nd_interface.name }}
+          iface {{ network_2nd_interface.name }} inet {{ network_2nd_interface.method }}
+              address {{ network_2nd_interface.address }}
+              netmask {{ network_2nd_interface.netmask }}
+          {% if network_2nd_interface.gateway is defined %}
+              gateway {{ network_2nd_interface.gateway }}
           {% endif %}
-          {% if network_interface_ens33.dns is defined %}
-              dns-nameservers {{ network_interface_ens33.dns | join(' ') }}
+          {% if network_2nd_interface.dns is defined %}
+              dns-nameservers {{ network_2nd_interface.dns | join(' ') }}
           {% endif %}
-  when: network_interface_ens33.name == "ens33"
+  when: vm_os == "debian"
 
 - name: Configurer la seconde interface sur Windows (Ethernet2) via PowerShell
   win_shell: |
@@ -26,4 +26,4 @@
       # Appliquer la nouvelle configuration
       New-NetIPAddress -InterfaceAlias $interface.Name -IPAddress "{{ new_ip }}" -PrefixLength {{ prefix_length }} -DefaultGateway "{{ gateway }}"
     }
-  when: network_interface_ens33.name == "Ethernet2"
+  when: network_2nd_interface.name == "Ethernet2"
