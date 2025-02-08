@@ -9,8 +9,10 @@
     - name: Inclure la tâche de démarrage des VMs
       include_tasks: "../tasks/vm_esxi_start.yml"
 
-- name: Installer Squid sur la VM démarrée
-  hosts: windows_dns_dhcp_ad
+
+- name: Fin du playbook
+  hosts: "windows_dns_dhcp_ad"
   gather_facts: no
-  roles:
-    - vm_update_2nd_interface
+  roles: 
+    - vm_remove_first_ip
+    - create_snapshot

@@ -1,4 +1,35 @@
 ---
+
+- name: Attendre que hw_guest_id ne soit plus null après démarrage de la VM
+  community.vmware.vmware_guest:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    validate_certs: no
+    datacenter: "{{datacenter_name}}"
+    name: "{{ inventory_hostname }}"
+  delegate_to: localhost
+  register: vm_facts
+  until: vm_facts.instance.hw_guest_id is not none
+  retries: 10
+  delay: 15
+
+
+- name: Définir si la VM "{{ inventory_hostname }}" est sous Windows ou Linux
+  set_fact:
+    is_windows: "{{ 'windows' in (vm_facts.instance.hw_guest_id | lower) }}"
+
+- name: Task pour Windows
+  debug:
+    msg: "La VM est sous Windows {{vm_facts.instance.hw_guest_id}}"
+  when: is_windows
+
+- name: Task pour Linux
+  debug:
+    msg: "La VM est sous Linux {{vm_facts.instance.hw_guest_id}}"
+  when: not is_windows
+
+
 - name: Supprimer la configuration de ens32 dans le guest
   become: yes
   blockinfile:
@@ -7,22 +38,22 @@
     state: absent
   # Cette tâche s'exécute sur le guest ; assurez-vous que cet hôte est ciblé dans le play.
   # Vous pouvez ajouter une condition si besoin (ex: only if a variable remove_ens32_config est vraie).
-  when: vm_os == "debian"
+  when: not is_windows
 
-- name: Récupérer les informations de la VM
-  community.vmware.vmware_guest_info:
-    hostname: "{{ esxi_hostname }}"
-    username: "{{ esxi_username }}"
-    password: "{{ esxi_password }}"
-    datacenter: "ha-datacenter"
-    validate_certs: no
-    name: "{{ inventory_hostname }}"
-  delegate_to: localhost
-  register: vm_info
+#- name: Récupérer les informations de la VM
+#  community.vmware.vmware_guest_info:
+#    hostname: "{{ esxi_hostname }}"
+#    username: "{{ esxi_username }}"
+#    password: "{{ esxi_password }}"
+#    datacenter: "{{datacenter_name}}"
+#    validate_certs: no
+#    name: "{{ inventory_hostname }}"
+#  delegate_to: localhost
+#  register: vm_info
 
 - name: Récupérer l'adresse MAC de la première carte réseau (Network adapter 1)
   set_fact:
-    mac_address_to_remove: "{{ vm_info.instance.hw_eth0.macaddress }}"
+    mac_address_to_remove: "{{ vm_facts.instance.hw_eth0.macaddress }}"
 
 - name: Supprimer la carte réseau avec l'adresse MAC "{{ mac_address_to_remove }}"
   community.vmware.vmware_guest_network:
@@ -31,7 +62,7 @@
     password: "{{ esxi_password }}"
     validate_certs: no
     name: "{{ inventory_hostname }}"
-    datacenter: "ha-datacenter"
+    datacenter: "{{datacenter_name}}"
     mac_address: "{{ mac_address_to_remove }}"
     state: absent
   delegate_to: localhost

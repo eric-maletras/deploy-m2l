@@ -1,7 +1,18 @@
 ---
 #
-- name: Test win_ping on windows
-  hosts: M2L-WSRV01-A
+
+- name: Démarrer la VM via ESXi et attendre son accessibilité
+  hosts: localhost
+  gather_facts: no
+  vars:
+    target_group: "windows_dns_dhcp_ad"
+  tasks:
+    - name: Inclure la tâche de démarrage des VMs
+      include_tasks: "../tasks/vm_esxi_start.yml"
+
+
+- name: Installation du DNS, AD et DHCP
+  hosts: windows_dns_dhcp_ad
   become: false
   gather_facts: false
   #
@@ -9,3 +20,10 @@
     - install_dns
     - install_ad
     - install_dhcp
+
+- name: Fin du playbook
+  hosts: "windows_dns_dhcp_ad"
+  gather_facts: no
+  roles:
+    - vm_remove_first_ip
+    - create_snapshot

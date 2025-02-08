@@ -1,0 +1,38 @@
+---
+
+- name: Arrêter la VM
+  community.vmware.vmware_guest:
+    hostname: "{{ esxi_hostname  }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    validate_certs: no
+    datacenter: "{{datacenter_name}}"
+    name: "{{ inventory_hostname }}"
+    state: poweredoff
+  delegate_to: localhost
+
+
+- name: Créer un snapshot
+  community.vmware.vmware_guest_snapshot:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    validate_certs: no
+    datacenter: "{{datacenter_name}}"
+    name: "{{ inventory_hostname }}"
+    folder: "/{{datacenter_name}}/vm"
+    snapshot_name: "after_conf"
+    description: "Mise en place de la conf OK"
+    state: present
+  delegate_to: localhost
+
+- name: Démarrer la VM
+  community.vmware.vmware_guest:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    validate_certs: no
+    datacenter: "{{datacenter_name}}"
+    name: "{{ inventory_hostname }}"
+    state: poweredon
+  delegate_to: localhost
