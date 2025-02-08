@@ -8,13 +8,6 @@
     - name: Inclure la tâche de démarrage des VMs
       include_tasks: "../tasks/vm_esxi_start.yml"
 
-#- name: Mettre à jour l'IP de la seconde carte réseau dans la VM
-#  hosts: "debian_squid"  # ou un hôte spécifique
-#  gather_facts: yes
-#  become: yes
-#  tasks:
-#    - name: Mettre à jour l'IP de la seconde interface
-#      include_tasks: "../tasks/vm_update_second_ip.yml"
 
 - name: Installer Squid sur la VM démarrée
   hosts: "debian_squid"

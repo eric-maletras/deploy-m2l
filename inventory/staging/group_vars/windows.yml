@@ -11,6 +11,8 @@ ansible_winrm_transport: basic
 ansible_python_interpreter: 'C:\program files\Python311\python.exe'
 ansible_winrm_read_timeout_sec: 120
 ansible_winrm_operation_timeout_sec: 90
+wait_for_port: 5985
+
 
 # Configuration pour un utilisateur local (Basic)
 basic_user:

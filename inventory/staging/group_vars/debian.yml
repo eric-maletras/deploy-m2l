@@ -5,6 +5,7 @@ ansible_password: "Btssio75000"
 ansible_become: yes
 ansible_become_method: sudo
 ansible_become_password: "Btssio75000"
+wait_for_port: 22
 
 ansible_python_interpreter: /usr/bin/python3
 ansible_mysql_python: pymysql

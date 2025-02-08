@@ -1,4 +1,30 @@
 ---
+
+- name: Récupérer les facts de la VM
+  community.vmware.vmware_guest_info:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    datacenter: "ha-datacenter"
+    validate_certs: no
+    name: "{{ inventory_hostname }}"
+  register: vm_facts
+  delegate_to: localhost
+
+- name: Définir si la VM est sous Windows ou Linux
+  set_fact:
+    is_windows: "{{ 'windows' in (vm_facts.instance.hw_guest_id | lower) }}"
+
+- name: Task pour Windows
+  debug:
+    msg: "La VM est sous Windows"
+  when: is_windows
+
+- name: Task pour Linux
+  debug:
+    msg: "La VM est sous Linux"
+  when: not is_windows
+
 - name: Configurer la seconde interface sur Debian via /etc/network/interfaces
   become: yes
   blockinfile:
@@ -15,15 +41,19 @@
           {% if network_2nd_interface.dns is defined %}
               dns-nameservers {{ network_2nd_interface.dns | join(' ') }}
           {% endif %}
-  when: vm_os == "debian"
+  when: not is_windows
+
+- name: Inclure la configuration ad credssp
+  include_tasks: "../../../tasks/configure_ad_credssp.yml"
+  when: is_windows
 
 - name: Configurer la seconde interface sur Windows (Ethernet2) via PowerShell
   win_shell: |
-    $interface = Get-NetAdapter -Name "{{ networkCard_name }}" -ErrorAction SilentlyContinue
+    $interface = Get-NetAdapter -Name "{{ network_2nd_interface.name }}" -ErrorAction SilentlyContinue
     if ($interface) {
       # Optionnel : Supprimer les anciennes adresses IP
-      Get-NetIPAddress -InterfaceAlias $interface.Name -ErrorAction SilentlyContinue | Remove-NetIPAddress -Confirm:$false
+      #Get-NetIPAddress -InterfaceAlias $interface.Name -ErrorAction SilentlyContinue | Remove-NetIPAddress -Confirm:$false
       # Appliquer la nouvelle configuration
-      New-NetIPAddress -InterfaceAlias $interface.Name -IPAddress "{{ new_ip }}" -PrefixLength {{ prefix_length }} -DefaultGateway "{{ gateway }}"
+      New-NetIPAddress -InterfaceAlias $interface -IPAddress "{{  network_2nd_interface.address }}" -PrefixLength {{  network_2nd_interface.netmask }} -DefaultGateway "{{ network_2nd_interface.gateway }}"
     }
-  when: network_2nd_interface.name == "Ethernet2"
+  when: is_windows

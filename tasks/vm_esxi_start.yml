@@ -12,10 +12,10 @@
   loop_control:
     label: "{{ hostvars[item].inventory_hostname }}"
 
-- name: Attendre que chaque VM soit accessible en SSH
+- name: Attendre que chaque VM soit accessible en SSH/winRM
   wait_for:
     host: "{{ hostvars[item].ansible_host }}"
-    port: 22
+    port: "{{ hostvars[item].wait_for_port }}"
     delay: 10
     timeout: 300
   delegate_to: localhost
