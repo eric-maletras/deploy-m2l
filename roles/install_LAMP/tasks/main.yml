@@ -41,7 +41,7 @@
 
 - name: Vérifier si le mot de passe root '{{ mysql_root_password }}' est déjà défini
   ansible.builtin.command:
-    cmd: "mysql -u root -p'{{ mysql_root_password }}' -e 'SELECT 1;'"
+    cmd: "mysql -u {{mysql_root_user}} -p'{{ mysql_root_password }}' -e 'SELECT 1;'"
   register: mysql_root_check
   changed_when: false
   failed_when: false
@@ -71,7 +71,7 @@
     name: root
     host: "{{ item }}"
     state: absent
-    login_user: root
+    login_user: "{{mysql_root_user}}"
     login_password: "{{ mysql_root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: true
@@ -86,11 +86,11 @@
   ansible.builtin.mysql_db:
     name: test
     state: absent
-    login_user: root
+    login_user: "{{mysql_root_user}}"
     login_password: "{{ mysql_root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Recharger les privilèges MariaDB
   ansible.builtin.command:
-    cmd: "mysql -u root -p'{{ mysql_root_password }}' -e 'FLUSH PRIVILEGES;'"
+    cmd: "mysql -u {{mysql_root_user}} -p'{{ mysql_root_password }}' -e 'FLUSH PRIVILEGES;'"
   become: yes

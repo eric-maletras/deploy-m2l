@@ -17,9 +17,10 @@
   #
   roles:
     - vm_update_2nd_interface
+    - lamp_vars
     - install_LAMP
     - phpmyadmin
-    - configure_glpi
+    - install_glpi
 
 - name: Supprimer les accès externes
   hosts: debian_glpi

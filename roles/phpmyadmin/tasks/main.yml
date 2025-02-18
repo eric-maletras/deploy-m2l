@@ -56,7 +56,7 @@
   mysql_db:
     name: phpmyadmin
     state: present
-    login_user: root
+    login_user: "{{mysql_root_user}}"
     login_password: "{{ mysql_root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 #  become: yes
@@ -69,7 +69,7 @@
     password: "{{ pma_db_password }}"
     priv: "phpmyadmin.*:ALL"
     state: present
-    login_user: root
+    login_user: "{{mysql_root_user}}"
     login_password: "{{ mysql_root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: false
@@ -82,7 +82,7 @@
     password: "{{ pma_db_password }}"
     priv: "*.*:SELECT,INSERT,UPDATE,DELETE"
     state: present
-    login_user: root
+    login_user: "{{mysql_root_user}}"
     login_password: "{{ mysql_root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     column_case_sensitive: false
@@ -95,13 +95,6 @@
     line: "$cfg['Servers'][$i]['controluser'] = 'phpmyadmin';"
   become: yes
 
-#- name: Configurer phpMyAdmin avec le bon mot de passe
-#  lineinfile:
-#    path: /etc/phpmyadmin/config.inc.php
-#    regexp: "^\\$cfg\\['Servers'\\]\\[\\$i\\]\\['controlpass'\\]"
-#    line: "$cfg['Servers'][$i]['controlpass'] = '{{ pma_db_password }}';"
-#  become: yes
-
 - name: Configurer phpMyAdmin pour utiliser la connexion socket
   lineinfile:
     path: /etc/phpmyadmin/config.inc.php
@@ -111,6 +104,6 @@
   
 
 - name: Mettre à jour les privilèges MySQL
-  command: mysql -u root -p'{{ mysql_root_password }}' -e "FLUSH PRIVILEGES;"
+  command: mysql -u {{mysql_root_user}} -p'{{ mysql_root_password }}' -e "FLUSH PRIVILEGES;"
   become: yes
-  become_user: root
+#  become_user: root
