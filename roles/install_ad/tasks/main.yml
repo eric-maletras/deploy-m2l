@@ -17,9 +17,9 @@
     domain_mode: "default"
     create_dns_delegation: "no"
     safe_mode_password: "{{windows_admin_password}}"
-    database_path: "C:\\Windows\\NTDS"
-    sysvol_path: "C:\\Windows\\SYSVOL"
-    log_path: "C:\\Windows\\Logs"
+    database_path: "E:\\Windows\\NTDS"
+    sysvol_path: "E:\\Windows\\SYSVOL"
+    log_path: "E:\\Windows\\Logs"
     reboot: true
     reboot_timeout: 1800
 

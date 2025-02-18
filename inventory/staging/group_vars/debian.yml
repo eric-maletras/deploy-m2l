@@ -10,9 +10,3 @@ wait_for_port: 22
 ansible_python_interpreter: /usr/bin/python3
 ansible_mysql_python: pymysql
 
-# Variables MySQL
-mysql_root_user: "root"
-mysql_root_password: "Btssio75000"
-
-# Informations du serveur
-phpmyadmin_db_password: "Btssio75000"

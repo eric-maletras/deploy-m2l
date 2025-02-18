@@ -9,7 +9,7 @@
 
 - name: Vérifier si GLPI est déjà installé
   stat:
-    path: "/var/www/glpi/config/config_db.php"
+    path: "{{glpi_document_root}}/config/config_db.php"
   register: glpi_config_file
 
 - name: Télécharger et extraire GLPI
@@ -29,7 +29,7 @@
 
     - name: Définir les permissions correctes
       ansible.builtin.file:
-        path: "/var/www/glpi"
+        path: "{{glpi_document_root}}"
         owner: www-data
         group: www-data
         mode: '0755'
@@ -72,7 +72,7 @@
 
 - name: Vérifier si la base de données GLPI existe déjà
   mysql_db:
-    name: glpi
+    name: "{{glpi_db_name}}"
     state: present
     login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
@@ -81,8 +81,8 @@
 
 - name: Créer un utilisateur MySQL/MariaDB pour GLPI
   mysql_user:
-    name: glpi
-    password: "Btssio75000"
+    name: "{{glpi_db_user}}"
+    password: "{{glpi_db_password}}"
     priv: "glpi.*:ALL"
     host: "localhost"
     state: present
