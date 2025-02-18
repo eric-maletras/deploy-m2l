@@ -6,3 +6,8 @@ glpi_db_name: "glpi"
 glpi_db_port: "3306"
 
 glpi_document_root: "/var/www/glpi"
+
+glpi_admin_password: "Btssio75000"
+glpi_tech_password: "Btssio75000"
+glpi_normal_password: "Btssio75000"
+glpi_postonly_password: "Btssio75000"

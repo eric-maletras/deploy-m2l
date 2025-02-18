@@ -19,7 +19,6 @@
     - vm_update_2nd_interface
     - install_LAMP
     - phpmyadmin
-    - install_glpi
     - configure_glpi
 
 - name: Supprimer les accès externes
