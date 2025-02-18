@@ -1,0 +1,60 @@
+# group_vars/windows_dns_dhcp_ad.yml
+dns_role_name: "DNS"
+dns_zrd_name: "m2l.lan"
+netbios_name: "M2L"
+dns_zri_name: "2.16.172.in-addr.arpa"
+
+dns_a_records:
+  - { name: "m2l-lsrv03", address: "172.16.2.59" }
+  - { name: "m2l-lsrv05", address: "172.16.2.58" }
+dns_cname_records:
+  - { alias: "glpi", target: "m2l-lsrv03.m2l.lan" }
+  - { alias: "onwcloud", target: "m2l-lsrv03.m2l.lan" }
+
+windows_admin_password: "Btssio75000"
+ad_base_dn: "DC=m2l,DC=lan"
+
+
+ad_ou_hierarchy:
+  - name: "0_m2l.lan"
+    path: ""
+  - name: "Ligues"
+    path: "OU=0_m2l.lan,{{ ad_base_dn }}"
+  - name: "tennis"
+    path: "OU=Ligues,OU=0_m2l.lan,{{ ad_base_dn }}"
+  - name: "basket"
+    path: "OU=Ligues,OU=0_m2l.lan,{{ ad_base_dn }}"
+  - name: "Serveurs"
+    path: "OU=0_m2l.lan,{{ad_base_dn}}"
+
+ad_users:
+  - { name: "jdoe", firstname: "John", lastname: "Doe", display_name: "John Doe", email: "jdoe@m2l.lan", password: "Btssio75000", description: "Utilisateur Tennis 1", path: "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+  - { name: "asmith", firstname: "Anna", lastname: "Smith", display_name: "Anna Smith", email: "asmith@m2l.lan", password: "Btssio75000", description: "Utilisateur Tennis 2", path: "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+  - { name: "bjones", firstname: "Bob", lastname: "Jones", display_name: "Bob Jones", email: "bjones@m2l.lan", password: "Btssio75000", description: "Utilisateur Tennis 3", path: "OU=tennis,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+  - { name: "cwhite", firstname: "Chris", lastname: "White", display_name: "Chris White", email: "cwhite@m2l.lan", password: "Btssio75000", description: "Utilisateur Basket 1", path: "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+  - { name: "jdavis", firstname: "Jane", lastname: "Davis", display_name: "Jane Davis", email: "jdavis@m2l.lan", password: "Btssio75000", description: "Utilisateur Basket 2", path: "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+  - { name: "kwilson", firstname: "Kevin", lastname: "Wilson", display_name: "Kevin Wilson", email: "kwilson@m2l.lan", password: "Btssio75000", description: "Utilisateur Basket 3", path: "OU=basket,OU=ligues,OU=0_m2l.lan,DC=m2l,DC=lan" }
+
+
+dhcp_scopes:
+  - network_id: "172.16.2.0"
+    subnet_mask: "255.255.255.192"  # /26
+    ip_start: "172.16.2.1"
+    ip_end: "172.16.2.10"
+    gateway: "172.16.2.62"
+    dns: "172.16.2.61"
+    domain: "m2l.lan"
+  - network_id: "172.16.10.0"
+    subnet_mask: "255.255.255.192"  # /26
+    ip_start: "172.16.10.1"
+    ip_end: "172.16.10.10"
+    gateway: "172.16.10.62"
+    dns: "172.16.2.61"
+    domain: "m2l.lan"
+  - network_id: "172.16.11.0"
+    subnet_mask: "255.255.255.192"  # /26
+    ip_start: "172.16.11.1"
+    ip_end: "172.16.11.10"
+    gateway: "172.16.11.62"
+    dns: "172.16.2.61"
+    domain: "m2l.lan"

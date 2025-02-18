@@ -1,5 +1,11 @@
 ---
 
+- name: Générer le script configure_cdrom.sh
+  ansible.builtin.template:
+    src: configure_cdrom.sh.j2
+    dest: "{{ role_path }}/files/configure_cdrom.sh"
+    mode: '0755'
+
 - name: Lancer le script configure_cdrom.sh
   ansible.builtin.shell: |
     ./configure_cdrom.sh
