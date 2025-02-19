@@ -1,6 +1,6 @@
 # group_vars/windows_dns_dhcp_ad.yml
 dns_role_name: "DNS"
-dns_zrd_name: "m2l.lan"
+#dns_zrd_name: "m2l.lan"
 netbios_name: "M2L"
 dns_zri_name: "2.16.172.in-addr.arpa"
 

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 echo 'Arrêt de la VM avant ajout CDROM\n'
-govc vm.power -off -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k "{{ inventory_hostname }}"
+govc vm.power -off -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k "{{ ansible_host }}"
 echo 'Ajout CD ROM\n'
-govc device.cdrom.add -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k -vm "{{ inventory_hostname }}"
+govc device.cdrom.add -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k -vm "{{ ansible_host }}"
 sleep 60
-govc device.connect -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k -vm "{{ inventory_hostname }}"
+govc device.connect -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k -vm "{{ ansible_host }}"
 echo 'Ajout de ISO windows 10\n'
-govc device.cdrom.insert -vm "{{ inventory_hostname }}" -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k  '[datastore1] ISOs/Win10_20H2_French_x64.iso'
+govc device.cdrom.insert -vm "{{ ansible_host }}" -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k  '[datastore1] ISOs/Win10_20H2_French_x64.iso'
 echo 'Boot de la VM\n'
-govc vm.power -on -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k "{{ inventory_hostname }}"
+govc vm.power -on -u 'https://{{esxi_username}}:{{esxi_password}}@{{esxi_hostname}}' -k "{{ ansible_host }}"
 sleep 80
 echo "Fin du Script"

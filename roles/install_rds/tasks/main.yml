@@ -38,20 +38,20 @@
     _raw_params: |
       New-RDSessionDeployment -ConnectionBroker {{ rds_server }} -SessionHost {{ rds_server }} -WebAccessServer {{ rds_server }}
   vars:
-    rds_server: "M2L-WSRV02.m2l.lan"
+    rds_server: "{{inventory_hostname}}.{{dns_zrd_name}}"
 
 - name: Ajouter le rôle Licensing au serveur
   ansible.windows.win_shell:
     _raw_params: Add-RDServer -Server {{ rds_server }} -Role RDS-LICENSING -ConnectionBroker {{ rds_server }}
   vars:
-    rds_server: "M2L-WSRV02.m2l.lan"
+    rds_server: "{{inventory_hostname}}.{{dns_zrd_name}}"
 
 - name: Configurer le serveur de licences
   ansible.windows.win_shell:
     _raw_params: |
       Set-RDLicenseConfiguration -LicenseServer {{ rds_server }} -Mode PerUser -ConnectionBroker {{ rds_server }} -Force
   vars:
-    rds_server: "M2L-WSRV02.m2l.lan"
+    rds_server: "{{inventory_hostname}}.{{dns_zrd_name}}"
 
 - name: Vérifier la configuration des licences RDS
   ansible.windows.win_shell:
@@ -67,16 +67,16 @@
 - name: Créer une collection RD Session
   ansible.windows.win_shell:
     _raw_params: |
-      New-RDSessionCollection -CollectionName "RdsApps" -CollectionDescription "Collection RDS pour accéder aux apps M2L" -ConnectionBroker {{ rds_server }} -SessionHost {{ rds_server }}
+      New-RDSessionCollection -CollectionName "RdsApps" -CollectionDescription "Collection RDS pour accéder aux apps" -ConnectionBroker {{ rds_server }} -SessionHost {{ rds_server }}
   vars:
-    rds_server: "M2L-WSRV02.m2l.lan"
+    rds_server: "{{inventory_hostname}}.{{dns_zrd_name}}"
 
 - name: Ajouter une application distante à la collection
   ansible.windows.win_shell:
     _raw_params: |
       New-RDRemoteApp -Alias WordPad -DisplayName WordPad -FilePath "C:\Program Files\Windows NT\Accessories\wordpad.exe" -ShowInWebAccess 1 -CollectionName "RdsApps" -ConnectionBroker {{ rds_server }}
   vars:
-    rds_server: "M2L-WSRV02.m2l.lan"
+    rds_server: "{{inventory_hostname}}.{{dns_zrd_name}}"
 
 #- name: Redémarrer après l'ajout d'une collection
 #  ansible.windows.win_reboot:

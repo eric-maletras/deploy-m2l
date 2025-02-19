@@ -49,19 +49,19 @@
 
 - name: Créer le dossier pour Windows 10 sur le serveur WDS
   win_file:
-    path: "E:\\Sources\\win10"
+    path: "F:\\Sources\\win10"
     state: directory
 
 - name: Copier le fichier boot.wim pour Windows 10
   win_copy:
     src: "D:\\sources\\boot.wim"
-    dest: "E:\\Sources\\win10\\boot.wim"
+    dest: "F:\\Sources\\win10\\boot.wim"
     remote_src: yes
 
 - name: Copier le fichier install.wim pour Windows 10
   win_copy:
     src: "D:\\sources\\install.wim"
-    dest: "E:\\Sources\\win10\\install.wim"
+    dest: "F:\\Sources\\win10\\install.wim"
     remote_src: yes
 - name: Vérifier l'état actuel de DSC
   win_shell: |
@@ -84,14 +84,14 @@
         Node "localhost" {
             WdsBootImage BootImage {
                 Ensure      = "Present"
-                Path        = "E:\\Sources\\win10\\boot.wim"
+                Path        = "F:\\Sources\\win10\\boot.wim"
                 NewImageName        = "Windows 10 Boot Image (x64)"
                 NewDescription = "Boot image for Windows 10 deployments"
             }
         }
     }
-    AddWdsBootImage -OutputPath "E:\\DSC\\AddWdsBootImage"
-    Start-DscConfiguration -Path "E:\\DSC\\AddWdsBootImage" -Wait -Verbose
+    AddWdsBootImage -OutputPath "F:\\DSC\\AddWdsBootImage"
+    Start-DscConfiguration -Path "F:\\DSC\\AddWdsBootImage" -Wait -Verbose
 
 - name: Créer un groupe d'images via PowerShell natif
   win_shell: |
@@ -109,7 +109,7 @@
         Node "localhost" {
             WdsInstallImage InstallImage {
                 Ensure         = "Present"
-                Path           = "E:\\Sources\\win10\\install.wim"
+                Path           = "F:\\Sources\\win10\\install.wim"
                 ImageGroup     = "Windows 10 Images"
                 ImageName      = "Windows 10 Pro"  # Utiliser le nom affiché dans WDS
                 NewImageName   = "Windows 10 Professional"
@@ -118,8 +118,8 @@
             }
         }
     }
-    AddWdsInstallImage -OutputPath "E:\\DSC\\AddWdsInstallImage"
-    Start-DscConfiguration -Path "E:\\DSC\\AddWdsInstallImage" -Wait -Verbose
+    AddWdsInstallImage -OutputPath "F:\\DSC\\AddWdsInstallImage"
+    Start-DscConfiguration -Path "F:\\DSC\\AddWdsInstallImage" -Wait -Verbose
   args:
     executable: powershell
 

@@ -1,7 +1,7 @@
 ---
 #
 - name: Installe RDS sur un serveur windows 2019
-  hosts: M2L-WSRV02-A
+  hosts: windows_wds_rdp
   become: false
   gather_facts: false
   #

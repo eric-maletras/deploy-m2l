@@ -1,18 +1,18 @@
 ---
 
-- name: Générer le script configure_cdrom.sh
-  ansible.builtin.template:
-    src: configure_cdrom.sh.j2
-    dest: "{{ role_path }}/files/configure_cdrom.sh"
-    mode: '0755'
-
-- name: Lancer le script configure_cdrom.sh
+- name: Configuration du CD-ROM sur les VMs cibles
   ansible.builtin.shell: |
-    ./configure_cdrom.sh
-  args:
-    chdir: "{{ role_path }}/files" # Remplace par le chemin du script
-  register: result
-
-- name: Afficher le résultat du script
-  ansible.builtin.debug:
-    var: result.stdout
+    echo 'Arrêt de la VM avant ajout CDROM\n'
+    govc vm.power -off -u 'https://{{ esxi_username }}:{{ esxi_password }}@{{ esxi_hostname }}' -k "{{ item }}"
+    echo 'Ajout CD ROM\n'
+    govc device.cdrom.add -u 'https://{{ esxi_username }}:{{ esxi_password }}@{{ esxi_hostname }}' -k -vm "{{ item }}"
+    sleep 60
+    govc device.connect -u 'https://{{ esxi_username }}:{{ esxi_password }}@{{ esxi_hostname }}' -k -vm "{{ item }}"
+    echo 'Ajout de ISO windows 10\n'
+    govc device.cdrom.insert -vm "{{ item }}" -u 'https://{{ esxi_username }}:{{ esxi_password }}@{{ esxi_hostname }}' -k '[datastore1] ISOs/Win10_20H2_French_x64.iso'
+    echo 'Boot de la VM\n'
+    govc vm.power -on -u 'https://{{ esxi_username }}:{{ esxi_password }}@{{ esxi_hostname }}' -k "{{ item }}"
+    sleep 80
+    echo "Fin du Script"
+  loop: "{{ groups['windows_wds_rdp'] }}"
+  when: groups['windows_wds_rdp'] | length > 0
