@@ -14,7 +14,7 @@ network_1st_interface:
 network_2nd_interface:
   name: ens33
   method: static
-  address: 172.16.2.58
+  address: 172.16.2.59
   netmask: 255.255.255.192
   gateway: 172.16.2.62
   dns:

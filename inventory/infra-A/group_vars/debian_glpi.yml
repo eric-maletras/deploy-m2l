@@ -6,4 +6,4 @@ glpi_db_port: "3306"
 
 
 
-glpi_server_name: "glpi.m2l.lan"
+glpi_server_name: "glpi"
