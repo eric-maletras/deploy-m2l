@@ -1,12 +1,10 @@
 #!/bin/bash
 
-#ansible-playbook -i inventory/infra-D/ playbooks/configure_dns_ad_dhcp.yml
+ansible-playbook -i inventory/infra-D/ playbooks/configure_M2L-WSRV01.yml
 
-#ansible-playbook -i inventory/infra-D/ playbooks/configure_wds.yml
+ansible-playbook -i inventory/infra-D/ playbooks/configure_M2L-WSRV02.yml
 
-#ansible-playbook -i inventory/infra-D/ playbooks/configure_rds.yml
+ansible-playbook -i inventory/infra-D/ playbooks/configure_M2L-LSRV03.yml
 
-#ansible-playbook -i inventory/infra-D/ playbooks/configure_glpi.yml
-
-ansible-playbook -i inventory/infra-D/ playbooks/configure_squid.yml
+ansible-playbook -i inventory/infra-D/ playbooks/configure_M2L-LSRV05.yml
 
