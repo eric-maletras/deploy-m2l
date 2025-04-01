@@ -1,0 +1,11 @@
+# Adresse de votre serveur ESXi
+esxi_hostname: "192.168.3.11"
+
+# Identifiants de connexion à ESXi
+esxi_username: "root"
+esxi_password: "Btssio75000!"
+datacenter_name: "ha-datacenter"
+
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
+dns_zrd_name: "m2l.lan"

@@ -1,0 +1,22 @@
+[windows:children]
+windows_dns_dhcp_ad
+windows_wds_rdp
+
+[windows_dns_dhcp_ad]
+M2L-WSRV01 ansible_host=192.168.3.100
+
+[windows_wds_rdp]
+M2L-WSRV02 ansible_host=192.168.3.101
+
+[debian:children]
+debian_glpi
+debian_squid
+
+[debian_lamp:children]
+debian_glpi
+
+[debian_glpi]
+M2L-LSRV03 ansible_host=192.168.3.102
+
+[debian_squid]
+M2L-LSRV05 ansible_host=192.168.3.103

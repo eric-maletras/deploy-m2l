@@ -1,0 +1,21 @@
+vm_os: debian
+
+network_1st_interface:
+  name: ens32
+  method: static
+  address: 192.168.3.103
+  netmask: 255.255.255.0
+  gateway: 192.168.3.1
+  dns:
+    - 192.168..1
+    - 8.8.8.8
+
+
+network_2nd_interface:
+  name: ens33
+  method: static
+  address: 192.168.0.1
+  netmask: 255.255.255.0
+  gateway: 192.168.0.254
+  dns:
+    - 172.16.2.61

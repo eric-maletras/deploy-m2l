@@ -1,5 +1,13 @@
 ---
 
+- name: Afficher esxi_hostname
+  debug:
+    var: esxi_hostname
+
+- name: Afficher la liste des hôtes dans windows_wds_rdp
+  debug:
+    var: groups['windows_wds_rdp']
+
 - name: Configuration du CD-ROM sur les VMs cibles
   ansible.builtin.shell: |
     echo 'Arrêt de la VM avant ajout CDROM\n'

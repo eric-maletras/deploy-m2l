@@ -1,0 +1,39 @@
+---
+
+ansible_shell_type: powershell
+#ansible_user: administrateur
+#ansible_password: Btssio75000
+#ansible_port: 5985
+ansible_connection: winrm
+ansible_winrm_scheme: http
+ansible_winrm_server_cert_validation: ignore
+ansible_winrm_transport: basic
+ansible_python_interpreter: 'C:\program files\Python311\python.exe'
+ansible_winrm_read_timeout_sec: 120
+ansible_winrm_operation_timeout_sec: 90
+wait_for_port: 5985
+
+
+# Configuration pour un utilisateur local (Basic)
+basic_user:
+  username: "Administrateur"
+  password: "Btssio75000"
+
+# Configuration pour un utilisateur AD avec Basic
+ad_basic_user:
+  username: "M2L\\Administrateur"
+  password: "Btssio75000"
+
+# Configuration pour un utilisateur AD avec CredSSP
+ad_credssp_user:
+  username: "M2L\\Administrateur"
+  password: "Btssio75000"
+
+
+#local_admin:
+#  username: "administrateur"
+#  password: "Btssio75000"
+#
+ad_admin:
+  username: "m2l\\administrateur"
+  password: "Btssio75000"
