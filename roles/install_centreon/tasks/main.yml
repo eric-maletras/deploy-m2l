@@ -1,0 +1,100 @@
+---
+
+- name: Installer wget et gnupg pour la gestion du dépôt Centreon
+  ansible.builtin.apt:
+    name:
+      - wget
+      - gnupg
+    state: present
+    update_cache: yes
+
+
+- name: Vérifier si la base de données Centreon existe déjà
+  mysql_db:
+    name: "{{ centreon_db_name }}"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  register: centreon_db_check
+
+- name: Créer l’utilisateur MySQL pour Centreon
+  mysql_user:
+    name: "{{ centreon_db_user }}"
+    password: "{{ centreon_db_password }}"
+    priv: "{{ centreon_db_name }}.*:ALL"
+    host: "localhost"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: centreon_db_check is changed
+
+
+
+- name: Ajouter le dépôt apt-standard de Centreon
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/centreon.list
+    content: "deb https://packages.centreon.com/apt-standard-24.10-stable/ {{ centreon_codename }} main\n"
+    mode: '0644'
+
+- name: Ajouter le dépôt apt-plugins de Centreon
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/centreon-plugins.list
+    content: "deb https://packages.centreon.com/apt-plugins-stable/ {{ centreon_codename }} main\n"
+    mode: '0644'
+
+- name: Télécharger et ajouter la clé GPG de Centreon
+  ansible.builtin.shell: |
+    wget -O- https://apt-key.centreon.com | gpg --dearmor | tee /etc/apt/trusted.gpg.d/centreon.gpg > /dev/null
+  args:
+    creates: /etc/apt/trusted.gpg.d/centreon.gpg
+
+
+- name: Mettre à jour les paquets
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Installer Centreon
+  ansible.builtin.apt:
+    name: "{{ centreon_deps }}"
+    state: present
+
+- name: Vérifier si un service php-fpm est installé
+  ansible.builtin.shell: |
+    systemctl list-units --type=service --no-pager --no-legend | awk '{print $1}' | grep -E '^php[0-9\.]+-fpm\.service$' || true
+  register: php_fpm_service
+  changed_when: false
+
+
+- name: Ajouter php-fpm à la liste des services Centreon si présent
+  ansible.builtin.set_fact:
+    centreon_services: "{{ centreon_services + [php_fpm_service.stdout_lines[0]] }}"
+  when: php_fpm_service.stdout != ""
+
+- name: Activer proxy_fcgi et setenvif si PHP-FPM est installé
+  ansible.builtin.shell: a2enmod proxy_fcgi setenvif
+  args:
+    creates: /etc/apache2/mods-enabled/proxy_fcgi.load
+  when: php_fpm_service.stdout != ""
+
+
+- name: Activer la conf php8.2-fpm si PHP-FPM est installé
+  ansible.builtin.shell: a2enconf php8.2-fpm
+  args:
+    creates: /etc/apache2/conf-enabled/php8.2-fpm.conf
+  when: php_fpm_service.stdout != ""
+
+
+- name: Recharger Apache si FPM a été activé
+  ansible.builtin.service:
+    name: apache2
+    state: reloaded
+
+
+- name: Activer et démarrer les services Centreon
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop: "{{ centreon_services }}"

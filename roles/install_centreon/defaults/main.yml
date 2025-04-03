@@ -1,0 +1,18 @@
+---
+centreon_codename: "{{ ansible_lsb.codename }}"
+centreon_deps:
+  - centreon
+
+centreon_db_name: centreon
+centreon_db_user: centreon
+centreon_db_password: Btssio75000
+
+centreon_services:
+  - apache2
+  - centreon
+  - cbd
+  - centengine
+  - gorgoned
+  - centreontrapd
+  - snmpd
+  - snmptrapd
