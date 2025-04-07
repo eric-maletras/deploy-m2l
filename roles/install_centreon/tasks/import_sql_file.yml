@@ -1,0 +1,20 @@
+- name: Vérifier si le fichier SQL {{ sqlfile }} a déjà été importé
+  stat:
+    path: "/var/lib/ansible/centreon_sql_flags/{{ sqlfile }}.done"
+  register: sql_marker
+
+- name: Importer le fichier SQL {{ sqlfile }}
+  mysql_db:
+    name: "{{ centreon_db_name }}"
+    state: import
+    target: "/usr/share/centreon/www/install/{{ sqlfile }}"
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: not sql_marker.stat.exists
+
+- name: Créer un fichier marqueur après l'import
+  file:
+    path: "/var/lib/ansible/centreon_sql_flags/{{ sqlfile }}.done"
+    state: touch
+  when: not sql_marker.stat.exists

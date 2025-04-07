@@ -1,0 +1,21 @@
+<?php
+$conf['centreon_path'] = "/usr/share/centreon";
+
+$conf['centreon_db'] = [
+  "type" => "mysql",
+  "user" => "{{ centreon_db_user }}",
+  "password" => "{{ centreon_db_password }}",
+  "host" => "localhost",
+  "port" => "3306",
+  "dbname" => "{{ centreon_db_name }}"
+];
+
+$conf['centstorage_db'] = [
+  "type" => "mysql",
+  "user" => "{{ centreon_db_user }}",
+  "password" => "{{ centreon_db_password }}",
+  "host" => "localhost",
+  "port" => "3306",
+  "dbname" => "centreon_storage"
+];
+?>
