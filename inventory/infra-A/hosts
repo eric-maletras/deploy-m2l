@@ -11,6 +11,7 @@ M2L-WSRV02 ansible_host=192.168.3.91
 [debian:children]
 debian_glpi
 debian_squid
+debian_centreon
 
 [debian_lamp:children]
 debian_glpi
@@ -20,3 +21,6 @@ M2L-LSRV03 ansible_host=192.168.3.92
 
 [debian_squid]
 M2L-LSRV05 ansible_host=192.168.3.93
+
+[debian_centreon]
+M2L-LSRV08 ansible_host=192.168.3.66
